@@ -1,4 +1,5 @@
-<img src="docs/preview.png" alt="The Glyphy UI kit page" width="100%">
+<img src="docs/preview.png" width="100%"
+  alt="Glyphy: the mark mid-accumulate with its live step in terracotta, over the kit page's five motion states — idle, travel, accumulate, snap and error.">
 
 # Glyphy
 

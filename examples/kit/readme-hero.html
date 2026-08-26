@@ -1,0 +1,276 @@
+<!doctype html>
+<!--
+  The 1280×860 image the README opens with. Not part of the site build: it is
+  rendered once to public/preview.png, which the build copies into docs/.
+
+    npx playwright screenshot --viewport-size=1280,860 \
+      examples/kit/readme-hero.html examples/kit/public/preview.png
+
+  It is a composition rather than a screenshot of the page, because a screenshot
+  of the top of the page shows one mark and a headline; two seconds of a
+  README should show what the library actually is. Every mark is nine divs with
+  the nine fixed wobble signatures from packages/core/src/wobble.ts.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Glyphy — README hero</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        width: 1280px;
+        height: 620px;
+        overflow: hidden;
+        background: #efece4;
+        color: #1c1a17;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+      }
+      .nav {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 0 56px;
+        border-bottom: 1px solid rgba(28, 26, 23, 0.14);
+      }
+      .nav .brand {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font:
+          600 15px/1 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+        letter-spacing: -0.02em;
+      }
+      .nav .links {
+        display: flex;
+        gap: 18px;
+      }
+      .nav .links span {
+        font:
+          400 13px/1 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+        color: rgba(28, 26, 23, 0.62);
+      }
+      .search {
+        margin-left: auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        height: 32px;
+        padding: 0 8px 0 11px;
+        border: 1px solid rgba(28, 26, 23, 0.16);
+        border-radius: 6px;
+        color: rgba(28, 26, 23, 0.62);
+        font:
+          400 12.5px/1 'Helvetica Neue',
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+      .search kbd {
+        font:
+          500 10px/1 ui-monospace,
+          Menlo,
+          monospace;
+        border: 1px solid rgba(28, 26, 23, 0.16);
+        border-radius: 4px;
+        padding: 4px 5px;
+        color: rgba(28, 26, 23, 0.42);
+      }
+      .hero {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 56px;
+        padding: 46px 56px 0;
+      }
+      .eyebrow {
+        font:
+          500 11px/1 ui-monospace,
+          Menlo,
+          monospace;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #b5522f;
+      }
+      h1 {
+        font-size: 78px;
+        font-weight: 600;
+        letter-spacing: -0.045em;
+        line-height: 0.92;
+        margin: 20px 0 0;
+      }
+      .lede {
+        font-size: 17px;
+        line-height: 1.55;
+        color: rgba(28, 26, 23, 0.62);
+        margin: 18px 0 0;
+        max-width: 46ch;
+      }
+      .install {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 26px 0 0;
+        padding: 10px 16px;
+        border: 1px solid rgba(28, 26, 23, 0.16);
+        border-radius: 6px;
+        max-width: 360px;
+        font:
+          500 12.5px/1 ui-monospace,
+          Menlo,
+          monospace;
+      }
+      .install i {
+        color: rgba(28, 26, 23, 0.42);
+        font-style: normal;
+      }
+      .states {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 16px;
+        padding: 46px 56px 0;
+      }
+      .state {
+        background: #f7f5f0;
+        border: 1px solid rgba(28, 26, 23, 0.1);
+        border-radius: 6px;
+        padding: 26px 22px 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+      }
+      .state span {
+        font:
+          500 10px/1 ui-monospace,
+          Menlo,
+          monospace;
+        color: rgba(28, 26, 23, 0.42);
+      }
+      .mark {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        flex: none;
+      }
+      .cell {
+        position: relative;
+        display: grid;
+        place-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav">
+      <span class="brand"
+        ><span class="mark" data-mask="000010000" data-size="22" data-dots="0"></span>Glyphy</span
+      >
+      <span class="links">
+        <span>Anatomy</span><span>Palette</span><span>Motion states</span><span>Playground</span
+        ><span>Filling patterns</span>
+      </span>
+      <span class="search">Search<kbd>⌘K</kbd></span>
+    </div>
+
+    <div class="hero">
+      <div>
+        <div class="eyebrow">UI-Kit · v0.1 · glyph + motion</div>
+        <h1>Glyphy</h1>
+        <p class="lede">
+          A nine-cell dot matrix. Every cell is either a bare dot or a ringed dot; the pattern of
+          rings over time is the whole language.
+        </p>
+        <div class="install"><i>$</i> npm install @glyphy/react</div>
+      </div>
+      <span class="mark" data-mask="111001001" data-size="248" data-accent="8"></span>
+    </div>
+
+    <div class="states">
+      <div class="state">
+        <span class="mark" data-mask="000010000" data-size="88"></span><span>idle</span>
+      </div>
+      <div class="state">
+        <span class="mark" data-mask="110000000" data-size="88"></span><span>travel</span>
+      </div>
+      <div class="state">
+        <span class="mark" data-mask="111001001" data-size="88"></span><span>accumulate</span>
+      </div>
+      <div class="state">
+        <span class="mark" data-mask="111111111" data-size="88"></span><span>snap</span>
+      </div>
+      <div class="state">
+        <span class="mark" data-mask="010100001" data-size="88" data-ink="#c62f2a"></span
+        ><span>error</span>
+      </div>
+    </div>
+
+    <script>
+      // The nine fixed signatures, copied from packages/core/src/wobble.ts. The
+      // mark is drawn the way the library draws it: rings are CSS borders with a
+      // per-cell irregularity that never changes.
+      const WOBBLE = [
+        ['53% 47% 45% 55% / 48% 54% 46% 52%', -7],
+        ['46% 54% 52% 48% / 53% 47% 53% 47%', 5],
+        ['51% 49% 47% 53% / 45% 55% 49% 51%', -3],
+        ['48% 52% 55% 45% / 52% 48% 51% 49%', 8],
+        ['54% 46% 48% 52% / 47% 53% 52% 48%', -5],
+        ['47% 53% 51% 49% / 54% 46% 47% 53%', 4],
+        ['52% 48% 54% 46% / 46% 54% 53% 47%', -9],
+        ['49% 51% 46% 54% / 51% 49% 45% 55%', 6],
+        ['55% 45% 49% 51% / 49% 51% 54% 46%', -4],
+      ];
+
+      for (const host of document.querySelectorAll('.mark')) {
+        const size = Number(host.dataset.size);
+        const mask = host.dataset.mask;
+        const ink = host.dataset.ink ?? '#1c1a17';
+        const accent = host.dataset.accent === undefined ? -1 : Number(host.dataset.accent);
+        const dots = host.dataset.dots !== '0';
+        const stroke = Math.max(1, Math.round(size / 52));
+        const dot = Math.max(2, Math.round(size / 30));
+        host.style.width = size + 'px';
+        host.style.height = size + 'px';
+
+        WOBBLE.forEach(([radius, rotate], at) => {
+          const cell = document.createElement('span');
+          cell.className = 'cell';
+          const ring = document.createElement('span');
+          ring.style.cssText =
+            'position:absolute;width:78%;height:78%;box-sizing:border-box;border:' +
+            stroke +
+            'px solid ' +
+            (at === accent ? '#b5522f' : ink) +
+            ';border-radius:' +
+            radius +
+            ';transform:rotate(' +
+            rotate +
+            'deg);opacity:' +
+            (mask[at] === '1' ? 1 : 0);
+          const bare = document.createElement('span');
+          bare.style.cssText =
+            'width:' +
+            dot +
+            'px;height:' +
+            dot +
+            'px;border-radius:50%;background:' +
+            ink +
+            ';opacity:' +
+            (dots ? 0.42 : 0);
+          cell.append(ring, bare);
+          host.append(cell);
+        });
+      }
+    </script>
+  </body>
+</html>
