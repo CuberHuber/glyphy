@@ -9,7 +9,6 @@
 import {
   COLORS,
   CSS_VARIABLES,
-  RESERVED_COLORS,
   DEFAULT_SIZE,
   EASE,
   EASE_OPACITY_MS,
@@ -27,8 +26,14 @@ import {
  * Every colour core names, plus the wash tier for each reserved colour. The
  * wash is derived rather than retyped, so `bg-glyphy-error-soft` and a ring
  * drawn with `fill="tint"` cannot end up at two different strengths.
+ *
+ * The keys are written out rather than spread in from `RESERVED_COLORS`, so
+ * the object keeps its literal key type: `glyphyColors.acent` stays a compile
+ * error and an editor still completes the token names. That a reserved colour
+ * without a wash is a mistake is a job for the test that walks
+ * `RESERVED_COLORS`, not for a spread that costs every consumer its checking.
  */
-export const glyphyColors: Readonly<Record<string, string>> = Object.freeze({
+export const glyphyColors = Object.freeze({
   paper: COLORS.paper,
   surface: COLORS.surface,
   ink: COLORS.ink,
@@ -41,7 +46,8 @@ export const glyphyColors: Readonly<Record<string, string>> = Object.freeze({
   'error-hover': COLORS.errorHover,
   'error-contrast': COLORS.errorContrast,
   slate: COLORS.slate,
-  ...Object.fromEntries(RESERVED_COLORS.map((name) => [`${name}-soft`, softOf(name)])),
+  'accent-soft': softOf('accent'),
+  'error-soft': softOf('error'),
 });
 
 /**
