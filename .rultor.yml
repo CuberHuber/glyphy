@@ -15,11 +15,12 @@ architect:
 docker:
   image: node:22-bookworm
 
-# Encrypted files rultor decrypts into the working directory before running.
-# Generate with: gpg --encrypt --armor -r <rultor key> .npmrc
-# and commit the result. The token itself is never in this file.
-assets:
-  npmrc: CuberHuber/glyphy-secrets#.npmrc.asc
+# No assets. There was an encrypted .npmrc here holding a long-lived npm
+# token, decrypted into the container on every run. Nothing publishes from
+# rultor any more, so nothing needs it — and an unused credential that still
+# gets decrypted on every merge is strictly worse than no credential.
+#
+# Revoke that token on npmjs.com and delete .npmrc.asc from glyphy-secrets.
 
 # Runs on `@rultor merge`. Exactly the gate CI runs, so a green pull request
 # and a green merge mean the same thing.
@@ -28,19 +29,20 @@ merge:
     npm ci
     npm run verify
 
-# Runs on `@rultor release, tag is 0.2.0`. The tag is the version, so a release
-# is a decision a human states out loud rather than something a script infers.
-release:
-  script: |
-    npm ci
-    npm run verify
-    npx changeset version --snapshot-off || true
-    npm version "${tag}" --no-git-tag-version --workspaces --include-workspace-root
-    cp ../npmrc "${HOME}/.npmrc"
-    npm run build
-    npx changeset publish --tag latest
-  commanders:
-    - CuberHuber
+# Releasing moved to GitHub Actions — see .github/workflows/release.yml.
+#
+# This is not a change of heart about who owns main. Rultor still guards it,
+# and a release is still a version a human states out loud rather than one a
+# script infers; it is stated in the Actions tab now instead of a comment.
+#
+# It moved because npm trusted publishing mints its credential from GitHub's
+# OIDC issuer, and only GitHub Actions and GitLab CI can present one. Keeping
+# the release here would mean keeping a long-lived npm token in
+# glyphy-secrets and decrypting it into this container on every release —
+# which is the exact credential trusted publishing exists to abolish. There
+# is now no npm token anywhere.
+#
+# `@rultor merge` and `@rultor deploy` are unchanged.
 
 # Runs on `@rultor deploy`. Rebuilds the kit page into docs/, which is what
 # GitHub Pages serves. See PAGES.md — the folder is committed on purpose, so

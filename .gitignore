@@ -13,3 +13,7 @@ coverage/
 # The seeded design canvas: 2.5MB of editor payload, rebuilt from
 # design/boards/*.dc.html whenever the boards change.
 design/boards/glyphy-pages-boards.html
+
+# Local Claude Code config (ECC skills + rules), not part of the package
+.claude/
+/CLAUDE.md
