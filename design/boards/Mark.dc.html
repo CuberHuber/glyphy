@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    a { color: #b5522f; text-decoration: none; }
+    a:hover { color: #8f3f22; }
+  </style>
+</helmet>
+<div style="{{grid}}">
+  <sc-for list="{{cells}}" as="cell" hint-placeholder-count="9">
+    <div style="position: relative; display: grid; place-items: center;">
+      <div style="{{cell.ring}}"></div>
+      <div style="{{cell.dot}}"></div>
+    </div>
+  </sc-for>
+</div>
+</x-dc>
+<script data-dc-script data-props='{"size":{"editor":"int","default":120,"min":16,"max":360,"unit":"px","section":"Mark"},"mask":{"editor":"text","default":"111111111","section":"Mark"},"ink":{"editor":"color","default":"#1c1a17","options":["#1c1a17","#efece4","#b5522f","#c62f2a"],"section":"Mark"},"dots":{"editor":"boolean","default":true,"section":"Mark"},"accentCell":{"editor":"int","default":-1,"min":-1,"max":8,"section":"Mark"},"$preview":{"width":120,"height":120}}'>
+/*
+ * The mark, as the library draws it: nine cells, each a bare dot with a ring
+ * over it, the ring a CSS border with a fixed per-cell irregularity. The nine
+ * signatures are copied from packages/core/src/wobble.ts and are never
+ * regenerated — that is the whole reason the mark stays recognisable.
+ */
+class Component extends DCLogic {
+  renderVals() {
+    const WOBBLE = [
+      { radius: '53% 47% 45% 55% / 48% 54% 46% 52%', rotate: -7 },
+      { radius: '46% 54% 52% 48% / 53% 47% 53% 47%', rotate: 5 },
+      { radius: '51% 49% 47% 53% / 45% 55% 49% 51%', rotate: -3 },
+      { radius: '48% 52% 55% 45% / 52% 48% 51% 49%', rotate: 8 },
+      { radius: '54% 46% 48% 52% / 47% 53% 52% 48%', rotate: -5 },
+      { radius: '47% 53% 51% 49% / 54% 46% 47% 53%', rotate: 4 },
+      { radius: '52% 48% 54% 46% / 46% 54% 53% 47%', rotate: -9 },
+      { radius: '49% 51% 46% 54% / 51% 49% 45% 55%', rotate: 6 },
+      { radius: '55% 45% 49% 51% / 49% 51% 54% 46%', rotate: -4 }
+    ];
+
+    // Attributes arrive as strings, so every value is coerced at the boundary.
+    const size = Number(this.props.size ?? 120);
+    const mask = String(this.props.mask ?? '111111111');
+    const ink = String(this.props.ink ?? '#1c1a17');
+    const dots = String(this.props.dots ?? 'true') !== 'false';
+    const accentCell = Number(this.props.accentCell ?? -1);
+
+    // Stroke and dot are derived from the box, exactly as the engine does it.
+    const stroke = Math.max(1, Math.round(size / 52));
+    const dot = Math.max(2, Math.round(size / 30));
+
+    const cells = WOBBLE.map((wobble, at) => {
+      const on = mask.charAt(at) === '1';
+      const colour = at === accentCell ? '#b5522f' : ink;
+      return {
+        ring:
+          'position: absolute; width: 78%; height: 78%; box-sizing: border-box;' +
+          ' border: ' + stroke + 'px solid ' + colour + ';' +
+          ' border-radius: ' + wobble.radius + ';' +
+          ' transform: rotate(' + wobble.rotate + 'deg);' +
+          ' opacity: ' + (on ? 1 : 0) + ';',
+        dot:
+          'width: ' + dot + 'px; height: ' + dot + 'px; border-radius: 50%;' +
+          ' background: ' + ink + '; opacity: ' + (dots ? 0.42 : 0) + ';'
+      };
+    });
+
+    return {
+      grid:
+        'display: grid; grid-template-columns: repeat(3, 1fr);' +
+        ' grid-template-rows: repeat(3, 1fr); width: ' + size + 'px; height: ' + size + 'px;',
+      cells: cells
+    };
+  }
+}
+</script>
+</body>
+</html>

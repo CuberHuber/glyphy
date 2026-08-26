@@ -118,6 +118,18 @@ cells[0].frame; // the frame these styles came from
 Rings are CSS borders with an irregular `border-radius`, not paths. No SVG, no
 sprite sheet — the mark stays crisp at any size and the wobble costs nothing.
 
+`ink` is resolved through the palette first, so a reserved colour can be named
+rather than retyped:
+
+```ts
+import { COLORS, RESERVED_COLORS, resolveColor, tintOf } from '@glyphy/core';
+
+RESERVED_COLORS; // ['accent', 'error'] — one meaning each, never emphasis
+resolveColor('error'); // '#c62f2a'
+resolveColor('var(--brand)'); // 'var(--brand)' — untouched
+tintOf('error'); // '#c62f2a2e' — the same colour at 18%
+```
+
 ## The clock
 
 Nothing above touches time. When you need it to move, the clock is the only

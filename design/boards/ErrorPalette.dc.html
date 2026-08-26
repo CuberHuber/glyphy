@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    a { color: #b5522f; text-decoration: none; }
+    a:hover { color: #8f3f22; }
+    .tier { display: inline-flex; align-items: center; gap: 7px; font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.62); border: 1px solid rgba(28,26,23,.16); border-radius: 100px; padding: 6px 10px 6px 6px; }
+    .tier i { width: 14px; height: 14px; border-radius: 3px; display: block; }
+    .swatch { background: #f7f5f0; border: 1px solid rgba(28,26,23,.1); border-radius: 6px; overflow: hidden; }
+    .swatch b { display: block; height: 58px; }
+    .swatch s { display: block; padding: 11px 12px 13px; text-decoration: none; }
+    .swatch u { display: block; font: 500 12px/1.2 'Helvetica Neue', Helvetica, Arial, sans-serif; text-decoration: none; }
+    .swatch em { display: block; font: 500 10px/1.4 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42); margin-top: 4px; font-style: normal; }
+    .band { display: flex; border-radius: 6px; overflow: hidden; border: 1px solid rgba(28,26,23,.1); }
+    .band span { width: 92px; height: 48px; display: grid; place-items: end center; padding-bottom: 6px; font: 500 9px/1 ui-monospace, Menlo, monospace; color: #f7f5f0; letter-spacing: .06em; }
+    .card { background: #f7f5f0; border: 1px solid rgba(28,26,23,.1); border-radius: 6px; }
+    .spec { border-radius: 6px; padding: 26px 0; display: grid; place-items: center; gap: 14px; }
+  </style>
+</helmet>
+
+<div style="width: 1200px; background: #efece4; color: #1c1a17; padding: 56px 48px 64px; display: flex; flex-direction: column; gap: 34px;">
+
+  <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 24px; border-bottom: 1px solid rgba(28,26,23,.14); flex-wrap: wrap;">
+    <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: #b5522f;">04</span>
+    <h2 style="font: 600 24px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.02em; margin: 0;">Palette</h2>
+    <span style="font: 400 13px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.5);">two inks, two papers, and two colours that are spent on nothing else</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px;">
+
+    <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 20px;">
+      <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+        <span style="font: 600 17px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.01em;">Accent</span>
+        <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: #b5522f;">#b5522f</span>
+        <span style="font: 400 12.5px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.5); margin-left: auto;">reserved for: the live step of a flow</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;">
+        <div class="spec" style="background: #f7f5f0; border: 1px solid rgba(28,26,23,.1);">
+          <dc-import name="Mark" size="92" mask="111001001" ink="#b5522f" hint-size="92px,92px"></dc-import>
+          <span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.5);">4.22:1 on paper</span>
+        </div>
+        <div class="spec" style="background: #191816; border: 1px solid rgba(239,236,228,.12);">
+          <dc-import name="Mark" size="92" mask="111001001" ink="#b5522f" hint-size="92px,92px"></dc-import>
+          <span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(239,236,228,.45);">3.56:1 on night</span>
+        </div>
+      </div>
+      <p style="font: 400 12.5px/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0; text-wrap: pretty;">The step that is happening now — the active item in a stepper, the row being saved. One per screen, and never for emphasis.</p>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <span class="tier"><i style="background: #b5522f;"></i>base #b5522f</span>
+        <span class="tier"><i style="background: #8f3f22;"></i>hover #8f3f22</span>
+        <span class="tier"><i style="background: #f7f5f0; border: 1px solid rgba(28,26,23,.16);"></i>contrast #f7f5f0</span>
+        <span class="tier"><i style="background: #b5522f2e;"></i>soft #b5522f2e</span>
+      </div>
+    </div>
+
+    <div class="card" style="padding: 28px; display: flex; flex-direction: column; gap: 20px;">
+      <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;">
+        <span style="font: 600 17px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.01em;">Error</span>
+        <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: #c62f2a;">#c62f2a</span>
+        <span style="font: 400 12.5px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.5); margin-left: auto;">reserved for: the failed state</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;">
+        <div class="spec" style="background: #f7f5f0; border: 1px solid rgba(28,26,23,.1);">
+          <dc-import name="Mark" size="92" mask="010100001" ink="#c62f2a" hint-size="92px,92px"></dc-import>
+          <span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.5);">4.63:1 on paper</span>
+        </div>
+        <div class="spec" style="background: #191816; border: 1px solid rgba(239,236,228,.12);">
+          <dc-import name="Mark" size="92" mask="010100001" ink="#c62f2a" hint-size="92px,92px"></dc-import>
+          <span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(239,236,228,.45);">3.25:1 on night</span>
+        </div>
+      </div>
+      <p style="font: 400 12.5px/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0; text-wrap: pretty;">A state that did not complete. It does not spend the one-accent budget, because an error is not decoration and a screen may have to show both at once.</p>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <span class="tier"><i style="background: #c62f2a;"></i>base #c62f2a</span>
+        <span class="tier"><i style="background: #a12622;"></i>hover #a12622</span>
+        <span class="tier"><i style="background: #f7f5f0; border: 1px solid rgba(28,26,23,.16);"></i>contrast #f7f5f0</span>
+        <span class="tier"><i style="background: #c62f2a2e;"></i>soft #c62f2a2e</span>
+      </div>
+    </div>
+  </div>
+
+  <p style="font: 400 13px/1.65 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.62); margin: 0; max-width: 76ch; text-wrap: pretty;">These were one colour. A screen that has to say <em>this step is running</em> and <em>this step failed</em> in the same breath cannot do it with one, so the terracotta kept the first job and a vermilion took the second. They sit 21 apart in CIE L*a*b* — further than the accent is from its own hover — so neither is read as a state of the other.</p>
+
+  <div class="card" style="border-left: 3px solid #c62f2a; padding: 28px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 34px; align-items: center;">
+    <div style="display: flex; gap: 30px;">
+      <div style="display: grid; place-items: center; gap: 12px;">
+        <dc-import name="Mark" size="96" mask="111001001" ink="#1c1a17" hint-size="96px,96px"></dc-import>
+        <span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42);">accumulate</span>
+      </div>
+      <div style="display: grid; place-items: center; gap: 12px;">
+        <dc-import name="Mark" size="96" mask="010100001" ink="#1c1a17" hint-size="96px,96px"></dc-import>
+        <span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42);">error</span>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <span style="font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase; color: rgba(28,26,23,.45);">Colour is never the only channel</span>
+      <p style="font: 400 12.5px/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0; text-wrap: pretty;">Both marks here are plain ink. A reader who cannot separate two warm reds still has to tell a step running from a step that failed, so the state is carried by the motion first: <span style="font: 500 12px ui-monospace, Menlo, monospace;">error</span> cuts rather than eases, holds each frame for three ticks, and drops its rings unevenly until only the bare lattice is left.</p>
+      <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap; padding-top: 4px;">
+        <div class="band">
+          <span style="background: #b5522f;">accent</span>
+          <span style="background: #c62f2a;">error</span>
+        </div>
+        <div class="band" style="filter: grayscale(1);">
+          <span style="background: #b5522f;">accent</span>
+          <span style="background: #c62f2a;">error</span>
+        </div>
+        <span style="font: 400 11px/1.45 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.5);">in greyscale they are<br>nearly the same value</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 14px;">
+    <div class="swatch"><b style="background: #efece4;"></b><s><u>paper</u><em>#efece4</em></s></div>
+    <div class="swatch"><b style="background: #f7f5f0;"></b><s><u>surface</u><em>#f7f5f0</em></s></div>
+    <div class="swatch"><b style="background: #1c1a17;"></b><s><u>ink</u><em>#1c1a17</em></s></div>
+    <div class="swatch"><b style="background: #191816;"></b><s><u>night</u><em>#191816</em></s></div>
+    <div class="swatch"><b style="background: #3a4a52;"></b><s><u>slate</u><em>#3a4a52</em></s></div>
+    <div class="swatch"><b style="background: linear-gradient(90deg, #b5522f 0 50%, #c62f2a 50% 100%);"></b><s><u>reserved</u><em>two, no ramp</em></s></div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {}
+</script>
+</body>
+</html>

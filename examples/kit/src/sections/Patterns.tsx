@@ -35,14 +35,13 @@ const BAND: readonly MaskInput[] = [
 export function Patterns(): ReactElement {
   return (
     <Section
-      number="09"
-      title="Filling patterns"
+      id="patterns"
       note={`nine bits, ${MASK_COUNT} marks — these ten are the sanctioned set`}
     >
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill,minmax(180px,1fr))',
+          gridTemplateColumns: 'repeat(auto-fill,minmax(min(180px,100%),1fr))',
           gap: 16,
           padding: '40px 0 0',
         }}
@@ -65,7 +64,7 @@ export function Patterns(): ReactElement {
                 {name}
               </div>
               <div
-                style={{ font: `500 10px/1 ${mono}`, color: 'rgba(28,26,23,.45)', marginTop: 6 }}
+                style={{ font: `500 10px/1 ${mono}`, color: 'var(--page-eyebrow)', marginTop: 6 }}
               >
                 {PATTERNS[name]}
               </div>
@@ -93,7 +92,7 @@ export function Patterns(): ReactElement {
       <p
         style={{
           font: `400 12.5px/1.6 ${sans}`,
-          color: 'rgba(28,26,23,.55)',
+          color: ink.soft,
           margin: '16px 0 0',
           maxWidth: 640,
         }}
@@ -107,7 +106,7 @@ export function Patterns(): ReactElement {
           font: `400 12.5px/1.6 ${sans}`,
           color: ink.faint,
           margin: '80px 0 0',
-          borderTop: `1px solid rgba(28,26,23,.12)`,
+          borderTop: `1px solid ${ink.rule}`,
           paddingTop: 22,
         }}
       >

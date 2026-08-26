@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    a { color: #b5522f; text-decoration: none; }
+    a:hover { color: #8f3f22; }
+    .col { padding: 0 20px; }
+    .card { background: #f7f5f0; border: 1px solid rgba(28,26,23,.1); border-radius: 6px; }
+    .chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border: 1px solid rgba(28,26,23,.16); border-radius: 100px; font: 500 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .06em; color: rgba(28,26,23,.62); }
+    .themechip { display: inline-flex; align-items: center; justify-content: center; min-height: 32px; padding: 0 8px; border-radius: 4px; border: 1px solid rgba(28,26,23,.16); font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.62); }
+    .themechip.on { background: #1c1a17; color: #efece4; border-color: transparent; }
+    .rule { display: flex; align-items: baseline; gap: 12px; padding-bottom: 22px; border-bottom: 1px solid rgba(28,26,23,.14); flex-wrap: wrap; }
+  </style>
+</helmet>
+
+<div style="width: 390px; background: #efece4; color: #1c1a17; padding-bottom: 64px;">
+
+  <div style="background: rgba(239,236,228,.82); border-bottom: 1px solid rgba(28,26,23,.14);">
+    <div class="col" style="height: 60px; display: flex; align-items: center; gap: 10px;">
+      <span style="display: flex; align-items: center; min-height: 32px;">
+        <dc-import name="Mark" size="22" mask="000010000" ink="#1c1a17" dots="false" hint-size="22px,22px"></dc-import>
+      </span>
+      <span style="display: inline-flex; align-items: center; height: 32px; padding: 0 11px; border-radius: 6px; border: 1px solid rgba(28,26,23,.16); color: rgba(28,26,23,.62); font: 400 12.5px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; margin-left: auto;">Search</span>
+      <span style="display: flex; gap: 4px;">
+        <span class="themechip on">auto</span>
+        <span class="themechip">light</span>
+        <span class="themechip">dark</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="col" style="padding-top: 44px; display: flex; flex-direction: column;">
+    <div style="font: 500 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase; color: #b5522f;">UI-Kit · v0.1</div>
+    <h1 style="font: 600 58px/.92 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.045em; margin: 18px 0 0;">Glyphy</h1>
+    <p style="font: 400 16px/1.55 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.62); margin: 16px 0 0; text-wrap: pretty;">A nine-cell dot matrix. Every cell is either a bare dot or a ringed dot; the pattern of rings over time is the whole language.</p>
+    <div style="display: flex; justify-content: center; padding: 30px 0 0;">
+      <dc-import name="Mark" size="180" mask="110000000" ink="#1c1a17" hint-size="180px,180px"></dc-import>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; margin: 30px 0 0; padding: 10px 10px 10px 14px; border: 1px solid rgba(28,26,23,.16); border-radius: 6px;">
+      <code style="font: 500 11.5px/1 ui-monospace, Menlo, monospace; flex: 1;"><span style="color: rgba(28,26,23,.42);">$ </span>npm i @glyphy/react</code>
+      <span style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border: 1px solid rgba(28,26,23,.16); border-radius: 4px; font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; color: rgba(28,26,23,.62);">Copy</span>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin: 16px 0 0;">
+      <span style="display: inline-flex; align-items: center; justify-content: center; min-height: 44px; font: 500 13px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; border-radius: 6px; background: #1c1a17; color: #efece4;">Open the playground</span>
+      <span style="display: inline-flex; align-items: center; justify-content: center; min-height: 44px; font: 500 13px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; border-radius: 6px; border: 1px solid rgba(28,26,23,.16);">Source on GitHub</span>
+    </div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin: 24px 0 0;">
+      <span class="chip">loading</span>
+      <span class="chip">thinking</span>
+      <span class="chip">pattern</span>
+    </div>
+  </div>
+
+  <div class="col" style="padding-top: 64px;">
+    <div class="rule">
+      <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: #b5522f;">05</span>
+      <h2 style="font: 600 22px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.02em; margin: 0;">Motion states</h2>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 16px; padding-top: 28px;">
+      <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: grid; place-items: center; min-height: 110px;"><dc-import name="Mark" size="96" mask="111001001" ink="#1c1a17" hint-size="96px,96px"></dc-import></div>
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="font: 500 14px/1.2 'Helvetica Neue', Helvetica, Arial, sans-serif;">Accumulate</span><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: #b5522f;">additive</span></div>
+          <p style="font: 400 12.5px/1.55 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 9px 0 0;">Rings draw on in spiral order until all nine are set, hold two beats, reset.</p>
+        </div>
+      </div>
+      <div class="card" style="padding: 24px; display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: grid; place-items: center; min-height: 110px;"><dc-import name="Mark" size="96" mask="010100001" ink="#c62f2a" hint-size="96px,96px"></dc-import></div>
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="font: 500 14px/1.2 'Helvetica Neue', Helvetica, Arial, sans-serif;">Error</span><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: #c62f2a;">error only</span></div>
+          <p style="font: 400 12.5px/1.55 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 9px 0 0;">Rings drop out unevenly and the bare dots remain — the lattice survives, the state does not.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col" style="padding-top: 40px;">
+    <p style="font: 400 11.5px/1.6 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42); margin: 0;">Nav links and the ⌘K badge stand down below 720px; the mark is the wordmark at this width.</p>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {}
+</script>
+</body>
+</html>

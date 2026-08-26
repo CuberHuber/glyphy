@@ -1,6 +1,10 @@
-<img src="docs/preview.png" alt="The Glyphy UI kit page" width="100%">
+<img src="docs/preview.png" width="100%"
+  alt="Glyphy: the mark mid-accumulate with its live step in terracotta, over the kit page's five motion states — idle, travel, accumulate, snap and error.">
 
 # Glyphy
+
+**[The kit page →](https://cuberhuber.github.io/glyphy/)** — every state live,
+a playground for every prop, and all 512 patterns to browse.
 
 [![ci](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/CuberHuber/glyphy/branch/main/graph/badge.svg)](https://codecov.io/gh/CuberHuber/glyphy)
@@ -135,6 +139,42 @@ Any pattern can gate any motion, which is the full cross product:
 
 ## Theming
 
+### The palette
+
+Two inks, two papers, and two reserved colours. `ink` takes a palette name as
+readily as a CSS colour, so the reserved ones can be spelled out rather than
+copied as hex:
+
+```tsx
+<Glyph variant="error" ink="error" label="Upload failed" />
+```
+
+| Token         | Value     | Reserved for                           |
+| ------------- | --------- | -------------------------------------- |
+| `accent`      | `#b5522f` | The live step of a flow. Nothing else. |
+| `error`       | `#c62f2a` | The failed state. Nothing else.        |
+| `ink`         | `#1c1a17` | Everything else on a light surface     |
+| `ink-inverse` | `#efece4` | Everything else on a dark surface      |
+| `slate`       | `#3a4a52` | The optional third ink                 |
+
+Each reserved colour carries three more names and no numeric ramp: `-hover` for
+the pointer state, `-contrast` for what is drawn on top of it, and `-soft` for
+the same eighteen percent wash the `tint` fill uses.
+
+The accent and the error were one terracotta until the palette was split. A
+screen that shows one step running and another that failed needs to say which
+is which, and one colour cannot. They now sit 21 apart in CIE L\*a\*b\* — further
+than the accent is from its own hover — and neither drops under 3:1 on any
+surface the kit draws on: the error reads at 4.63:1 on the paper and the accent
+at 4.58:1 on the card surface the marks sit on, so neither depends on the other
+to be read. One accented thing per screen still holds; an error does not spend
+that budget, because it is not decoration.
+
+They are still both warm reds, so the kit does not let colour carry the state on
+its own. `error` cuts rather than eases, holds each frame for three ticks and
+drops its rings unevenly until the bare lattice is all that is left — the state
+reads with the colour taken away, and the colour only agrees with it.
+
 Three ways in, depending on what you already use.
 
 **A provider**, for defaults across a screen:
@@ -183,7 +223,11 @@ mismatch.
 ```bash
 npm ci && npm run verify   # format, lint, types, tests, build, packaging
 npm run dev                # the kit page, wired to the TypeScript sources
+npm run build:pages        # the same page, built into docs/ for GitHub Pages
 ```
+
+The published page is the built output of `examples/kit`, committed to `docs/`.
+[PAGES.md](PAGES.md) says how it is served and how to rebuild it.
 
 `main` is read-only. Everything arrives through a pull request that CI has
 verified on Node 20 and 22, and only the merge bot fast-forwards. Coverage has a

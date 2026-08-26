@@ -96,6 +96,11 @@ Providers nest, so an inner one only names what it changes. By default the
 provider renders no element of its own; pass `cssVariables` and it emits the
 kit's design tokens as `--glyphy-*` custom properties on a wrapper.
 
+`ink` accepts a palette name as well as a CSS colour, which is how the two
+reserved colours are meant to be reached — `ink="accent"` for the live step of a
+flow, `ink="error"` for a state that failed. Anything the palette does not name
+is passed through untouched, so `ink="var(--brand)"` still works.
+
 For Tailwind, see [`@glyphy/tailwind`](https://www.npmjs.com/package/@glyphy/tailwind).
 
 ## Headless

@@ -16,10 +16,23 @@ import {
   MOTION_VARIANTS,
   SNAP_MS,
   TICK_MS,
+  softOf,
   stepDuration,
 } from '@glyphy/core';
 
-/** The kit's palette, keyed as Tailwind colour names. */
+/**
+ * The kit's palette, keyed as Tailwind colour names.
+ *
+ * Every colour core names, plus the wash tier for each reserved colour. The
+ * wash is derived rather than retyped, so `bg-glyphy-error-soft` and a ring
+ * drawn with `fill="tint"` cannot end up at two different strengths.
+ *
+ * The keys are written out rather than spread in from `RESERVED_COLORS`, so
+ * the object keeps its literal key type: `glyphyColors.acent` stays a compile
+ * error and an editor still completes the token names. That a reserved colour
+ * without a wash is a mistake is a job for the test that walks
+ * `RESERVED_COLORS`, not for a spread that costs every consumer its checking.
+ */
 export const glyphyColors = Object.freeze({
   paper: COLORS.paper,
   surface: COLORS.surface,
@@ -28,7 +41,13 @@ export const glyphyColors = Object.freeze({
   night: COLORS.night,
   accent: COLORS.accent,
   'accent-hover': COLORS.accentHover,
+  'accent-contrast': COLORS.accentContrast,
+  error: COLORS.error,
+  'error-hover': COLORS.errorHover,
+  'error-contrast': COLORS.errorContrast,
   slate: COLORS.slate,
+  'accent-soft': softOf('accent'),
+  'error-soft': softOf('error'),
 });
 
 /**

@@ -21,11 +21,7 @@ const RAMP = [
 /** Section 02 — the mark at every size it is specified for. */
 export function Scale(): ReactElement {
   return (
-    <Section
-      number="02"
-      title="Scale ramp"
-      note="stroke and dot scale with the box; below 24px drop the bare dots"
-    >
+    <Section id="scale" note="stroke and dot scale with the box; below 24px drop the bare dots">
       <div
         style={{
           display: 'flex',

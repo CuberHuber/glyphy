@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    a { color: #b5522f; text-decoration: none; }
+    a:hover { color: #8f3f22; }
+    .col { max-width: 1180px; margin: 0 auto; padding: 0 48px; }
+    .rule { display: flex; align-items: baseline; gap: 14px; padding-bottom: 26px; border-bottom: 1px solid rgba(239,236,228,.16); flex-wrap: wrap; }
+    .num { font: 500 11px/1 ui-monospace, Menlo, monospace; color: #b5522f; }
+    .h2 { font: 600 24px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.02em; margin: 0; }
+    .note { font: 400 13px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(239,236,228,.52); }
+    .card { background: #1c1b19; border: 1px solid rgba(239,236,228,.12); border-radius: 6px; }
+    .chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border: 1px solid rgba(239,236,228,.2); border-radius: 100px; font: 500 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .06em; color: rgba(239,236,228,.68); }
+    .navlink { display: inline-flex; align-items: center; min-height: 32px; font: 400 13px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(239,236,228,.68); white-space: nowrap; }
+    .themechip { display: inline-flex; align-items: center; justify-content: center; min-height: 32px; padding: 0 8px; border-radius: 4px; border: 1px solid rgba(239,236,228,.2); font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .05em; color: rgba(239,236,228,.68); }
+    .themechip.on { background: #efece4; color: #121110; border-color: transparent; }
+    .specrow { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid rgba(239,236,228,.12); }
+    .specname { font: 400 13px/1.3 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(239,236,228,.68); }
+    .specval { font: 500 12px/1.3 ui-monospace, Menlo, monospace; }
+    .state { background: #1c1b19; border: 1px solid rgba(239,236,228,.12); border-radius: 6px; padding: 26px; display: flex; flex-direction: column; gap: 22px; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; background: #121110; color: #efece4; padding-bottom: 96px;">
+
+  <div style="position: sticky; top: 0; background: rgba(18,17,16,.82); border-bottom: 1px solid rgba(239,236,228,.16);">
+    <div class="col" style="height: 60px; display: flex; align-items: center; gap: 20px;">
+      <span style="display: flex; align-items: center; min-height: 32px; gap: 9px;">
+        <dc-import name="Mark" size="22" mask="000010000" ink="#efece4" dots="false" hint-size="22px,22px"></dc-import>
+        <span style="font: 600 15px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.02em;">Glyphy</span>
+      </span>
+      <span style="display: flex; align-items: center; gap: 18px;">
+        <span class="navlink">Anatomy</span>
+        <span class="navlink">Palette</span>
+        <span class="navlink">Motion states</span>
+        <span class="navlink">Playground</span>
+        <span class="navlink">Compare</span>
+        <span class="navlink">Export &amp; code</span>
+        <span class="navlink">Filling patterns</span>
+      </span>
+      <span style="display: flex; align-items: center; gap: 5px; margin-left: auto;">
+        <span style="display: inline-flex; align-items: center; gap: 10px; height: 32px; padding: 0 8px 0 11px; border-radius: 6px; border: 1px solid rgba(239,236,228,.2); color: rgba(239,236,228,.68); font: 400 12.5px/1 'Helvetica Neue', Helvetica, Arial, sans-serif;">Search<span style="font: 500 10px/1 ui-monospace, Menlo, monospace; border: 1px solid rgba(239,236,228,.2); border-radius: 4px; padding: 4px 5px; color: rgba(239,236,228,.44);">⌘K</span></span>
+        <span style="display: flex; gap: 4px;">
+          <span class="themechip on">auto</span>
+          <span class="themechip">light</span>
+          <span class="themechip">dark</span>
+        </span>
+      </span>
+    </div>
+  </div>
+
+  <div class="col" style="padding-top: 72px; display: flex; justify-content: space-between; align-items: flex-start; gap: 64px; flex-wrap: wrap;">
+    <div style="max-width: 560px; display: flex; flex-direction: column; gap: 0;">
+      <div style="font: 500 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase; color: #b5522f;">UI-Kit · v0.1 · glyph + motion</div>
+      <h1 style="font: 600 92px/.92 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.045em; margin: 22px 0 0;">Glyphy</h1>
+      <p style="font: 400 17px/1.55 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(239,236,228,.68); margin: 20px 0 0; text-wrap: pretty;">A nine-cell dot matrix. Every cell is either a bare dot or a ringed dot; the pattern of rings over time is the whole language. Hand-drawn origin, kept deliberately uneven — clean stroke, wobbly path.</p>
+      <div style="display: flex; align-items: center; gap: 12px; margin: 26px 0 0; padding: 10px 10px 10px 16px; border: 1px solid rgba(239,236,228,.2); border-radius: 6px; max-width: 400px;">
+        <code style="font: 500 12.5px/1 ui-monospace, Menlo, monospace; flex: 1;"><span style="color: rgba(239,236,228,.44);">$ </span>npm install @glyphy/react</code>
+        <span style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border: 1px solid rgba(239,236,228,.2); border-radius: 4px; font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; color: rgba(239,236,228,.68);">Copy</span>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 0;">
+        <span style="display: inline-flex; align-items: center; min-height: 32px; font: 500 12.5px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: 0 16px; border-radius: 6px; background: #efece4; color: #121110;">Open the playground</span>
+        <span style="display: inline-flex; align-items: center; min-height: 32px; font: 500 12.5px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; padding: 0 16px; border-radius: 6px; border: 1px solid rgba(239,236,228,.2);">Source on GitHub</span>
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin: 28px 0 0; align-items: center;">
+        <span class="chip">loading</span>
+        <span class="chip">thinking</span>
+        <span class="chip">pattern</span>
+        <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .06em; color: rgba(239,236,228,.52);">12 states · 512 patterns</span>
+      </div>
+    </div>
+    <div style="padding-top: 8px;">
+      <dc-import name="Mark" size="228" mask="110000000" ink="#efece4" hint-size="228px,228px"></dc-import>
+    </div>
+  </div>
+
+  <div class="col" style="padding-top: 96px;">
+    <div class="rule"><span class="num">01</span><h2 class="h2">Anatomy</h2><span class="note">construction on the 3×3 lattice</span></div>
+    <div style="display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; align-items: start; padding-top: 40px;">
+      <div class="card" style="padding: 56px; display: grid; place-items: center; background-image: radial-gradient(rgba(239,236,228,.2) 1px, transparent 1px); background-size: 26px 26px; background-position: 13px 13px;">
+        <div style="position: relative; padding: 26px; outline: 1px dashed rgba(181,82,47,.5);">
+          <dc-import name="Mark" size="234" mask="111111111" ink="#efece4" hint-size="234px,234px"></dc-import>
+          <span style="position: absolute; top: -11px; left: 26px; font: 500 10px/1 ui-monospace, Menlo, monospace; background: #1c1b19; padding: 0 5px; color: #b5522f;">bounding box = 3 × pitch</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <div class="specrow"><span class="specname">Cell pitch</span><span class="specval">1 u</span></div>
+        <div class="specrow"><span class="specname">Ring diameter</span><span class="specval">0.78 u</span></div>
+        <div class="specrow"><span class="specname">Ring stroke</span><span class="specval">size ÷ 52</span></div>
+        <div class="specrow"><span class="specname">Dot diameter</span><span class="specval">size ÷ 30</span></div>
+        <div class="specrow"><span class="specname">Wobble tolerance</span><span class="specval">±5% radius</span></div>
+        <div class="specrow"><span class="specname">Cell rotation</span><span class="specval">−9° … +8°</span></div>
+        <div class="specrow"><span class="specname">Dot opacity (unringed)</span><span class="specval">0.42</span></div>
+        <p style="font: 400 13px/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(239,236,228,.62); margin: 22px 0 0; text-wrap: pretty;">Each cell carries a fixed wobble signature — the same nine irregularities every time it renders, so the mark stays recognisable while never looking machined. Never regenerate the wobble randomly per instance.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col" style="padding-top: 96px;">
+    <div class="rule"><span class="num">04</span><h2 class="h2">Palette</h2><span class="note">two inks, two papers, and two colours that are spent on nothing else</span></div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; padding-top: 40px;">
+      <div class="card" style="padding: 28px; display: flex; align-items: center; gap: 26px;">
+        <dc-import name="Mark" size="88" mask="111001001" ink="#b5522f" hint-size="88px,88px"></dc-import>
+        <div>
+          <div style="font: 600 15px/1 'Helvetica Neue', Helvetica, Arial, sans-serif;">Accent <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: #b5522f;">#b5522f</span></div>
+          <p style="font: 400 12.5px/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(239,236,228,.62); margin: 8px 0 0;">The live step of a flow. One per screen, never for emphasis.</p>
+        </div>
+      </div>
+      <div class="card" style="padding: 28px; display: flex; align-items: center; gap: 26px;">
+        <dc-import name="Mark" size="88" mask="010100001" ink="#c62f2a" hint-size="88px,88px"></dc-import>
+        <div>
+          <div style="font: 600 15px/1 'Helvetica Neue', Helvetica, Arial, sans-serif;">Error <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: #c62f2a;">#c62f2a</span></div>
+          <p style="font: 400 12.5px/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(239,236,228,.62); margin: 8px 0 0;">The failed state. It does not spend the one-accent budget.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col" style="padding-top: 96px;">
+    <div class="rule"><span class="num">05</span><h2 class="h2">Motion states</h2><span class="note">all live, all looping — one glyph, seven behaviours</span></div>
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; padding-top: 40px;">
+      <div class="state">
+        <div style="display: grid; place-items: center; min-height: 120px;"><dc-import name="Mark" size="104" mask="000010000" ink="#efece4" hint-size="104px,104px"></dc-import></div>
+        <div><div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="font: 500 14px/1.2 'Helvetica Neue', Helvetica, Arial, sans-serif;">Idle</span><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: #b5522f;">breathe</span></div><div style="font: 500 10px/1.5 ui-monospace, Menlo, monospace; color: rgba(239,236,228,.44); margin-top: 11px;">490ms · sine · infinite</div></div>
+      </div>
+      <div class="state">
+        <div style="display: grid; place-items: center; min-height: 120px;"><dc-import name="Mark" size="104" mask="110000000" ink="#efece4" hint-size="104px,104px"></dc-import></div>
+        <div><div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="font: 500 14px/1.2 'Helvetica Neue', Helvetica, Arial, sans-serif;">Travel</span><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: #b5522f;">stepped</span></div><div style="font: 500 10px/1.5 ui-monospace, Menlo, monospace; color: rgba(239,236,228,.44); margin-top: 11px;">210ms/cell · 9 steps · loop</div></div>
+      </div>
+      <div class="state">
+        <div style="display: grid; place-items: center; min-height: 120px;"><dc-import name="Mark" size="104" mask="111001001" ink="#efece4" hint-size="104px,104px"></dc-import></div>
+        <div><div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="font: 500 14px/1.2 'Helvetica Neue', Helvetica, Arial, sans-serif;">Accumulate</span><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: #b5522f;">additive</span></div><div style="font: 500 10px/1.5 ui-monospace, Menlo, monospace; color: rgba(239,236,228,.44); margin-top: 11px;">280ms/cell · draw-on · loop</div></div>
+      </div>
+      <div class="state">
+        <div style="display: grid; place-items: center; min-height: 120px;"><dc-import name="Mark" size="104" mask="010100001" ink="#c62f2a" hint-size="104px,104px"></dc-import></div>
+        <div><div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px;"><span style="font: 500 14px/1.2 'Helvetica Neue', Helvetica, Arial, sans-serif;">Error</span><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: #c62f2a;">error only</span></div><div style="font: 500 10px/1.5 ui-monospace, Menlo, monospace; color: rgba(239,236,228,.44); margin-top: 11px;">50ms steps · 11 frames · once</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {}
+</script>
+</body>
+</html>

@@ -44,11 +44,13 @@ export function rootVariables(): Record<string, string> {
 }
 
 /**
- * The kit's three surfaces and four ink utilities.
+ * The kit's three surfaces and five ink utilities.
  *
  * Deliberately short. These are the classes the kit page itself needs; a
  * design system that wants more should extend the theme rather than expect
- * this plugin to grow.
+ * this plugin to grow. The accent and the error each get a class of their own
+ * because they mean different things and a page that spells them the same way
+ * will eventually use the wrong one.
  */
 export const glyphyPlugin: TailwindPlugin = {
   handler(api: TailwindPluginApi): void {
@@ -74,6 +76,7 @@ export const glyphyPlugin: TailwindPlugin = {
       '.glyphy-ink': { color: COLORS.ink },
       '.glyphy-ink-inverse': { color: COLORS.inkInverse },
       '.glyphy-accent': { color: COLORS.accent },
+      '.glyphy-error': { color: COLORS.error },
       '.glyphy-tint': { backgroundColor: tintOf(COLORS.ink) },
     });
   },

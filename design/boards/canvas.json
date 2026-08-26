@@ -1,0 +1,41 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Glyphy Pages", "x": 0, "y": 0, "w": 1440, "h": 2560 },
+    { "file": "GlyphyPagesDark.dc.html", "title": "Glyphy Pages Dark", "x": 1560, "y": 0, "w": 1440, "h": 2560 },
+    { "file": "GlyphyPagesMobile.dc.html", "title": "Glyphy Pages Mobile", "x": 3120, "y": 0, "w": 390, "h": 1720 },
+
+    { "file": "ErrorPalette.dc.html", "title": "Error Palette", "x": 0, "y": 2760, "w": 1200, "h": 1420 },
+    { "file": "SearchPalette.dc.html", "title": "Search Palette", "x": 1320, "y": 2760, "w": 1200, "h": 920 },
+    { "file": "PreviewShell.dc.html", "title": "Preview Shell", "x": 2640, "y": 2760, "w": 1200, "h": 1120 },
+
+    { "file": "SectionKit.dc.html", "title": "Section Kit", "x": 0, "y": 4380, "w": 1200, "h": 1560 },
+    { "file": "SocialPreview.dc.html", "title": "Social Preview · 1280×640", "x": 1320, "y": 4380, "w": 1280, "h": 640 },
+    { "file": "ReadmeHero.dc.html", "title": "README Hero · 1280×860", "x": 2720, "y": 4380, "w": 1280, "h": 860 },
+
+    { "file": "Mark.dc.html", "title": "Mark · component", "x": 0, "y": 6140, "w": 200, "h": 200 }
+  ],
+  "annotations": [
+    {
+      "id": "provenance",
+      "x": 0,
+      "y": -190,
+      "w": 620,
+      "text": "Built from design/BRIEF.md, not from the Claude Design project — that project is unreadable from this environment (design-system authorization needs an interactive terminal). Reconcile against the real artboards when they arrive."
+    },
+    {
+      "id": "palette-rule",
+      "x": 700,
+      "y": -190,
+      "w": 520,
+      "text": "The palette is closed: twelve colours, two of them reserved. accent = the live step. error = the failed state. No numeric ramp, no danger/destructive alias. The page inverts; the palette does not."
+    },
+    {
+      "id": "mark-rule",
+      "x": 0,
+      "y": 6000,
+      "w": 620,
+      "text": "Every mark on every board is this one component: nine divs, rings as CSS borders, the nine fixed wobble signatures from packages/core/src/wobble.ts. Never SVG, never regenerated."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}

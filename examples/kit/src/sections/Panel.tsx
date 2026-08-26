@@ -2,7 +2,7 @@ import { useState, type ReactElement } from 'react';
 import { COLORS, PATTERNS, PATTERN_NAMES, type PatternName, type Variant } from '@glyphy/core';
 import { Glyph, GlyphRow } from '@glyphy/react';
 import { Card, Section } from '../ui.js';
-import { caption, eyebrow, inverse, mono, sans } from '../theme.js';
+import { caption, eyebrow, ink, inverse, mono, sans } from '../theme.js';
 
 /** The three behaviours the panel's segmented control offers. */
 const MOTIONS: readonly { readonly label: string; readonly variant: Variant }[] = [
@@ -64,14 +64,13 @@ export function Panel(): ReactElement {
 
   return (
     <Section
-      number="08"
-      title="Glyphs panel"
+      id="panel"
       note="the authoring surface — pick a fill pattern, set the motion, copy the mark"
     >
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(min(320px,100%),1fr))',
           gap: 20,
           padding: '40px 0 0',
           alignItems: 'start',
@@ -204,13 +203,16 @@ export function Panel(): ReactElement {
                     }}
                     style={{
                       flex: 1,
-                      textAlign: 'center',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      minHeight: 32,
                       font: `500 11px/1 ${sans}`,
                       color: selected ? COLORS.night : inverse.soft,
                       background: selected ? COLORS.inkInverse : 'transparent',
                       border: 0,
                       borderRadius: 4,
-                      padding: '8px 0',
+                      padding: 0,
                       cursor: 'pointer',
                     }}
                   >
@@ -234,12 +236,15 @@ export function Panel(): ReactElement {
                 onClick={() => {
                   setDots((on) => !on);
                 }}
+                // The switch stays 34 by 19 — that is what the inspector looks
+                // like. The button around it is 32 tall and transparent, so the
+                // thing a finger has to hit is bigger than the thing it draws.
                 style={{
-                  width: 34,
-                  height: 19,
-                  borderRadius: 100,
-                  background: dots ? COLORS.accent : inverse.border,
-                  position: 'relative',
+                  width: 44,
+                  height: 32,
+                  display: 'grid',
+                  placeItems: 'center',
+                  background: 'transparent',
                   border: 0,
                   padding: 0,
                   cursor: 'pointer',
@@ -247,16 +252,27 @@ export function Panel(): ReactElement {
               >
                 <span
                   style={{
-                    position: 'absolute',
-                    top: 2,
-                    left: dots ? 17 : 2,
-                    width: 15,
-                    height: 15,
-                    borderRadius: '50%',
-                    background: COLORS.inkInverse,
-                    transition: 'left 160ms cubic-bezier(.4,0,.2,1)',
+                    position: 'relative',
+                    display: 'block',
+                    width: 34,
+                    height: 19,
+                    borderRadius: 100,
+                    background: dots ? COLORS.accent : inverse.border,
                   }}
-                />
+                >
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: 2,
+                      left: dots ? 17 : 2,
+                      width: 15,
+                      height: 15,
+                      borderRadius: '50%',
+                      background: COLORS.inkInverse,
+                      transition: 'left 160ms cubic-bezier(.4,0,.2,1)',
+                    }}
+                  />
+                </span>
               </button>
             </div>
           </div>
@@ -315,7 +331,7 @@ export function Panel(): ReactElement {
               }}
             >
               <span style={eyebrow}>Multiple animation · phase offset</span>
-              <span style={{ font: `500 10px/1 ${mono}`, color: 'rgba(28,26,23,.42)' }}>
+              <span style={{ font: `500 10px/1 ${mono}`, color: ink.ghost }}>
                 phase += 2 per mark
               </span>
             </div>

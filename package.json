@@ -33,6 +33,7 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
+    "build:pages": "npm run build:pages --workspace examples/kit && node scripts/pages-finish.mjs",
     "clean": "rm -rf packages/*/dist examples/*/dist coverage *.tsbuildinfo packages/*/*.tsbuildinfo",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "eslint .",

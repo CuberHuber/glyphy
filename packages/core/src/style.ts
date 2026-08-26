@@ -18,6 +18,7 @@ import {
   EASE_OPACITY_MS,
   EASE_TRANSFORM_MS,
   type Fill,
+  resolveColor,
   SNAP_MS,
   tintOf,
 } from './theme.js';
@@ -62,7 +63,10 @@ export interface GlyphSpec extends FrameOptions {
   readonly variant?: Variant;
   /** Box size in pixels. Defaults to 120. */
   readonly size?: number;
-  /** Ring and dot colour. Defaults to the kit's ink. */
+  /**
+   * Ring and dot colour: a palette name such as `error`, or any CSS colour.
+   * Defaults to the kit's ink.
+   */
   readonly ink?: string;
   /** Outline or wash. Defaults to `stroke`. */
   readonly fill?: Fill;
@@ -114,7 +118,7 @@ export function ringStyle(
   spec: Pick<GlyphSpec, 'size' | 'ink' | 'fill'> = {},
 ): Style {
   const size = spec.size ?? DEFAULT_SIZE;
-  const ink = spec.ink ?? COLORS.ink;
+  const ink = resolveColor(spec.ink ?? COLORS.ink);
   const fill = spec.fill ?? 'stroke';
   const wobble = wobbleFor(cell);
   const percent = `${RING_RATIO * 100}%`;
@@ -139,7 +143,7 @@ export function dotStyle(spec: Pick<GlyphSpec, 'size' | 'ink' | 'dots'> = {}): S
     width: diameter,
     height: diameter,
     borderRadius: '50%',
-    background: spec.ink ?? COLORS.ink,
+    background: resolveColor(spec.ink ?? COLORS.ink),
     opacity: spec.dots === false ? 0 : DOT_OPACITY,
   };
 }

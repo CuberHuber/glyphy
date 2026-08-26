@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { COLORS, EASE, MOTION_VARIANTS, stepDuration } from '@glyphy/core';
+import { COLORS, EASE, MOTION_VARIANTS, RESERVED_COLORS, softOf, stepDuration } from '@glyphy/core';
 import {
   HAIRLINE,
   cssVariableBlock,
@@ -32,8 +32,23 @@ describe('the colour tokens', () => {
     expect(glyphyColors['accent-hover']).toBe(COLORS.accentHover);
   });
 
-  it('covers every colour core defines', () => {
-    expect(Object.keys(glyphyColors)).toHaveLength(Object.keys(COLORS).length);
+  it('covers every colour core defines, plus a wash per reserved colour', () => {
+    expect(Object.keys(glyphyColors)).toHaveLength(
+      Object.keys(COLORS).length + RESERVED_COLORS.length,
+    );
+  });
+
+  it('derives each wash rather than retyping it, so it matches the tint fill', () => {
+    for (const name of RESERVED_COLORS) {
+      expect(glyphyColors[`${name}-soft`]).toBe(softOf(name));
+    }
+  });
+
+  it('keeps the accent and the error apart, as two tokens with two jobs', () => {
+    expect(glyphyColors.accent).toBe(COLORS.accent);
+    expect(glyphyColors.error).toBe(COLORS.error);
+    expect(glyphyColors['error-hover']).toBe(COLORS.errorHover);
+    expect(glyphyColors.error).not.toBe(glyphyColors.accent);
   });
 });
 
@@ -90,6 +105,14 @@ describe('the v4 stylesheet', () => {
   it('repeats the tokens under the names the React provider emits', () => {
     expect(declared('--glyphy-ink')).toBe(COLORS.ink);
     expect(declared('--glyphy-accent')).toBe(COLORS.accent);
+    expect(declared('--glyphy-error')).toBe(COLORS.error);
+    expect(declared('--glyphy-error-hover')).toBe(COLORS.errorHover);
+  });
+
+  it('carries a class for each reserved colour, so neither is spelled the other', () => {
+    for (const rule of ['.glyphy-accent', '.glyphy-error']) {
+      expect(stylesheet).toContain(rule);
+    }
   });
 
   it('carries the three surfaces, so it works without Tailwind', () => {
@@ -136,6 +159,7 @@ describe('the plugin', () => {
   it('adds the ink utilities and the tint', () => {
     const { utilities } = run();
     expect(utilities['.glyphy-accent']?.color).toBe(COLORS.accent);
+    expect(utilities['.glyphy-error']?.color).toBe(COLORS.error);
     expect(utilities['.glyphy-tint']?.backgroundColor).toBe('#1c1a172e');
   });
 
@@ -160,6 +184,7 @@ describe('the no-Tailwind door', () => {
   it('emits every token as a declaration', () => {
     const block = cssVariableBlock();
     expect(block).toContain(`--glyphy-ink: ${COLORS.ink};`);
+    expect(block).toContain(`--glyphy-error: ${COLORS.error};`);
     expect(block).toContain('--glyphy-duration-travel: 210ms;');
     expect(block).toContain('--glyphy-size-96: 96px;');
   });
