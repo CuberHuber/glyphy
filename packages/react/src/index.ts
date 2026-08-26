@@ -19,9 +19,11 @@ export {
   type GlyphTheme,
 } from './context.js';
 export {
+  GLYPH_DEFAULTS,
   useGlyph,
   useGlyphTick,
   useReducedMotion,
+  type GlyphDefaults,
   type UseGlyphOptions,
   type UseGlyphResult,
   type UseGlyphTickOptions,

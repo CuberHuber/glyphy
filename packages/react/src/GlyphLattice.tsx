@@ -47,6 +47,9 @@ export const GlyphLattice = forwardRef<HTMLDivElement, GlyphLatticeProps>(
       style,
       size = 48,
       ink,
+      // Tiling patterns is the whole job, so the still pattern is the default
+      // variant here — `idle` would ignore the masks it was handed.
+      variant = 'mask',
       ...glyph
     } = props;
 
@@ -72,6 +75,7 @@ export const GlyphLattice = forwardRef<HTMLDivElement, GlyphLatticeProps>(
             <Glyph
               key={index}
               {...glyph}
+              variant={variant}
               size={size}
               ink={accented ? (accentInk ?? ink) : ink}
               mask={masks[index % masks.length]}
