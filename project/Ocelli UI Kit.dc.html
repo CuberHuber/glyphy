@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><style>body{margin:0;background:#efece4}a{color:#b5522f;text-decoration:none}a:hover{color:#8f3f22}</style></helmet>
+<div style="background:#efece4;color:#1c1a17;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;min-height:100vh;padding:0 0 120px">
+
+<div style="max-width:1180px;margin:0 auto;padding:72px 48px 0">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:64px;flex-wrap:wrap">
+<div style="max-width:560px">
+<div style="font:500 11px/1 ui-monospace,'SF Mono',Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:#b5522f">UI-Kit · v0.1 · glyph + motion</div>
+<h1 style="font:600 92px/.92 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.045em;margin:22px 0 0">Ocelli</h1>
+<p style="font:400 17px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.62);margin:20px 0 0;text-wrap:pretty">A nine-cell dot matrix. Every cell is either a bare dot or a ringed dot; the pattern of rings over time is the whole language. Hand-drawn origin, kept deliberately uneven — clean stroke, wobbly path.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 0">
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;padding:7px 11px;border:1px solid rgba(28,26,23,.16);border-radius:100px;color:rgba(28,26,23,.7)">loading</span>
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;padding:7px 11px;border:1px solid rgba(28,26,23,.16);border-radius:100px;color:rgba(28,26,23,.7)">thinking</span>
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;padding:7px 11px;border:1px solid rgba(28,26,23,.16);border-radius:100px;color:rgba(28,26,23,.7)">pattern</span>
+</div>
+</div>
+<div style="padding:8px 0 0">
+<dc-import name="GlyphGrid" variant="travel" size="228" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="228px,228px"></dc-import>
+</div>
+</div>
+</div>
+
+<div style="max-width:1180px;margin:0 auto;padding:96px 48px 0">
+<div style="display:flex;align-items:baseline;gap:14px;padding:0 0 26px;border-bottom:1px solid rgba(28,26,23,.14)">
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">01</span>
+<h2 style="font:600 24px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;margin:0">Anatomy</h2>
+<span style="font:400 13px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.5)">construction on the 3×3 lattice</span>
+</div>
+<div style="display:grid;grid-template-columns:1fr 340px;gap:56px;align-items:start;padding:40px 0 0">
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:56px;display:grid;place-items:center;background-image:radial-gradient(rgba(28,26,23,.22) 1px,transparent 1px);background-size:26px 26px;background-position:13px 13px">
+<div style="position:relative;padding:26px;outline:1px dashed rgba(181,82,47,.5)">
+<dc-import name="GlyphGrid" variant="all" size="234" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="234px,234px"></dc-import>
+<span style="position:absolute;top:-11px;left:26px;font:500 10px/1 ui-monospace,Menlo,monospace;background:#f7f5f0;padding:0 5px;color:#b5522f">bounding box = 3 × pitch</span>
+</div>
+</div>
+<div style="display:flex;flex-direction:column;gap:0">
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:400 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">Cell pitch</span><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">1 u</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:400 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">Ring diameter</span><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">0.78 u</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:400 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">Ring stroke</span><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">size ÷ 52</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:400 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">Dot diameter</span><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">size ÷ 30</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:400 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">Wobble tolerance</span><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">±5% radius</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:400 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">Cell rotation</span><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">−9° … +8°</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:400 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">Dot opacity (unringed)</span><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">0.42</span></div>
+<p style="font:400 13px/1.6 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.55);margin:22px 0 0;text-wrap:pretty">Each cell carries a fixed wobble signature — the same nine irregularities every time it renders, so the mark stays recognisable while never looking machined. Never regenerate the wobble randomly per instance.</p>
+</div>
+</div>
+</div>
+
+<div style="max-width:1180px;margin:0 auto;padding:96px 48px 0">
+<div style="display:flex;align-items:baseline;gap:14px;padding:0 0 26px;border-bottom:1px solid rgba(28,26,23,.14)">
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">02</span>
+<h2 style="font:600 24px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;margin:0">Scale ramp</h2>
+<span style="font:400 13px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.5)">stroke and dot scale with the box; below 24px drop the bare dots</span>
+</div>
+<div style="display:flex;align-items:flex-end;gap:44px;flex-wrap:wrap;padding:44px 0 0">
+<div style="display:flex;flex-direction:column;align-items:center;gap:14px"><dc-import name="GlyphGrid" variant="all" size="16" fill="{{ fill }}" ink="{{ ink }}" show-dots="false" hint-size="16px,16px"></dc-import><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.5)">16</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:14px"><dc-import name="GlyphGrid" variant="all" size="24" fill="{{ fill }}" ink="{{ ink }}" show-dots="false" hint-size="24px,24px"></dc-import><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.5)">24</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:14px"><dc-import name="GlyphGrid" variant="all" size="32" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="32px,32px"></dc-import><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.5)">32</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:14px"><dc-import name="GlyphGrid" variant="all" size="48" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="48px,48px"></dc-import><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.5)">48</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:14px"><dc-import name="GlyphGrid" variant="all" size="96" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="96px,96px"></dc-import><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.5)">96</span></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:14px"><dc-import name="GlyphGrid" variant="all" size="160" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="160px,160px"></dc-import><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.5)">160</span></div>
+</div>
+</div>
+
+<div style="max-width:1180px;margin:0 auto;padding:96px 48px 0">
+<div style="display:flex;align-items:baseline;gap:14px;padding:0 0 26px;border-bottom:1px solid rgba(28,26,23,.14)">
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">03</span>
+<h2 style="font:600 24px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;margin:0">Fill &amp; surface</h2>
+<span style="font:400 13px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.5)">two treatments, two surfaces — never mix both fills in one mark</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:40px 0 0">
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:36px;display:flex;flex-direction:column;align-items:center;gap:26px"><dc-import name="GlyphGrid" variant="accumulate" size="112" fill="stroke" ink="#1c1a17" hint-size="112px,112px"></dc-import><div style="text-align:center"><div style="font:500 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif">Stroke · light</div><div style="font:500 10px/1.4 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.5);margin-top:5px">#1c1a17 on #f7f5f0</div></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:36px;display:flex;flex-direction:column;align-items:center;gap:26px"><dc-import name="GlyphGrid" variant="accumulate" size="112" fill="tint" ink="#1c1a17" hint-size="112px,112px"></dc-import><div style="text-align:center"><div style="font:500 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif">Tint · light</div><div style="font:500 10px/1.4 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.5);margin-top:5px">18% ink fill, no stroke</div></div></div>
+<div style="background:#191816;border:1px solid rgba(239,236,228,.12);border-radius:6px;padding:36px;display:flex;flex-direction:column;align-items:center;gap:26px"><dc-import name="GlyphGrid" variant="accumulate" size="112" fill="stroke" ink="#efece4" hint-size="112px,112px"></dc-import><div style="text-align:center"><div style="font:500 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#efece4">Stroke · dark</div><div style="font:500 10px/1.4 ui-monospace,Menlo,monospace;color:rgba(239,236,228,.45);margin-top:5px">#efece4 on #191816</div></div></div>
+<div style="background:#191816;border:1px solid rgba(239,236,228,.12);border-radius:6px;padding:36px;display:flex;flex-direction:column;align-items:center;gap:26px"><dc-import name="GlyphGrid" variant="accumulate" size="112" fill="stroke" ink="#b5522f" hint-size="112px,112px"></dc-import><div style="text-align:center"><div style="font:500 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#efece4">Accent · dark</div><div style="font:500 10px/1.4 ui-monospace,Menlo,monospace;color:rgba(239,236,228,.45);margin-top:5px">#b5522f — one per screen</div></div></div>
+</div>
+</div>
+
+<div style="max-width:1180px;margin:0 auto;padding:96px 48px 0">
+<div style="display:flex;align-items:baseline;gap:14px;padding:0 0 26px;border-bottom:1px solid rgba(28,26,23,.14)">
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">04</span>
+<h2 style="font:600 24px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;margin:0">Motion states</h2>
+<span style="font:400 13px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.5)">all live, all looping — one glyph, seven behaviours</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));gap:20px;padding:40px 0 0">
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:26px">
+<div style="display:grid;place-items:center;min-height:120px"><dc-import name="GlyphGrid" variant="idle" size="104" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="104px,104px"></dc-import></div>
+<div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><span style="font:500 14px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Idle</span><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:#b5522f">breathe</span></div><p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.58);margin:9px 0 0">Centre ring only, scaling 1.00 → 1.08 on a 3s sine. Dots hold at 42%.</p><div style="font:500 10px/1.5 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.42);margin-top:11px">3000ms · sine · infinite</div></div>
+</div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:26px">
+<div style="display:grid;place-items:center;min-height:120px"><dc-import name="GlyphGrid" variant="travel" size="104" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="104px,104px"></dc-import></div>
+<div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><span style="font:500 14px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Loading · travel</span><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:#b5522f">stepped</span></div><p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.58);margin:9px 0 0">One ring walks the spiral path with a two-cell fading trail. Grid-snapped, never interpolated between cells.</p><div style="font:500 10px/1.5 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.42);margin-top:11px">210ms/cell · 9 steps · loop</div></div>
+</div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:26px">
+<div style="display:grid;place-items:center;min-height:120px"><dc-import name="GlyphGrid" variant="accumulate" size="104" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="104px,104px"></dc-import></div>
+<div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><span style="font:500 14px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Loading · accumulate</span><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:#b5522f">additive</span></div><p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.58);margin:9px 0 0">Rings draw on in spiral order until all nine are set, hold two beats, reset. Use when duration is unknown but progress matters.</p><div style="font:500 10px/1.5 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.42);margin-top:11px">280ms/cell · draw-on 300ms · loop</div></div>
+</div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:26px">
+<div style="display:grid;place-items:center;min-height:120px"><dc-import name="GlyphGrid" variant="thinking" size="104" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="104px,104px"></dc-import></div>
+<div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><span style="font:500 14px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Thinking</span><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:#b5522f">stochastic</span></div><p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.58);margin:9px 0 0">Cells ring on and off with no fixed path — deliberately unpredictable, so it reads as considering rather than counting.</p><div style="font:500 10px/1.5 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.42);margin-top:11px">350ms/frame · hash-seeded · loop</div></div>
+</div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:26px">
+<div style="display:grid;place-items:center;min-height:120px"><dc-import name="GlyphGrid" variant="snap" size="104" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="104px,104px"></dc-import></div>
+<div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><span style="font:500 14px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Success · snap</span><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:#b5522f">mechanical</span></div><p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.58);margin:9px 0 0">All nine rings arrive in a single 50ms frame. No stagger, no easing — the hard cut is the payoff.</p><div style="font:500 10px/1.5 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.42);margin-top:11px">50ms in · 1120ms hold · linear</div></div>
+</div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:26px">
+<div style="display:grid;place-items:center;min-height:120px"><dc-import name="GlyphGrid" variant="collapse" size="104" fill="{{ fill }}" ink="{{ ink }}" show-dots="{{ showDots }}" hint-size="104px,104px"></dc-import></div>
+<div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><span style="font:500 14px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Success · collapse</span><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:#b5522f">morph</span></div><p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.58);margin:9px 0 0">The full field folds inward to a single oversized centre ring — the resting mark. Use as the terminal state of a flow.</p><div style="font:500 10px/1.5 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.42);margin-top:11px">340ms · cubic(.4,0,.2,1) · once</div></div>
+</div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:26px">
+<div style="display:grid;place-items:center;min-height:120px"><dc-import name="GlyphGrid" variant="error" size="104" fill="{{ fill }}" ink="#b5522f" show-dots="{{ showDots }}" hint-size="104px,104px"></dc-import></div>
+<div><div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px"><span style="font:500 14px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Error · flicker out</span><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:#b5522f">accent only</span></div><p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.58);margin:9px 0 0">Rings drop out unevenly and the bare dots remain — the lattice survives, the state doesn't. The one state that may use the accent.</p><div style="font:500 10px/1.5 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.42);margin-top:11px">50ms steps · 11 frames · once</div></div>
+</div>
+</div>
+</div>
+
+<div style="max-width:1180px;margin:0 auto;padding:96px 48px 0">
+<div style="display:flex;align-items:baseline;gap:14px;padding:0 0 26px;border-bottom:1px solid rgba(28,26,23,.14)">
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">05</span>
+<h2 style="font:600 24px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;margin:0">In product</h2>
+<span style="font:400 13px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.5)">web and mobile placements</span>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:40px 0 0">
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:34px;display:flex;flex-direction:column;gap:24px">
+<span style="font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:rgba(28,26,23,.45)">Button · inline spinner</span>
+<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+<button style="display:flex;align-items:center;gap:11px;background:#1c1a17;color:#efece4;border:0;border-radius:100px;padding:13px 22px;font:500 14px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;cursor:pointer"><dc-import name="GlyphGrid" variant="travel" size="18" fill="stroke" ink="#efece4" show-dots="false" hint-size="18px,18px"></dc-import>Processing</button>
+<button style="display:flex;align-items:center;gap:11px;background:transparent;color:#1c1a17;border:1px solid rgba(28,26,23,.25);border-radius:100px;padding:12px 21px;font:500 14px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;cursor:pointer"><dc-import name="GlyphGrid" variant="snap" size="18" fill="stroke" ink="#1c1a17" show-dots="false" hint-size="18px,18px"></dc-import>Saved</button>
+</div>
+<p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.55);margin:0">At 18px the bare dots are dropped and stroke floors at 1px. Optical size only — never scale the 96px mark down.</p>
+</div>
+
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:34px;display:flex;flex-direction:column;gap:24px">
+<span style="font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:rgba(28,26,23,.45)">Chat · AI thinking</span>
+<div style="display:flex;flex-direction:column;gap:12px">
+<div style="align-self:flex-end;max-width:76%;background:#1c1a17;color:#efece4;border-radius:16px 16px 5px 16px;padding:13px 16px;font:400 13.5px/1.45 'Helvetica Neue',Helvetica,Arial,sans-serif">Summarise the Q3 anomalies for me.</div>
+<div style="align-self:flex-start;display:flex;align-items:center;gap:12px;background:#efece4;border:1px solid rgba(28,26,23,.12);border-radius:16px 16px 16px 5px;padding:14px 18px">
+<dc-import name="GlyphGrid" variant="thinking" size="26" fill="stroke" ink="#1c1a17" show-dots="true" hint-size="26px,26px"></dc-import>
+<span style="font:400 13px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.55)">Reading 14 documents</span>
+</div>
+</div>
+<p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.55);margin:0">Thinking is the only state allowed to run indefinitely. Pair it with changing copy, never with a fake percentage.</p>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:300px 1fr;gap:20px;padding:20px 0 0">
+<div style="background:#191816;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:16px">
+<span style="font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:rgba(239,236,228,.4)">Mobile · launch</span>
+<div style="flex:1;border-radius:22px;background:#efece4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:30px;padding:64px 0;min-height:380px">
+<dc-import name="GlyphGrid" variant="accumulate" size="88" fill="stroke" ink="#1c1a17" show-dots="true" hint-size="88px,88px"></dc-import>
+<div style="text-align:center"><div style="font:600 19px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em">Ocelli</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.42);margin-top:9px">restoring your workspace</div></div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:34px;display:flex;flex-direction:column;gap:26px">
+<span style="font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:rgba(28,26,23,.45)">Stepper · progress</span>
+<div style="display:flex;align-items:center;gap:0">
+<div style="display:flex;flex-direction:column;align-items:center;gap:11px;width:96px"><dc-import name="GlyphGrid" variant="all" size="34" fill="tint" ink="#1c1a17" show-dots="false" hint-size="34px,34px"></dc-import><span style="font:500 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif">Upload</span></div>
+<div style="flex:1;height:1px;background:rgba(28,26,23,.2);margin-bottom:24px"></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:11px;width:96px"><dc-import name="GlyphGrid" variant="all" size="34" fill="tint" ink="#1c1a17" show-dots="false" hint-size="34px,34px"></dc-import><span style="font:500 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif">Verify</span></div>
+<div style="flex:1;height:1px;background:rgba(28,26,23,.2);margin-bottom:24px"></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:11px;width:96px"><dc-import name="GlyphGrid" variant="travel" size="34" fill="stroke" ink="#1c1a17" show-dots="true" hint-size="34px,34px"></dc-import><span style="font:500 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#b5522f">Reconcile</span></div>
+<div style="flex:1;height:1px;background:rgba(28,26,23,.2);margin-bottom:24px"></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:11px;width:96px;opacity:.45"><dc-import name="GlyphGrid" variant="off" size="34" fill="stroke" ink="#1c1a17" show-dots="true" hint-size="34px,34px"></dc-import><span style="font:500 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif">Publish</span></div>
+</div>
+<p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.55);margin:0">Done steps use the tint fill, the active step animates, upcoming steps show the bare lattice at 45%.</p>
+</div>
+
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:34px;display:flex;flex-direction:column;gap:22px">
+<span style="font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:rgba(28,26,23,.45)">Empty state</span>
+<div style="display:flex;align-items:center;gap:26px">
+<div style="opacity:.4"><dc-import name="GlyphGrid" variant="idle" size="62" fill="stroke" ink="#1c1a17" show-dots="true" hint-size="62px,62px"></dc-import></div>
+<div><div style="font:500 15px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif">Nothing here yet</div><div style="font:400 13px/1.5 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.55);margin-top:5px">Connect a source and the lattice fills in as records arrive.</div></div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="background:#191816;border-radius:6px;padding:0;margin:20px 0 0;overflow:hidden;position:relative;min-height:220px;display:grid;align-items:center">
+<div style="display:flex;gap:0;flex-wrap:wrap;opacity:.2;padding:30px;justify-content:center">
+<dc-import name="GlyphGrid" variant="collapse" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="thinking" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="all" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="travel" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="accumulate" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="idle" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="thinking" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="snap" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="collapse" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="all" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="travel" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+<dc-import name="GlyphGrid" variant="idle" size="46" fill="stroke" ink="#efece4" show-dots="true" hint-size="46px,46px"></dc-import>
+</div>
+<div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 52px;background:linear-gradient(90deg,#191816 22%,rgba(25,24,22,.55) 70%)">
+<div style="font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:rgba(239,236,228,.45)">Hero band · pattern use</div>
+<div style="font:600 30px/1.15 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.03em;color:#efece4;margin-top:12px;max-width:440px">The lattice tiles as texture — at 20% opacity, never over body copy.</div>
+</div>
+</div>
+</div>
+
+<div style="max-width:1180px;margin:0 auto;padding:96px 48px 0">
+<div style="display:flex;align-items:baseline;gap:14px;padding:0 0 26px;border-bottom:1px solid rgba(28,26,23,.14)">
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">06</span>
+<h2 style="font:600 24px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;margin:0">Do &amp; don't</h2>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:40px 0 0">
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:22px"><div style="display:grid;place-items:center;height:110px"><dc-import name="GlyphGrid" variant="all" size="86" fill="stroke" ink="#1c1a17" show-dots="true" hint-size="86px,86px"></dc-import></div><div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#1c1a17">DO</div><p style="font:400 12.5px/1.5 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6);margin:8px 0 0">Keep the square box and the nine-cell lattice intact at every size.</p></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(181,82,47,.3);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:22px"><div style="display:grid;place-items:center;height:110px"><div style="transform:scaleX(1.5) skewX(-9deg)"><dc-import name="GlyphGrid" variant="all" size="86" fill="stroke" ink="#1c1a17" show-dots="true" hint-size="86px,86px"></dc-import></div></div><div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">DON'T</div><p style="font:400 12.5px/1.5 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6);margin:8px 0 0">Stretch, skew or non-uniformly scale. The wobble is the only distortion allowed.</p></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(181,82,47,.3);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:22px"><div style="display:grid;place-items:center;height:110px;gap:0"><div style="display:flex;gap:6px"><dc-import name="GlyphGrid" variant="all" size="40" fill="stroke" ink="#b5522f" show-dots="true" hint-size="40px,40px"></dc-import><dc-import name="GlyphGrid" variant="all" size="40" fill="tint" ink="#1c1a17" show-dots="true" hint-size="40px,40px"></dc-import></div></div><div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">DON'T</div><p style="font:400 12.5px/1.5 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6);margin:8px 0 0">Mix fills or colour cells individually. One ink, one fill, per mark.</p></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(181,82,47,.3);border-radius:6px;padding:30px;display:flex;flex-direction:column;gap:22px"><div style="display:grid;place-items:center;height:110px"><div style="display:flex;align-items:center;gap:10px"><dc-import name="GlyphGrid" variant="travel" size="34" fill="stroke" ink="#1c1a17" show-dots="false" hint-size="34px,34px"></dc-import><dc-import name="GlyphGrid" variant="thinking" size="34" fill="stroke" ink="#1c1a17" show-dots="false" hint-size="34px,34px"></dc-import><dc-import name="GlyphGrid" variant="accumulate" size="34" fill="stroke" ink="#1c1a17" show-dots="false" hint-size="34px,34px"></dc-import></div></div><div><div style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">DON'T</div><p style="font:400 12.5px/1.5 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6);margin:8px 0 0">Run several animated marks in one view. One moving glyph per screen, maximum.</p></div></div>
+</div>
+</div>
+
+<div style="max-width:1180px;margin:0 auto;padding:96px 48px 0">
+<div style="display:flex;align-items:baseline;gap:14px;padding:0 0 26px;border-bottom:1px solid rgba(28,26,23,.14)">
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">07</span>
+<h2 style="font:600 24px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;margin:0">Export &amp; code</h2>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:40px 0 0">
+<div style="background:#191816;border-radius:6px;padding:30px 32px;overflow:auto"><pre style="margin:0;font:400 12.5px/1.75 ui-monospace,'SF Mono',Menlo,monospace;color:#efece4;white-space:pre">&lt;Ocelli
+  variant="travel"   // idle · travel · accumulate
+                     // thinking · snap · collapse · error
+  size={96}          // px, square
+  ink="#1c1a17"      // 6-digit hex only
+  fill="stroke"      // stroke | tint
+  dots               // bare dots visible
+/&gt;</pre></div>
+<div style="display:flex;flex-direction:column;gap:0">
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">variant</span><span style="font:400 12.5px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">7 motion states + static</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">size</span><span style="font:400 12.5px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">16–320px; derives stroke and dot</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">ink</span><span style="font:400 12.5px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">single colour, hex; tint = ink @ 18%</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">fill</span><span style="font:400 12.5px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">stroke for motion, tint for completed</span></div>
+<div style="display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid rgba(28,26,23,.1)"><span style="font:500 12px/1.3 ui-monospace,Menlo,monospace">dots</span><span style="font:400 12.5px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.6)">off below 24px</span></div>
+<p style="font:400 13px/1.6 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.55);margin:22px 0 0;text-wrap:pretty">Rings are CSS borders with irregular <code style="font:500 12px ui-monospace,Menlo,monospace">border-radius</code> per cell, not paths — so the mark stays crisp at any size and the wobble costs nothing. No SVG, no sprite sheet.</p>
+</div>
+</div>
+</div>
+
+<div style="max-width:1180px;margin:0 auto;padding:96px 48px 0">
+<div style="display:flex;align-items:baseline;gap:14px;padding:0 0 26px;border-bottom:1px solid rgba(28,26,23,.14)">
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">08</span>
+<h2 style="font:600 24px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;margin:0">Glyphs panel</h2>
+<span style="font:400 13px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.5)">the authoring surface — pick a fill pattern, set the motion, copy the mark</span>
+</div>
+<div style="display:grid;grid-template-columns:344px 1fr;gap:20px;padding:40px 0 0">
+
+<div style="background:#191816;border:1px solid rgba(239,236,228,.1);border-radius:10px;padding:0;overflow:hidden;display:flex;flex-direction:column">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid rgba(239,236,228,.1)">
+<span style="font:500 12px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#efece4;letter-spacing:-.01em">Glyph</span>
+<span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(239,236,228,.4)">010111010</span>
+</div>
+<div style="padding:20px 18px;border-bottom:1px solid rgba(239,236,228,.1);display:flex;flex-direction:column;gap:14px">
+<span style="font:500 9.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(239,236,228,.38)">Fill pattern</span>
+<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+<div style="aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(239,236,228,.14);border-radius:5px;background:rgba(239,236,228,.04)"><dc-import name="GlyphGrid" variant="mask" mask="000010000" size="30" fill="stroke" ink="#efece4" show-dots="false" hint-size="30px,30px"></dc-import></div>
+<div style="aspect-ratio:1;display:grid;place-items:center;border:1px solid #b5522f;border-radius:5px;background:rgba(181,82,47,.16)"><dc-import name="GlyphGrid" variant="mask" mask="010111010" size="30" fill="stroke" ink="#efece4" show-dots="false" hint-size="30px,30px"></dc-import></div>
+<div style="aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(239,236,228,.14);border-radius:5px;background:rgba(239,236,228,.04)"><dc-import name="GlyphGrid" variant="mask" mask="101010101" size="30" fill="stroke" ink="#efece4" show-dots="false" hint-size="30px,30px"></dc-import></div>
+<div style="aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(239,236,228,.14);border-radius:5px;background:rgba(239,236,228,.04)"><dc-import name="GlyphGrid" variant="mask" mask="111101111" size="30" fill="stroke" ink="#efece4" show-dots="false" hint-size="30px,30px"></dc-import></div>
+<div style="aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(239,236,228,.14);border-radius:5px;background:rgba(239,236,228,.04)"><dc-import name="GlyphGrid" variant="mask" mask="111000111" size="30" fill="stroke" ink="#efece4" show-dots="false" hint-size="30px,30px"></dc-import></div>
+<div style="aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(239,236,228,.14);border-radius:5px;background:rgba(239,236,228,.04)"><dc-import name="GlyphGrid" variant="mask" mask="010010010" size="30" fill="stroke" ink="#efece4" show-dots="false" hint-size="30px,30px"></dc-import></div>
+<div style="aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(239,236,228,.14);border-radius:5px;background:rgba(239,236,228,.04)"><dc-import name="GlyphGrid" variant="mask" mask="101000101" size="30" fill="stroke" ink="#efece4" show-dots="false" hint-size="30px,30px"></dc-import></div>
+<div style="aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(239,236,228,.14);border-radius:5px;background:rgba(239,236,228,.04)"><dc-import name="GlyphGrid" variant="mask" mask="100010001" size="30" fill="stroke" ink="#efece4" show-dots="false" hint-size="30px,30px"></dc-import></div>
+<div style="aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(239,236,228,.14);border-radius:5px;background:rgba(239,236,228,.04)"><dc-import name="GlyphGrid" variant="mask" mask="011011000" size="30" fill="stroke" ink="#efece4" show-dots="false" hint-size="30px,30px"></dc-import></div>
+<div style="aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(239,236,228,.14);border-radius:5px;background:rgba(239,236,228,.04)"><dc-import name="GlyphGrid" variant="mask" mask="111111111" size="30" fill="stroke" ink="#efece4" show-dots="false" hint-size="30px,30px"></dc-import></div>
+</div>
+</div>
+<div style="padding:20px 18px;border-bottom:1px solid rgba(239,236,228,.1);display:flex;flex-direction:column;gap:16px">
+<span style="font:500 9.5px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:rgba(239,236,228,.38)">Motion</span>
+<div style="display:flex;gap:5px;background:rgba(239,236,228,.06);border-radius:6px;padding:3px">
+<span style="flex:1;text-align:center;font:500 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#191816;background:#efece4;border-radius:4px;padding:8px 0">Travel</span>
+<span style="flex:1;text-align:center;font:500 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(239,236,228,.55);padding:8px 0">Wave</span>
+<span style="flex:1;text-align:center;font:500 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(239,236,228,.55);padding:8px 0">Breathe</span>
+</div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;justify-content:space-between"><span style="font:400 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(239,236,228,.55)">Size</span><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:#efece4">96px</span></div>
+<div style="height:3px;border-radius:2px;background:rgba(239,236,228,.14);position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:34%;background:#efece4;border-radius:2px"></div><div style="position:absolute;left:34%;top:-4px;width:11px;height:11px;border-radius:50%;background:#efece4"></div></div>
+</div>
+<div style="display:flex;flex-direction:column;gap:9px">
+<div style="display:flex;justify-content:space-between"><span style="font:400 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(239,236,228,.55)">Step duration</span><span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:#efece4">210ms</span></div>
+<div style="height:3px;border-radius:2px;background:rgba(239,236,228,.14);position:relative"><div style="position:absolute;left:0;top:0;bottom:0;width:58%;background:#efece4;border-radius:2px"></div><div style="position:absolute;left:58%;top:-4px;width:11px;height:11px;border-radius:50%;background:#efece4"></div></div>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between"><span style="font:400 11px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(239,236,228,.55)">Show bare dots</span><div style="width:34px;height:19px;border-radius:100px;background:#b5522f;position:relative"><div style="position:absolute;top:2px;right:2px;width:15px;height:15px;border-radius:50%;background:#efece4"></div></div></div>
+</div>
+<div style="padding:26px 18px;display:flex;flex-direction:column;align-items:center;gap:20px;background:rgba(239,236,228,.03)">
+<dc-import name="GlyphGrid" variant="travel" size="104" fill="stroke" ink="#efece4" show-dots="true" hint-size="104px,104px"></dc-import>
+<div style="display:flex;gap:8px;width:100%">
+<span style="flex:1;text-align:center;font:500 11.5px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:#191816;background:#efece4;border-radius:6px;padding:11px 0">Copy JSX</span>
+<span style="flex:1;text-align:center;font:500 11.5px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(239,236,228,.75);border:1px solid rgba(239,236,228,.18);border-radius:6px;padding:10px 0">Export SVG</span>
+</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;gap:20px">
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:34px;display:flex;flex-direction:column;gap:28px">
+<div style="display:flex;align-items:baseline;justify-content:space-between;gap:14px">
+<span style="font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:rgba(28,26,23,.45)">Multiple animation · phase offset</span>
+<span style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.42)">phase += 2 per mark</span>
+</div>
+<div style="display:flex;gap:22px;flex-wrap:wrap;align-items:center">
+<dc-import name="GlyphGrid" variant="travel" size="64" phase="0" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="64px,64px"></dc-import>
+<dc-import name="GlyphGrid" variant="travel" size="64" phase="2" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="64px,64px"></dc-import>
+<dc-import name="GlyphGrid" variant="travel" size="64" phase="4" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="64px,64px"></dc-import>
+<dc-import name="GlyphGrid" variant="travel" size="64" phase="6" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="64px,64px"></dc-import>
+<dc-import name="GlyphGrid" variant="travel" size="64" phase="8" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="64px,64px"></dc-import>
+</div>
+<p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.58);margin:0;max-width:640px">A row of marks sharing one clock, each offset two steps — the ring appears to travel across the whole row rather than inside each glyph. The only sanctioned exception to “one moving glyph per screen”.</p>
+</div>
+
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:34px;display:flex;flex-direction:column;gap:26px">
+<span style="font:500 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:rgba(28,26,23,.45)">Column wave · one mark, three columns</span>
+<div style="display:flex;gap:34px;align-items:center;flex-wrap:wrap">
+<dc-import name="GlyphGrid" variant="wave" size="104" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="104px,104px"></dc-import>
+<dc-import name="GlyphGrid" variant="breathe-mask" mask="010111010" size="104" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="104px,104px"></dc-import>
+<dc-import name="GlyphGrid" variant="breathe-mask" mask="101010101" size="104" fill="tint" ink="{{ ink }}" show-dots="true" hint-size="104px,104px"></dc-import>
+<div style="max-width:260px"><div style="font:500 13px/1.3 'Helvetica Neue',Helvetica,Arial,sans-serif">Wave · Breathe · Breathe (tint)</div><p style="font:400 12.5px/1.55 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.58);margin:8px 0 0">Any fill pattern can carry the breathe motion — the pattern stays legible while opacity cycles 55 → 100%.</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div style="max-width:1180px;margin:0 auto;padding:96px 48px 0">
+<div style="display:flex;align-items:baseline;gap:14px;padding:0 0 26px;border-bottom:1px solid rgba(28,26,23,.14)">
+<span style="font:500 11px/1 ui-monospace,Menlo,monospace;color:#b5522f">09</span>
+<h2 style="font:600 24px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:-.02em;margin:0">Filling patterns</h2>
+<span style="font:400 13px/1 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.5)">nine bits, 512 marks — these ten are the sanctioned set</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;padding:40px 0 0">
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px"><dc-import name="GlyphGrid" variant="mask" mask="000010000" size="72" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="72px,72px"></dc-import><div style="text-align:center"><div style="font:500 12.5px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Seed</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.45);margin-top:6px">000010000</div></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px"><dc-import name="GlyphGrid" variant="mask" mask="010111010" size="72" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="72px,72px"></dc-import><div style="text-align:center"><div style="font:500 12.5px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Cross</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.45);margin-top:6px">010111010</div></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px"><dc-import name="GlyphGrid" variant="mask" mask="101010101" size="72" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="72px,72px"></dc-import><div style="text-align:center"><div style="font:500 12.5px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Saltire</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.45);margin-top:6px">101010101</div></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px"><dc-import name="GlyphGrid" variant="mask" mask="111101111" size="72" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="72px,72px"></dc-import><div style="text-align:center"><div style="font:500 12.5px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Hollow</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.45);margin-top:6px">111101111</div></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px"><dc-import name="GlyphGrid" variant="mask" mask="111000111" size="72" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="72px,72px"></dc-import><div style="text-align:center"><div style="font:500 12.5px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Bars</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.45);margin-top:6px">111000111</div></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px"><dc-import name="GlyphGrid" variant="mask" mask="010010010" size="72" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="72px,72px"></dc-import><div style="text-align:center"><div style="font:500 12.5px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Spine</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.45);margin-top:6px">010010010</div></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px"><dc-import name="GlyphGrid" variant="mask" mask="101000101" size="72" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="72px,72px"></dc-import><div style="text-align:center"><div style="font:500 12.5px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Quoin</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.45);margin-top:6px">101000101</div></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px"><dc-import name="GlyphGrid" variant="mask" mask="100010001" size="72" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="72px,72px"></dc-import><div style="text-align:center"><div style="font:500 12.5px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Fall</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.45);margin-top:6px">100010001</div></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px"><dc-import name="GlyphGrid" variant="mask" mask="011011000" size="72" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="72px,72px"></dc-import><div style="text-align:center"><div style="font:500 12.5px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Quarter</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.45);margin-top:6px">011011000</div></div></div>
+<div style="background:#f7f5f0;border:1px solid rgba(28,26,23,.1);border-radius:6px;padding:24px;display:flex;flex-direction:column;align-items:center;gap:18px"><dc-import name="GlyphGrid" variant="mask" mask="111111111" size="72" fill="{{ fill }}" ink="{{ ink }}" show-dots="true" hint-size="72px,72px"></dc-import><div style="text-align:center"><div style="font:500 12.5px/1.2 'Helvetica Neue',Helvetica,Arial,sans-serif">Full</div><div style="font:500 10px/1 ui-monospace,Menlo,monospace;color:rgba(28,26,23,.45);margin-top:6px">111111111</div></div></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(58px,1fr));gap:0;background:#191816;border-radius:6px;padding:24px;margin:20px 0 0">
+<dc-import name="GlyphGrid" variant="mask" mask="010111010" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="101010101" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="000010000" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="111000111" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="011011000" size="48" fill="stroke" ink="#b5522f" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="010010010" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="111101111" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="100010001" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="101000101" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="000010000" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="010111010" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="111111111" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="101010101" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="011011000" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="010010010" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+<dc-import name="GlyphGrid" variant="mask" mask="000010000" size="48" fill="stroke" ink="#efece4" show-dots="true" hint-size="48px,48px"></dc-import>
+</div>
+<p style="font:400 12.5px/1.6 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.55);margin:16px 0 0;max-width:640px">Patterns tile edge-to-edge with no gutter — the bare dots of neighbouring marks read as one continuous lattice. Accent no more than one tile in twelve.</p>
+</div>
+
+<div style="max-width:1180px;margin:0 auto;padding:80px 48px 0">
+<p style="font:400 12.5px/1.6 'Helvetica Neue',Helvetica,Arial,sans-serif;color:rgba(28,26,23,.45);margin:0;border-top:1px solid rgba(28,26,23,.12);padding-top:22px">Next: a second glyph size for favicon/app-icon lockups · a 4×4 lattice variant for denser progress · sound-on-snap spec.</p>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;fill&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;stroke&quot;,&quot;tint&quot;],&quot;default&quot;:&quot;stroke&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Glyph defaults&quot;},&quot;ink&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#1c1a17&quot;,&quot;options&quot;:[&quot;#1c1a17&quot;,&quot;#b5522f&quot;,&quot;#3a4a52&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Glyph defaults&quot;},&quot;showDots&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Glyph defaults&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      fill: this.props.fill ?? 'stroke',
+      ink: this.props.ink ?? '#1c1a17',
+      showDots: this.props.showDots === undefined ? true : this.props.showDots
+    };
+  }
+}
+</script>
+</body>
+</html>

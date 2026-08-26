@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="{{ gridStyle }}">
+<sc-for list="{{ cells }}" as="c" hint-placeholder-count="9">
+<div style="position:relative;display:grid;place-items:center">
+<div style="{{ c.ring }}"></div>
+<div style="{{ c.dot }}"></div>
+</div>
+</sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:180,&quot;height&quot;:180},&quot;variant&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;idle&quot;,&quot;travel&quot;,&quot;accumulate&quot;,&quot;snap&quot;,&quot;collapse&quot;,&quot;error&quot;,&quot;thinking&quot;,&quot;wave&quot;,&quot;mask&quot;,&quot;breathe-mask&quot;,&quot;all&quot;],&quot;default&quot;:&quot;travel&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;mask&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;010111010&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;phase&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:18,&quot;tsType&quot;:&quot;number&quot;},&quot;size&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:120,&quot;min&quot;:16,&quot;max&quot;:320,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;ink&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#1c1a17&quot;,&quot;options&quot;:[&quot;#1c1a17&quot;,&quot;#efece4&quot;,&quot;#b5522f&quot;],&quot;tsType&quot;:&quot;string&quot;},&quot;fill&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;stroke&quot;,&quot;tint&quot;],&quot;default&quot;:&quot;stroke&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showDots&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const WOB = [
+  ['53% 47% 45% 55% / 48% 54% 46% 52%', -7],
+  ['46% 54% 52% 48% / 53% 47% 53% 47%', 5],
+  ['51% 49% 47% 53% / 45% 55% 49% 51%', -3],
+  ['48% 52% 55% 45% / 52% 48% 51% 49%', 8],
+  ['54% 46% 48% 52% / 47% 53% 52% 48%', -5],
+  ['47% 53% 51% 49% / 54% 46% 47% 53%', 4],
+  ['52% 48% 54% 46% / 46% 54% 53% 47%', -9],
+  ['49% 51% 46% 54% / 51% 49% 45% 55%', 6],
+  ['55% 45% 49% 51% / 49% 51% 54% 46%', -4]
+];
+const SPIRAL = [0, 1, 2, 5, 8, 7, 6, 3, 4];
+
+class Component extends DCLogic {
+  state = { t: 0 };
+  componentDidMount() { this.iv = setInterval(() => this.setState(s => ({ t: s.t + 1 })), 70); }
+  componentWillUnmount() { clearInterval(this.iv); }
+
+  h(i, s) { const x = Math.sin(i * 127.1 + s * 311.7) * 43758.5453; return x - Math.floor(x); }
+
+  frame(variant, t, i) {
+    const pos = SPIRAL.indexOf(i);
+    const off = { on: 0, sc: 0.72, snap: false };
+    const mask = this.props.mask;
+    if (variant === 'mask' && mask) return mask[i] === '1' ? { on: 1, sc: 1, snap: false } : off;
+    switch (variant) {
+      case 'wave': {
+        const k = Math.floor(t / 3) % 7;
+        const col = i % 3;
+        return k === col ? { on: 1, sc: 1, snap: false } : k === col + 1 ? { on: 0.3, sc: 0.92, snap: false } : off;
+      }
+      case 'breathe-mask': {
+        const on = mask ? mask[i] === '1' : true;
+        return on ? { on: 0.55 + 0.45 * Math.abs(Math.sin(t / 9)), sc: 1, snap: false } : off;
+      }
+      case 'idle':
+        return i === 4 ? { on: 0.95, sc: 1 + 0.08 * Math.sin(t / 7), snap: false } : off;
+      case 'travel': {
+        const step = Math.floor(t / 3) % 9;
+        const d = (step - pos + 9) % 9;
+        if (d === 0) return { on: 1, sc: 1, snap: false };
+        if (d === 1) return { on: 0.42, sc: 0.93, snap: false };
+        if (d === 2) return { on: 0.14, sc: 0.86, snap: false };
+        return off;
+      }
+      case 'accumulate': {
+        const k = Math.floor(t / 4) % 12;
+        return pos < k ? { on: 1, sc: 1, snap: false } : off;
+      }
+      case 'snap': {
+        const ph = Math.floor(t / 4) % 9;
+        return ph >= 1 && ph <= 6 ? { on: 1, sc: 1, snap: true } : { on: 0, sc: 1, snap: true };
+      }
+      case 'collapse': {
+        const cy = Math.floor(t / 4) % 13;
+        if (cy < 6) return { on: 1, sc: 1, snap: false };
+        if (i === 4) return { on: 1, sc: 1.25, snap: false };
+        return { on: 0, sc: 0.35, snap: false };
+      }
+      case 'error': {
+        const cy = Math.floor(t / 3) % 11;
+        if (cy < 3) return { on: 1, sc: 1, snap: true };
+        if (cy > 8) return { on: 0, sc: 1, snap: true };
+        return { on: this.h(i, cy) > 0.5 ? 0 : 0.45, sc: 1, snap: true };
+      }
+      case 'thinking':
+        return this.h(i, Math.floor(t / 5)) > 0.55
+          ? { on: 1, sc: 1, snap: false }
+          : { on: 0, sc: 0.78, snap: false };
+      case 'all':
+        return { on: 1, sc: 1, snap: false };
+      default:
+        return off;
+    }
+  }
+
+  renderVals() {
+    const size = +(this.props.size ?? 120);
+    const ink = this.props.ink ?? '#1c1a17';
+    const fill = this.props.fill ?? 'stroke';
+    const variant = this.props.variant ?? 'idle';
+    const showDots = this.props.showDots === undefined ? true : !(this.props.showDots === false || this.props.showDots === 'false');
+    const sw = Math.max(1, Math.round(size / 52));
+    const dotD = Math.max(2, Math.round(size / 30));
+    const t = this.state.t + (+(this.props.phase ?? 0));
+    const cells = WOB.map((w, i) => {
+      const f = this.frame(variant, t, i);
+      return {
+        ring: {
+          position: 'absolute',
+          width: '78%',
+          height: '78%',
+          boxSizing: 'border-box',
+          border: fill === 'tint' ? '0' : sw + 'px solid ' + ink,
+          background: fill === 'tint' ? ink + '2e' : 'transparent',
+          borderRadius: w[0],
+          transform: 'rotate(' + w[1] + 'deg) scale(' + f.sc + ')',
+          opacity: f.on,
+          transition: f.snap
+            ? 'opacity 50ms linear, transform 50ms linear'
+            : 'opacity 300ms cubic-bezier(.4,0,.2,1), transform 340ms cubic-bezier(.4,0,.2,1)'
+        },
+        dot: {
+          width: dotD,
+          height: dotD,
+          borderRadius: '50%',
+          background: ink,
+          opacity: showDots ? 0.42 : 0
+        }
+      };
+    });
+    return {
+      cells,
+      gridStyle: {
+        width: size,
+        height: size,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3,1fr)',
+        gridTemplateRows: 'repeat(3,1fr)'
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
