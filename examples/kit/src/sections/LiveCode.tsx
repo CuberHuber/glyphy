@@ -65,11 +65,15 @@ function Rendered(props: { readonly reading: Success }): ReactElement {
     fill: fillOf(values),
     dots: dotsOf(values),
     maskMode: maskModeOf(values),
-    phase: number(values, 'phase'),
     paused: flag(values, 'paused'),
+    tick: number(values, 'tick'),
     tickMs: number(values, 'tickMs'),
     respectReducedMotion: flag(values, 'respectReducedMotion'),
   };
+
+  // Not shared: the row sets a phase per mark from `stepsApart`, so anything
+  // handed in here would be overwritten on the way past.
+  const phase = number(values, 'phase');
 
   if (component === 'GlyphRow') {
     return (
@@ -88,6 +92,7 @@ function Rendered(props: { readonly reading: Success }): ReactElement {
     return (
       <GlyphLattice
         {...shared}
+        phase={phase}
         masks={list(values, 'masks') ?? ['cross']}
         count={number(values, 'count')}
         columnWidth={number(values, 'columnWidth')}
@@ -100,6 +105,7 @@ function Rendered(props: { readonly reading: Success }): ReactElement {
   return (
     <Glyph
       {...shared}
+      phase={phase}
       mask={text(values, 'mask')}
       label={text(values, 'label')}
       live={flag(values, 'live')}

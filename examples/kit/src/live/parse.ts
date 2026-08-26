@@ -38,18 +38,36 @@ const SHARED: readonly string[] = [
   'fill',
   'dots',
   'maskMode',
-  'phase',
   'paused',
+  'tick',
   'tickMs',
   'respectReducedMotion',
 ];
 
-/** What each component accepts on top of the shared set. */
+/**
+ * What each component accepts on top of the shared set.
+ *
+ * `phase` is not shared: `GlyphRowProps` omits it and the row sets its own per
+ * mark, so offering it there would accept a prop the row then overwrites.
+ */
 const EXTRA: Readonly<Record<ComponentName, readonly string[]>> = {
-  Glyph: ['mask', 'label', 'live'],
+  Glyph: ['mask', 'label', 'live', 'phase'],
   GlyphRow: ['count', 'stepsApart', 'gap', 'mask', 'label'],
-  GlyphLattice: ['masks', 'count', 'columnWidth', 'accentEvery', 'accentInk'],
+  GlyphLattice: ['masks', 'count', 'columnWidth', 'accentEvery', 'accentInk', 'phase'],
 };
+
+/** Props whose value is a number, on whichever component takes them. */
+const NUMERIC: readonly string[] = [
+  'size',
+  'phase',
+  'tick',
+  'tickMs',
+  'count',
+  'stepsApart',
+  'gap',
+  'columnWidth',
+  'accentEvery',
+];
 
 /** A snippet that could not be read, with the reason. */
 export interface Failure {
@@ -117,6 +135,23 @@ function accepts(component: ComponentName, name: string): boolean {
   return SHARED.includes(name) || EXTRA[component].includes(name);
 }
 
+/**
+ * Check that every prop taking a number was given one.
+ *
+ * `size="96"` reads as a string and `size=96` as a bare attribute; both would
+ * be dropped by {@link number} further on, leaving the reader a default-sized
+ * mark under a message saying the prop was set.
+ */
+function checkNumbers(values: ReadonlyMap<string, Value>): string | undefined {
+  for (const name of NUMERIC) {
+    const value = values.get(name);
+    if (value === undefined || typeof value === 'number') continue;
+    const example = typeof value === 'string' && NUMBER.test(value) ? value : '96';
+    return `${name} is a number — write ${name}={${example}}.`;
+  }
+  return undefined;
+}
+
 /** Check the props whose legal answers are a closed set. */
 function checkValues(values: ReadonlyMap<string, Value>): string | undefined {
   const variant = values.get('variant');
@@ -173,7 +208,7 @@ export function read(source: string): Reading {
     }
   }
 
-  const problem = checkValues(values);
+  const problem = checkNumbers(values) ?? checkValues(values);
   return problem === undefined ? { ok: true, component, values } : { ok: false, problem };
 }
 
