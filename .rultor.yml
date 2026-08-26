@@ -1,0 +1,49 @@
+# Rultor — the merge and release bot.
+#
+# Most JavaScript projects have never met rultor, so: it is a chatbot that owns
+# the write access to master. A maintainer comments `@rultor merge` on a pull
+# request and rultor checks the branch out in a container, runs the script
+# below, and only fast-forwards master if it exits zero. Nobody, including the
+# maintainer, pushes to master by hand — which is the point.
+#
+# Docs: https://doc.rultor.com
+
+architect:
+  - your-org
+
+# The container the scripts run in. Anything with Node 22 will do.
+docker:
+  image: node:22-bookworm
+
+# Encrypted files rultor decrypts into the working directory before running.
+# Generate with: gpg --encrypt --armor -r <rultor key> .npmrc
+# and commit the result. The token itself is never in this file.
+assets:
+  npmrc: your-org/glyphy-secrets#.npmrc.asc
+
+# Runs on `@rultor merge`. Exactly the gate CI runs, so a green pull request
+# and a green merge mean the same thing.
+merge:
+  script: |
+    npm ci
+    npm run verify
+
+# Runs on `@rultor release, tag is 0.2.0`. The tag is the version, so a release
+# is a decision a human states out loud rather than something a script infers.
+release:
+  script: |
+    npm ci
+    npm run verify
+    npx changeset version --snapshot-off || true
+    npm version "${tag}" --no-git-tag-version --workspaces --include-workspace-root
+    cp ../npmrc "${HOME}/.npmrc"
+    npm run build
+    npx changeset publish --tag latest
+  commanders:
+    - your-org
+
+# Runs on `@rultor deploy`. Publishes the kit page to GitHub Pages.
+deploy:
+  script: |
+    npm ci
+    npm run build --workspace examples/kit

@@ -1,0 +1,39 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    # Workspaces are resolved from the root manifest, so one entry covers all
+    # four packages and the example.
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    # commitlint restricts scopes, and dependabot's own `include: scope` would
+    # emit `chore(npm)`. The scope is written into the prefix instead.
+    commit-message:
+      prefix: 'chore(deps)'
+    groups:
+      # One pull request a week for the routine churn; majors still arrive
+      # alone, because a major is a decision.
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    labels:
+      - dependencies
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: 'chore(deps)'
+    groups:
+      actions:
+        update-types:
+          - minor
+          - patch
+    labels:
+      - dependencies

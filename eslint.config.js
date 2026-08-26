@@ -99,6 +99,15 @@ export default tseslint.config(
 
   {
     files: ['**/*.config.{ts,js}', 'scripts/**/*.{ts,js,mjs}', 'vitest.setup.ts'],
+    languageOptions: {
+      // Repo tooling runs in Node, not in a browser or a bundle.
+      globals: {
+        process: 'readonly',
+        console: 'readonly',
+        URL: 'readonly',
+        __dirname: 'readonly',
+      },
+    },
     rules: {
       'no-console': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',

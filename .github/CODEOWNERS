@@ -1,0 +1,18 @@
+# Every file has an owner. A pull request without a review from one does not merge.
+*                       @your-org/maintainers
+
+# The engine is where a careless change is invisible until it ships, so it
+# carries its own reviewers.
+/packages/core/         @your-org/maintainers
+/packages/react/        @your-org/maintainers
+/packages/motion/       @your-org/maintainers
+/packages/tailwind/     @your-org/maintainers
+
+# Changing a gate is changing the project's standards, not its code.
+/.github/workflows/     @your-org/maintainers
+/eslint.config.js       @your-org/maintainers
+/vitest.config.ts       @your-org/maintainers
+/.rultor.yml            @your-org/maintainers
+
+# The handoff bundle is a historical record. It is read, not edited.
+/design/                @your-org/maintainers

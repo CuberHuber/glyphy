@@ -1,0 +1,47 @@
+name: Feature request
+description: Something the kit should be able to do and cannot.
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The kit is deliberately small: one mark, twelve behaviours, 512 patterns.
+        Additions are weighed against that. The strongest case is a real screen
+        you could not build, not a capability that would be nice to have.
+
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      options:
+        - '@glyphy/core'
+        - '@glyphy/react'
+        - '@glyphy/motion'
+        - '@glyphy/tailwind'
+        - A new package
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What you were trying to build
+      description: The screen or the behaviour, not the API you have in mind for it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: blocked
+    attributes:
+      label: Where you got stuck
+      description: What you tried with the current API, and why it did not work.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you would add
+      description: Optional. A prop, a variant, an export — whatever shape you think it takes.
+    validations:
+      required: false

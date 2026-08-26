@@ -1,0 +1,72 @@
+name: Bug report
+description: The mark does something other than what the kit says it does.
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. The single most useful thing you can give
+        us is a reproduction — a variant, a tick and what you saw, or a link to
+        a running page. The engine is deterministic, so a reproduction that
+        names the frame is a reproduction we can turn into a failing test.
+
+  - type: dropdown
+    id: package
+    attributes:
+      label: Package
+      description: Which one is misbehaving?
+      options:
+        - '@glyphy/core'
+        - '@glyphy/react'
+        - '@glyphy/motion'
+        - '@glyphy/tailwind'
+        - Not sure
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: The version installed, from `npm ls @glyphy/core`.
+      placeholder: 0.1.0
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Node version, browser, bundler, React version — whatever is relevant.
+      placeholder: Node 22.11, Chrome 131, Vite 5, React 18.3
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: >
+        The smallest code that shows it. If it is a rendering problem, the props
+        you passed. If it is a timing problem, the variant and the tick.
+      render: tsx
+      placeholder: |
+        import { glyphFrame } from '@glyphy/core';
+        glyphFrame('travel', 12); // cell 5 is lit; the kit says it should be cell 8
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happened
+      description: Error messages verbatim, please, rather than paraphrased.
+    validations:
+      required: true

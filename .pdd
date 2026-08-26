@@ -1,0 +1,38 @@
+# Puzzle Driven Development.
+#
+# A TODO in this codebase is not a note to self, it is a promise. Write one and
+# 0pdd opens a GitHub issue for it within the hour; delete the TODO and 0pdd
+# closes the issue. Nothing is deferred silently.
+#
+# The format is:
+#
+#   // @todo #42:30min The clock should coalesce listeners that share a period
+#   //  so a page with forty marks holds one timer rather than forty. Measure
+#   //  first — this may already be cheap enough not to matter.
+#
+#   #42     the issue this puzzle came out of
+#   30min   an honest estimate; anything over 90min should be split
+#           the body explains what and why, in whole sentences
+#
+# Rules of thumb, borrowed from the practice rather than invented here:
+#   - A puzzle is filed when you notice the work, not when you get to it.
+#   - A pull request that leaves work undone files a puzzle for it. Reviewers
+#     ask for one rather than asking for the work.
+#   - A puzzle with no issue number has not been thought about hard enough.
+#
+# Docs: https://www.yegor256.com/2009/03/04/pdd.html and https://github.com/0crat/0pdd
+
+errors: true
+alert: true
+
+include:
+  - packages/*/src/**/*
+  - packages/*/test/**/*
+  - examples/*/src/**/*
+
+exclude:
+  - '**/node_modules/**'
+  - '**/dist/**'
+  - '**/coverage/**'
+  - 'design/**'
+  - 'docs/**'
