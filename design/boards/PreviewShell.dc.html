@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    a { color: #b5522f; text-decoration: none; }
+    a:hover { color: #8f3f22; }
+    .shell { border: 1px solid rgba(28,26,23,.1); border-radius: 6px; overflow: hidden; background: #f7f5f0; }
+    .stage { display: grid; place-items: center; padding: 34px; background: #f7f5f0; }
+    .slab { position: relative; background: #191816; border-top: 1px solid rgba(28,26,23,.1); }
+    .slab pre { margin: 0; padding: 24px 92px 24px 24px; font: 400 12.5px/1.75 ui-monospace, Menlo, monospace; color: #efece4; white-space: pre; overflow: hidden; }
+    .copy { display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border-radius: 4px; border: 1px solid rgba(239,236,228,.2); background: transparent; color: rgba(239,236,228,.75); font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .toggle { display: inline-flex; align-items: center; min-height: 32px; padding: 0 14px; border-radius: 4px; border: 1px solid rgba(239,236,228,.2); background: #191816; color: rgba(239,236,228,.78); font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 66px; background: linear-gradient(to bottom, rgba(25,24,22,0), #191816 78%); }
+    .caption { font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase; color: rgba(28,26,23,.45); }
+    .note { font: 400 12px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0; }
+  </style>
+</helmet>
+
+<div style="width: 1200px; background: #efece4; color: #1c1a17; padding: 48px; display: flex; flex-direction: column; gap: 30px;">
+
+  <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 22px; border-bottom: 1px solid rgba(28,26,23,.14); flex-wrap: wrap;">
+    <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: #b5522f;">01</span>
+    <h2 style="font: 600 24px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.02em; margin: 0;">Preview shell</h2>
+    <span style="font: 400 13px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.5);">one container, every state — demo on top, source fused underneath, never tabs</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px;">
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <span class="caption">Resting · code collapsed</span>
+      <div class="shell">
+        <div class="stage" style="min-height: 190px;">
+          <dc-import name="Mark" size="112" mask="111001001" ink="#1c1a17" hint-size="112px,112px"></dc-import>
+        </div>
+        <div class="slab">
+          <div style="position: absolute; top: 10px; right: 10px;"><span class="copy">Copy</span></div>
+          <pre style="max-height: 112px;">&lt;Glyph
+  variant="accumulate"
+  size={112}
+  label="Saving"
+/&gt;</pre>
+          <div class="scrim"></div>
+          <div style="position: relative; display: flex; justify-content: center; padding-bottom: 12px;"><span class="toggle">View code</span></div>
+        </div>
+      </div>
+      <p class="note">The demo is the argument, so it is never behind a click. The scrim only exists while there is something under it to hide.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <span class="caption">Expanded</span>
+      <div class="shell">
+        <div class="stage" style="min-height: 190px;">
+          <dc-import name="Mark" size="112" mask="111001001" ink="#1c1a17" hint-size="112px,112px"></dc-import>
+        </div>
+        <div class="slab">
+          <div style="position: absolute; top: 10px; right: 10px;"><span class="copy" style="border-color: rgba(239,236,228,.4); color: #efece4;">Copied</span></div>
+          <pre>&lt;Glyph
+  variant="accumulate"
+  size={112}
+  label="Saving"
+/&gt;</pre>
+          <div style="position: relative; display: flex; justify-content: center; padding-bottom: 12px;"><span class="toggle">Hide code</span></div>
+        </div>
+      </div>
+      <p class="note">The code pane stays dark in both page themes. Code has its own ground.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <span class="caption">Stage · the snippet will not parse</span>
+      <div class="shell">
+        <div class="stage" style="min-height: 148px;">
+          <p style="font: 400 13px/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #c62f2a; margin: 0; max-width: 42ch; text-align: center;">variant="nope" is not one of: idle, travel, accumulate, thinking, snap, collapse, error, wave, mask, breathe-mask, all, off.</p>
+        </div>
+      </div>
+      <p class="note">The message says what is wrong and what the legal answers are — never that something went wrong.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      <span class="caption">Stage · nothing yet</span>
+      <div class="shell">
+        <div class="stage" style="min-height: 148px;">
+          <span style="font: 400 13px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.5);">Nothing to show yet.</span>
+        </div>
+      </div>
+      <p class="note">The stage keeps its floor whatever it holds, so mounting a demo never shifts the page under the reader.</p>
+    </div>
+
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 14px; background: #f7f5f0; border: 1px solid rgba(28,26,23,.1); border-radius: 6px; padding: 26px;">
+    <span class="caption">Copy button · three states, and focus</span>
+    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; background: #191816; border-radius: 6px; padding: 18px;">
+      <span class="copy">Copy</span>
+      <span class="copy" style="border-color: rgba(239,236,228,.4); color: #efece4;">Copied</span>
+      <span class="copy" style="border-color: #c62f2a; color: #efece4;">Press ⌘C</span>
+      <span class="copy" style="outline: 2px solid #b5522f; outline-offset: 2px;">Copy</span>
+      <span style="font: 400 11.5px/1.5 ui-monospace, Menlo, monospace; color: rgba(239,236,228,.55); margin-left: auto;">idle · copied 1.4s · clipboard absent · keyboard focus</span>
+    </div>
+    <p class="note" style="max-width: 88ch;">The third state is not decoration: the async clipboard is missing over plain HTTP and in older engines, and a button that silently does nothing is worse than one that says to press the keys.</p>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {}
+</script>
+</body>
+</html>

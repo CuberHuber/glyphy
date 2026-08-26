@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    a { color: #b5522f; text-decoration: none; }
+    a:hover { color: #8f3f22; }
+    .navlink { display: inline-flex; align-items: center; min-height: 32px; font: 400 13px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.62); white-space: nowrap; }
+    .state { background: #f7f5f0; border: 1px solid rgba(28,26,23,.1); border-radius: 6px; padding: 22px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; height: 860px; background: #efece4; color: #1c1a17; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column;">
+
+  <div style="border-bottom: 1px solid rgba(28,26,23,.14); background: rgba(239,236,228,.82);">
+    <div style="padding: 0 56px; height: 60px; display: flex; align-items: center; gap: 20px;">
+      <span style="display: flex; align-items: center; gap: 9px; min-height: 32px;">
+        <dc-import name="Mark" size="22" mask="000010000" ink="#1c1a17" dots="false" hint-size="22px,22px"></dc-import>
+        <span style="font: 600 15px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.02em;">Glyphy</span>
+      </span>
+      <span style="display: flex; align-items: center; gap: 18px;">
+        <span class="navlink">Anatomy</span>
+        <span class="navlink">Palette</span>
+        <span class="navlink">Motion states</span>
+        <span class="navlink">Playground</span>
+        <span class="navlink">Filling patterns</span>
+      </span>
+      <span style="display: inline-flex; align-items: center; gap: 10px; height: 32px; padding: 0 8px 0 11px; border-radius: 6px; border: 1px solid rgba(28,26,23,.16); color: rgba(28,26,23,.62); font: 400 12.5px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; margin-left: auto;">Search<span style="font: 500 10px/1 ui-monospace, Menlo, monospace; border: 1px solid rgba(28,26,23,.16); border-radius: 4px; padding: 4px 5px; color: rgba(28,26,23,.42);">⌘K</span></span>
+    </div>
+  </div>
+
+  <div style="padding: 56px 56px 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 56px;">
+    <div style="max-width: 540px; display: flex; flex-direction: column;">
+      <div style="font: 500 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase; color: #b5522f;">UI-Kit · v0.1 · glyph + motion</div>
+      <h1 style="font: 600 84px/.92 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.045em; margin: 20px 0 0;">Glyphy</h1>
+      <p style="font: 400 17px/1.55 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.62); margin: 18px 0 0; text-wrap: pretty;">A nine-cell dot matrix. Every cell is either a bare dot or a ringed dot; the pattern of rings over time is the whole language.</p>
+      <div style="display: flex; align-items: center; gap: 12px; margin: 24px 0 0; padding: 10px 10px 10px 16px; border: 1px solid rgba(28,26,23,.16); border-radius: 6px; max-width: 380px;">
+        <code style="font: 500 12.5px/1 ui-monospace, Menlo, monospace; flex: 1;"><span style="color: rgba(28,26,23,.42);">$ </span>npm install @glyphy/react</code>
+      </div>
+    </div>
+    <dc-import name="Mark" size="228" mask="110000000" ink="#1c1a17" hint-size="228px,228px"></dc-import>
+  </div>
+
+  <div style="padding: 52px 56px 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px;">
+    <div class="state"><dc-import name="Mark" size="76" mask="000010000" ink="#1c1a17" hint-size="76px,76px"></dc-import><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42);">idle</span></div>
+    <div class="state"><dc-import name="Mark" size="76" mask="110000000" ink="#1c1a17" hint-size="76px,76px"></dc-import><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42);">travel</span></div>
+    <div class="state"><dc-import name="Mark" size="76" mask="111001001" ink="#1c1a17" hint-size="76px,76px"></dc-import><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42);">accumulate</span></div>
+    <div class="state"><dc-import name="Mark" size="76" mask="111111111" ink="#1c1a17" hint-size="76px,76px"></dc-import><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42);">snap</span></div>
+    <div class="state"><dc-import name="Mark" size="76" mask="010100001" ink="#c62f2a" hint-size="76px,76px"></dc-import><span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: #c62f2a;">error</span></div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {}
+</script>
+</body>
+</html>

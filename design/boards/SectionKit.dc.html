@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    a { color: #b5522f; text-decoration: none; }
+    a:hover { color: #8f3f22; }
+    .cap { font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase; color: rgba(28,26,23,.45); }
+    .card { background: #f7f5f0; border: 1px solid rgba(28,26,23,.1); border-radius: 6px; }
+    .bay { background: #f7f5f0; border: 1px solid rgba(28,26,23,.1); border-radius: 6px; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .chip { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 32px; padding: 0 10px; border-radius: 4px; border: 1px solid rgba(28,26,23,.16); background: transparent; color: rgba(28,26,23,.62); font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .05em; }
+    .chip.on { background: #1c1a17; color: #efece4; border-color: transparent; }
+    .chip.focus { outline: 2px solid #b5522f; outline-offset: 2px; }
+    .chip.off { opacity: .4; }
+    .copy { display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border-radius: 4px; border: 1px solid rgba(28,26,23,.16); color: rgba(28,26,23,.62); font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .08em; text-transform: uppercase; }
+    .pill { display: inline-flex; align-items: center; min-height: 32px; padding: 0 11px; border: 1px solid rgba(28,26,23,.16); border-radius: 100px; font: 500 11px/1 ui-monospace, Menlo, monospace; letter-spacing: .06em; color: rgba(28,26,23,.62); }
+    .swatch { width: 32px; height: 32px; border-radius: 4px; border: 1px solid rgba(28,26,23,.16); }
+    .cellbtn { width: 32px; height: 32px; border-radius: 4px; border: 1px solid rgba(28,26,23,.16); background: transparent; }
+    .cellbtn.on { background: #b5522f; border-color: transparent; }
+    .track { height: 4px; border-radius: 2px; background: rgba(28,26,23,.16); position: relative; }
+    .track i { position: absolute; left: 0; top: 0; bottom: 0; width: 62%; background: #b5522f; border-radius: 2px; display: block; }
+    .thumb { position: absolute; left: 62%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: #b5522f; display: block; }
+    th { text-align: left; font: 500 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase; color: rgba(28,26,23,.45); padding: 0 14px 10px 0; border-bottom: 1px solid rgba(28,26,23,.14); }
+    td { padding: 11px 14px 11px 0; border-bottom: 1px solid rgba(28,26,23,.1); vertical-align: top; }
+  </style>
+</helmet>
+
+<div style="width: 1200px; background: #efece4; color: #1c1a17; padding: 48px; display: flex; flex-direction: column; gap: 28px;">
+
+  <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 22px; border-bottom: 1px solid rgba(28,26,23,.14); flex-wrap: wrap;">
+    <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: #b5522f;">00</span>
+    <h2 style="font: 600 24px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.02em; margin: 0;">Section kit</h2>
+    <span style="font: 400 13px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.5);">every shape the page repeats, at the 32px floor</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+
+    <div class="bay">
+      <span class="cap">Chip · four states</span>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+        <span class="chip">idle</span>
+        <span class="chip on">active</span>
+        <span class="chip focus">focus</span>
+        <span class="chip off">disabled</span>
+      </div>
+      <p style="font: 400 12px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0;">Height is set, not derived from padding, so a narrow chip is as tall as a wide one.</p>
+    </div>
+
+    <div class="bay">
+      <span class="cap">Copy button</span>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+        <span class="copy">Copy</span>
+        <span class="copy" style="border-color: #1c1a17; color: #1c1a17;">Copied</span>
+        <span class="copy" style="border-color: #c62f2a; color: #c62f2a;">Press ⌘C</span>
+      </div>
+      <p style="font: 400 12px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0;">The third state is real: the async clipboard is absent over plain HTTP.</p>
+    </div>
+
+    <div class="bay">
+      <span class="cap">Ink swatches · 32px</span>
+      <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+        <span class="swatch" style="background: #1c1a17; border: 2px solid #1c1a17;"></span>
+        <span class="swatch" style="background: #efece4;"></span>
+        <span class="swatch" style="background: #b5522f;"></span>
+        <span class="swatch" style="background: #c62f2a;"></span>
+        <span class="swatch" style="background: #3a4a52;"></span>
+      </div>
+      <p style="font: 400 12px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0;">Selected carries a 2px ink border, not a tick — the swatch is the label.</p>
+    </div>
+
+    <div class="bay">
+      <span class="cap">Mask editor · nine cells</span>
+      <div style="display: grid; grid-template-columns: repeat(3, 32px); gap: 4px;">
+        <span class="cellbtn"></span><span class="cellbtn on"></span><span class="cellbtn"></span>
+        <span class="cellbtn on"></span><span class="cellbtn on"></span><span class="cellbtn on"></span>
+        <span class="cellbtn"></span><span class="cellbtn on"></span><span class="cellbtn"></span>
+      </div>
+      <p style="font: 400 12px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0;">Cross · <span style="font: 500 11px ui-monospace, Menlo, monospace;">010111010</span></p>
+    </div>
+
+    <div class="bay">
+      <span class="cap">Slider</span>
+      <div style="display: flex; justify-content: space-between; gap: 10px;">
+        <span class="cap">Size</span>
+        <span style="font: 500 10px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42);">160px</span>
+      </div>
+      <div style="height: 32px; display: grid; align-items: center;">
+        <span class="track"><i></i><span class="thumb"></span></span>
+      </div>
+      <p style="font: 400 12px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0;">The track box is 32px tall whatever the thumb looks like.</p>
+    </div>
+
+    <div class="bay">
+      <span class="cap">Pills and section number</span>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+        <span class="pill">loading</span>
+        <span class="pill">thinking</span>
+        <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: #b5522f;">04</span>
+      </div>
+      <p style="font: 400 12px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0;">The number is one of the four places the accent is spent.</p>
+    </div>
+
+  </div>
+
+  <div class="card" style="padding: 26px; display: flex; flex-direction: column; gap: 16px;">
+    <span class="cap">Section rule</span>
+    <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 26px; border-bottom: 1px solid rgba(28,26,23,.14); flex-wrap: wrap;">
+      <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: #b5522f;">07</span>
+      <span style="font: 600 24px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.02em;">Compare</span>
+      <span style="font: 400 13px/1 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.5);">two marks off one clock — the difference is the only thing moving</span>
+    </div>
+  </div>
+
+  <div class="card" style="padding: 26px; display: flex; flex-direction: column; gap: 16px;">
+    <span class="cap">Prop table · four columns, types as literal unions</span>
+    <table style="border-collapse: collapse; width: 100%;">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font: 500 12px/1.4 ui-monospace, Menlo, monospace; white-space: nowrap;">fill</td>
+          <td style="font: 400 11px/1.5 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.58);">'stroke' | 'tint'</td>
+          <td style="font: 500 11px/1.5 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42);">'stroke'</td>
+          <td style="font: 400 12.5px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.62);">Stroke while something is happening, tint once it has finished.</td>
+        </tr>
+        <tr>
+          <td style="font: 500 12px/1.4 ui-monospace, Menlo, monospace; white-space: nowrap;">tick</td>
+          <td style="font: 400 11px/1.5 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.58);">number</td>
+          <td style="font: 500 11px/1.5 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.42);">—</td>
+          <td style="font: 400 12.5px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.62);">Drive the mark yourself. Overrides the shared clock entirely.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font: 400 12px/1.5 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0;">A missing default is an em dash, never an empty cell — a reader has to be able to tell “none” from “nobody filled this in”.</p>
+  </div>
+
+  <div class="card" style="padding: 26px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px;">
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <span class="cap">Spec row</span>
+      <div style="display: flex; flex-direction: column;">
+        <div style="display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid rgba(28,26,23,.1);"><span style="font: 400 13px/1.3 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.62);">Ring stroke</span><span style="font: 500 12px/1.3 ui-monospace, Menlo, monospace;">size ÷ 52</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid rgba(28,26,23,.1);"><span style="font: 400 13px/1.3 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.62);">Dot opacity</span><span style="font: 500 12px/1.3 ui-monospace, Menlo, monospace;">0.42</span></div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      <span class="cap">Code slab · dark in both themes</span>
+      <div style="background: #191816; border-radius: 6px; padding: 20px 22px;">
+        <pre style="margin: 0; font: 400 12.5px/1.75 ui-monospace, Menlo, monospace; color: #efece4; white-space: pre;">&lt;Glyph variant="error" ink="error" /&gt;</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="padding: 26px; display: flex; align-items: center; gap: 24px; border-left: 3px solid #b5522f; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="width: 3px; height: 32px; background: #b5522f; display: block;"></span>
+      <span style="font: 500 11px/1 ui-monospace, Menlo, monospace; color: rgba(28,26,23,.62);">32px — the floor</span>
+    </div>
+    <p style="font: 400 12.5px/1.6 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.58); margin: 0; flex: 1; min-width: 280px;">Every interactive control on the page clears it on its smallest axis. Where a control has to stay small to look right — the inspector's 34×19 switch — it keeps its size inside a transparent 44×32 hit area rather than being shrunk to pass.</p>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {}
+</script>
+</body>
+</html>

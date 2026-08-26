@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <style>
+    body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+    a { color: #b5522f; text-decoration: none; }
+    a:hover { color: #8f3f22; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; height: 640px; background: #efece4; color: #1c1a17; display: flex; align-items: center; justify-content: space-between; gap: 64px; padding: 64px 72px; box-sizing: border-box; overflow: hidden;">
+  <div style="display: flex; flex-direction: column;">
+    <div style="font: 500 20px/1 ui-monospace, Menlo, monospace; letter-spacing: .16em; text-transform: uppercase; color: #b5522f;">UI-Kit · glyph + motion</div>
+    <h1 style="font: 600 116px/.9 'Helvetica Neue', Helvetica, Arial, sans-serif; letter-spacing: -.045em; margin: 26px 0 0;">Glyphy</h1>
+    <p style="font: 400 30px/1.35 'Helvetica Neue', Helvetica, Arial, sans-serif; color: rgba(28,26,23,.66); margin: 26px 0 0; max-width: 19ch;">One mark. Twelve motion states. 512 patterns.</p>
+    <div style="align-self: flex-start; margin: 34px 0 0; padding: 14px 20px; border: 1px solid rgba(28,26,23,.18); border-radius: 8px; font: 500 21px/1 ui-monospace, Menlo, monospace;"><span style="color: rgba(28,26,23,.42);">$</span> npm install @glyphy/react</div>
+  </div>
+  <dc-import name="Mark" size="452" mask="111111111" ink="#1c1a17" accentCell="4" hint-size="452px,452px"></dc-import>
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {}
+</script>
+</body>
+</html>
