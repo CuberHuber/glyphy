@@ -105,13 +105,17 @@ export {
   EASE_OPACITY_MS,
   EASE_TRANSFORM_MS,
   FILLS,
+  RESERVED_COLORS,
   SNAP_MS,
   TINT_ALPHA,
   TINT_ALPHA_HEX,
+  isColorName,
   isFill,
+  resolveColor,
   tintOf,
   type ColorName,
   type Fill,
+  type ReservedColorName,
 } from './theme.js';
 
 export {

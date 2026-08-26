@@ -65,16 +65,24 @@ import { cssVariableBlock } from '@glyphy/tailwind';
 
 **Colours** — `bg-glyphy-paper`, `text-glyphy-ink`, `border-glyphy-accent`:
 
-| Token          | Value     | Use                                      |
-| -------------- | --------- | ---------------------------------------- |
-| `paper`        | `#efece4` | Page background                          |
-| `surface`      | `#f7f5f0` | Cards, one step up from the paper        |
-| `ink`          | `#1c1a17` | Body ink on light                        |
-| `ink-inverse`  | `#efece4` | Ink on dark                              |
-| `night`        | `#191816` | Dark surface                             |
-| `accent`       | `#b5522f` | Error, and the active step. Nothing else |
-| `accent-hover` | `#8f3f22` | Accent under the pointer                 |
-| `slate`        | `#3a4a52` | The optional third ink                   |
+| Token          | Value     | Use                                   |
+| -------------- | --------- | ------------------------------------- |
+| `paper`        | `#efece4` | Page background                       |
+| `surface`      | `#f7f5f0` | Cards, one step up from the paper     |
+| `ink`          | `#1c1a17` | Body ink on light                     |
+| `ink-inverse`  | `#efece4` | Ink on dark                           |
+| `night`        | `#191816` | Dark surface                          |
+| `accent`       | `#b5522f` | The live step of a flow. Nothing else |
+| `accent-hover` | `#8f3f22` | Accent under the pointer              |
+| `error`        | `#c62f2a` | The failed state. Nothing else        |
+| `error-hover`  | `#a12622` | Error under the pointer               |
+| `slate`        | `#3a4a52` | The optional third ink                |
+
+`accent` and `error` were one token until the palette was split. They are two
+now because a screen that shows a step running and a step that failed needs two
+colours, and reusing one for both meant the interface could not say which was
+which. They are 21 apart in CIE L\*a\*b\* — further than the accent is from its
+own hover — so neither is mistakable for the other.
 
 **Durations** — `duration-glyph-travel`, and so on. These are derived from the
 engine's own timing table, not retyped, so a class name and the mark it sits
@@ -107,7 +115,7 @@ The three surfaces the kit page is built from, and no more; a design system that
 wants a fourth should extend the theme rather than wait for this plugin to grow.
 
 **Utilities** — `.glyphy-ink`, `.glyphy-ink-inverse`, `.glyphy-accent`,
-`.glyphy-tint`.
+`.glyphy-error`, `.glyphy-tint`.
 
 ## Keeping the two in step
 

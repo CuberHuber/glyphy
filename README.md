@@ -135,6 +135,32 @@ Any pattern can gate any motion, which is the full cross product:
 
 ## Theming
 
+### The palette
+
+Two inks, two papers, and two reserved colours. `ink` takes a palette name as
+readily as a CSS colour, so the reserved ones can be spelled out rather than
+copied as hex:
+
+```tsx
+<Glyph variant="error" ink="error" label="Upload failed" />
+```
+
+| Token         | Value     | Reserved for                           |
+| ------------- | --------- | -------------------------------------- |
+| `accent`      | `#b5522f` | The live step of a flow. Nothing else. |
+| `error`       | `#c62f2a` | The failed state. Nothing else.        |
+| `ink`         | `#1c1a17` | Everything else on a light surface     |
+| `ink-inverse` | `#efece4` | Everything else on a dark surface      |
+| `slate`       | `#3a4a52` | The optional third ink                 |
+
+The accent and the error were one terracotta until the palette was split. A
+screen that shows one step running and another that failed needs to say which
+is which, and one colour cannot. They now sit 21 apart in CIE L\*a\*b\* — further
+than the accent is from its own hover — and each carries at least 4.5:1 on the
+paper and 3:1 on the night surface, so neither depends on the other to be read.
+One accented thing per screen still holds; an error does not spend that budget,
+because it is not decoration.
+
 Three ways in, depending on what you already use.
 
 **A provider**, for defaults across a screen:

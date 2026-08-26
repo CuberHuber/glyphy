@@ -28,6 +28,8 @@ export const glyphyColors = Object.freeze({
   night: COLORS.night,
   accent: COLORS.accent,
   'accent-hover': COLORS.accentHover,
+  error: COLORS.error,
+  'error-hover': COLORS.errorHover,
   slate: COLORS.slate,
 });
 

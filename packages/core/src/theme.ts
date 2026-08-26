@@ -1,8 +1,12 @@
 /**
  * Design tokens.
  *
- * Two inks, two papers, one accent. The accent is reserved: the error state
- * and the active step of a flow, nothing else. One accented thing per screen.
+ * Two inks, two papers, and two reserved colours that must never be confused
+ * for one another: the accent marks the live step of a flow, the error marks a
+ * state that has failed. They were one token until the palette was split,
+ * which meant a page could not show a step in progress and a step that broke
+ * on the same screen. One accented thing per screen still holds, and an error
+ * does not count against that budget — it is not decoration.
  */
 
 /** Every colour the kit names. */
@@ -17,16 +21,46 @@ export const COLORS = Object.freeze({
   inkInverse: '#efece4',
   /** Card background, dark surface. */
   night: '#191816',
-  /** Terracotta. Error, and the active step. Nothing else. */
+  /** Terracotta. The live step of a flow, and nothing else. */
   accent: '#b5522f',
   /** Accent under the pointer. */
   accentHover: '#8f3f22',
+  /** Vermilion. The failed state, and nothing else. */
+  error: '#c62f2a',
+  /** Error under the pointer. */
+  errorHover: '#a12622',
   /** The optional third ink. */
   slate: '#3a4a52',
 } as const);
 
 /** A named colour. */
 export type ColorName = keyof typeof COLORS;
+
+/**
+ * Colours the kit reserves — each one means a single thing and is never spent
+ * on emphasis. Ordered as the palette reads them: what is happening, then what
+ * went wrong.
+ */
+export const RESERVED_COLORS = Object.freeze(['accent', 'error'] as const);
+
+/** A reserved colour's name. */
+export type ReservedColorName = (typeof RESERVED_COLORS)[number];
+
+/** Whether a value names a colour in the palette. */
+export function isColorName(value: unknown): value is ColorName {
+  return typeof value === 'string' && value in COLORS;
+}
+
+/**
+ * A colour, given either as a palette name or as CSS.
+ *
+ * A palette name resolves to its hex; everything else is handed back
+ * untouched, so `ink="error"`, `ink="#c62f2a"` and `ink="var(--brand)"` are
+ * all valid and only the first is the kit's business.
+ */
+export function resolveColor(value: string): string {
+  return isColorName(value) ? COLORS[value] : value;
+}
 
 /** How the ring is drawn. */
 export const FILLS = Object.freeze(['stroke', 'tint'] as const);
@@ -69,9 +103,10 @@ export function isFill(value: unknown): value is Fill {
  * tokens rather than demanding hex.
  */
 export function tintOf(ink: string): string {
-  return /^#[0-9a-f]{6}$/i.test(ink)
-    ? `${ink}${TINT_ALPHA_HEX}`
-    : `color-mix(in srgb, ${ink} 18%, transparent)`;
+  const resolved = resolveColor(ink);
+  return /^#[0-9a-f]{6}$/i.test(resolved)
+    ? `${resolved}${TINT_ALPHA_HEX}`
+    : `color-mix(in srgb, ${resolved} 18%, transparent)`;
 }
 
 /** Every token as a CSS custom property, for the style provider to emit. */
@@ -83,6 +118,8 @@ export const CSS_VARIABLES = Object.freeze({
   '--glyphy-night': COLORS.night,
   '--glyphy-accent': COLORS.accent,
   '--glyphy-accent-hover': COLORS.accentHover,
+  '--glyphy-error': COLORS.error,
+  '--glyphy-error-hover': COLORS.errorHover,
   '--glyphy-slate': COLORS.slate,
   '--glyphy-ease': EASE,
 } as const);
