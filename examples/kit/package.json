@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "The Glyphy UI kit page — every section of the design, rendered from the published packages.",
-  "license": "MIT",
+  "license": "PolyForm-Noncommercial-1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -68,6 +68,25 @@ The four `@glyphy/*` packages are versioned together, so they always agree with
 each other. On merge to `main`, CI opens a "Version Packages" pull request;
 merging that publishes to npm with provenance.
 
+## Licensing your contribution
+
+The project is under the
+[PolyForm Noncommercial License 1.0.0](LICENSE.txt) — source-available, not open
+source. Opening a pull request means you agree your contribution ships under
+that same licence (inbound equals outbound). There is no CLA to sign and no
+copyright assignment: you keep your copyright, the project gets the licence.
+
+Two things follow from the licence that are worth knowing before you invest time:
+
+- **Dependencies must be permissive.** A dependency under GPL, AGPL or any
+  copyleft licence cannot be added, because this project cannot satisfy their
+  redistribution terms. MIT, BSD, ISC and Apache-2.0 are fine. `@glyphy/core`
+  has no dependencies at all and is meant to stay that way.
+- **You cannot ship your own work here commercially either.** If you are
+  contributing something you also want to sell, say so in the pull request
+  before you write it, and we will work out whether it belongs in this repo or
+  in one of your own.
+
 ## The gates
 
 None of these are advisory.
@@ -104,7 +123,10 @@ for the puzzle rather than for the work. See `.pdd` for the format.
 The repo borrows its standards from
 [yegor256's](https://www.yegor256.com/2014/04/17/how-to-be-a-good-open-source-citizen.html)
 open source practice. Those come out of an object-oriented Java world, so they
-translate rather than transplant. What carried over, concretely:
+translate rather than transplant — and one of them is not borrowed at all: his
+projects are MIT, this one is noncommercial. The engineering discipline is the
+part that carried over, not the licensing politics. What carried over,
+concretely:
 
 - **Immutability.** Every exported constant is frozen, every interface is
   `readonly`. Nothing in the kit is mutated after it is built.

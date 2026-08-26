@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@glyphy/motion.svg)](https://www.npmjs.com/package/@glyphy/motion)
 [![ci](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
+[![License](https://img.shields.io/badge/license-PolyForm%20Noncommercial-orange.svg)](LICENSE.txt)
 
 A [Motion](https://motion.dev) adapter for the
 [Glyphy](https://github.com/CuberHuber/glyphy) glyph. The same nine frames as
@@ -80,4 +80,6 @@ Everything else is identical to `<Glyph>`: the same DOM, the same
 
 ## Licence
 
-[MIT](LICENSE.txt) © 2026 The Glyphy authors.
+[PolyForm Noncommercial 1.0.0](LICENSE.txt) © 2026 CuberHuber.
+
+Source-available, **not** open source: any noncommercial use is permitted, commercial use is not. For a commercial licence, open an issue.

@@ -8,7 +8,7 @@
 [![bundle](https://img.shields.io/bundlephobia/minzip/@glyphy/react?label=minzip)](https://bundlephobia.com/package/@glyphy/react)
 [![PDD status](https://www.0pdd.com/svg?name=CuberHuber/glyphy)](https://www.0pdd.com/p?name=CuberHuber/glyphy)
 [![Hits-of-Code](https://hitsofcode.com/github/CuberHuber/glyphy?branch=main)](https://hitsofcode.com/view/github/CuberHuber/glyphy?branch=main)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
+[![License](https://img.shields.io/badge/license-PolyForm%20Noncommercial-orange.svg)](LICENSE.txt)
 
 A nine-cell dot matrix. Every cell is either a bare dot or a ringed dot, and the
 pattern of rings over time is the whole language: a loading spinner, a thinking
@@ -206,4 +206,31 @@ on purpose.
 
 ## Licence
 
-[MIT](LICENSE.txt) © 2026 The Glyphy authors.
+[PolyForm Noncommercial 1.0.0](LICENSE.txt) © 2026 CuberHuber.
+`SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0`
+
+This is **source-available, not open source**. It fails the OSI definition
+deliberately, on clause 6 — no discrimination against fields of endeavour —
+because it discriminates against exactly one: making money.
+
+**Yes**, without asking:
+
+- personal use, research, experiment, learning, and hobby projects
+- use inside a charity, a school, a university, or a public-benefit body
+- reading, modifying, forking and redistributing the source, under these terms
+- teaching with it, writing about it, and shipping it in course materials
+
+**No**, not without a separate licence:
+
+- shipping it in a product or a service you charge for
+- using it on the website or in the app of a business that sells something
+- anything a company does that is not itself a noncommercial purpose
+
+If you want the commercial one, [open an issue](https://github.com/CuberHuber/glyphy/issues)
+and say what you are building. The read-through is short — the whole licence is
+under 150 lines and written in plain language, which is why it was chosen over
+CC BY-NC, whose own authors advise against using it for software.
+
+Note that the `design/` bundle is a record of how the kit was designed and is
+covered by the same licence. Contributions are accepted under it too — see
+[CONTRIBUTING.md](CONTRIBUTING.md).

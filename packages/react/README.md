@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/@glyphy/react.svg)](https://www.npmjs.com/package/@glyphy/react)
 [![bundle](https://img.shields.io/bundlephobia/minzip/@glyphy/react?label=minzip)](https://bundlephobia.com/package/@glyphy/react)
 [![ci](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
+[![License](https://img.shields.io/badge/license-PolyForm%20Noncommercial-orange.svg)](LICENSE.txt)
 
 React bindings for the [Glyphy](https://github.com/CuberHuber/glyphy) nine-cell
 glyph: a loading spinner, a thinking indicator, a progress mark and a background
@@ -150,4 +150,6 @@ actually changes.
 
 ## Licence
 
-[MIT](LICENSE.txt) © 2026 The Glyphy authors.
+[PolyForm Noncommercial 1.0.0](LICENSE.txt) © 2026 CuberHuber.
+
+Source-available, **not** open source: any noncommercial use is permitted, commercial use is not. For a commercial licence, open an issue.
