@@ -1,0 +1,162 @@
+# Publishing @glyphy/* to npm, with no npm token.
+#
+# This workflow authenticates to the registry over OIDC — npm "trusted
+# publishing". GitHub mints a short-lived credential scoped to this one
+# workflow run; npm verifies it against the trusted publisher configured on
+# each package. Nothing long-lived is stored anywhere, so there is no npm
+# credential in this repository, in GitHub secrets, or in a container on
+# somebody else's infrastructure. A leaked token cannot exist because there
+# is no token.
+#
+# Provenance is automatic under OIDC: every published tarball carries a signed
+# attestation binding it to this commit and this run, which npm renders as the
+# "Provenance" badge and consumers verify with `npm audit signatures`.
+#
+# Releasing is still something a human says out loud, the way `@rultor release`
+# was — you run this from the Actions tab and state the version. The workflow
+# refuses to publish a version that disagrees with the repository.
+#
+# Setup and the one-time bootstrap are in RELEASING.md. Read it before the
+# first run; trusted publishing cannot be configured on a package that does
+# not exist yet, so the first publish is a documented special case.
+
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version being released, e.g. 0.2.0. Must equal the version already committed to the packages."
+        required: true
+        type: string
+      dry-run:
+        description: "Validate and pack without publishing. Leave on until the summary looks right."
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  # The whole point. Without this npm cannot mint the OIDC credential and the
+  # publish falls back to looking for a token it will not find.
+  id-token: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: publish to npm
+    runs-on: ubuntu-latest
+
+    # Self-hosted runners cannot use trusted publishing. This must stay a
+    # GitHub-hosted runner.
+
+    # Add required reviewers to this environment in Settings → Environments to
+    # put a human approval in front of every publish. The environment is
+    # created on first run if it does not exist.
+    environment: release
+
+    env:
+      # Present only during the one-time bootstrap described in RELEASING.md.
+      # Once trusted publishing is configured, delete this secret; the step
+      # below then does nothing and the publish goes over OIDC.
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Refuse to release from anywhere but main
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "Releases come from main. This ref is ${{ github.ref }}."
+          exit 1
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          # Trusted publishing needs Node >= 22.14.0. 22 resolves to the
+          # current 22.x, which clears that.
+          node-version: 22
+
+      - name: Upgrade npm
+        # Node 22 ships npm 10.x, which does not understand trusted publishing.
+        # 11.5.1 is the floor.
+        run: |
+          npm install -g npm@latest
+          npm --version
+
+      - name: Install
+        run: npm ci
+
+      # Exactly the gate CI and rultor run. A release that cannot pass the
+      # ordinary gate is not a release.
+      - name: Verify
+        run: npm run verify
+
+      - name: Check the stated version against the repository
+        env:
+          # Via env, never interpolated into the script body — a workflow input
+          # is attacker-controlled text and `${{ }}` inside `run:` is a shell
+          # injection.
+          STATED: ${{ inputs.version }}
+        run: |
+          actual=$(node -p "require('./packages/core/package.json').version")
+          if [ "$STATED" != "$actual" ]; then
+            echo "You said $STATED. The packages say $actual."
+            echo "Versions come from changesets: run 'npm run version-packages',"
+            echo "commit the result, merge it, then release the version it produced."
+            exit 1
+          fi
+          echo "Releasing $actual."
+
+      - name: Check that no changesets are left unconsumed
+        run: |
+          left=$(find .changeset -name '*.md' ! -name 'README.md' | wc -l | tr -d ' ')
+          if [ "$left" != "0" ]; then
+            echo "$left changeset(s) still pending — the version was never computed from them:"
+            find .changeset -name '*.md' ! -name 'README.md'
+            echo "Run 'npm run version-packages', commit, merge, then release."
+            exit 1
+          fi
+
+      - name: Build
+        run: npm run build
+
+      # Bootstrap only. Writes a literal ${NPM_TOKEN} into .npmrc so npm
+      # expands it from the environment at publish time — the secret is never
+      # written to disk. Skipped entirely once the secret is deleted.
+      - name: Registry auth for the bootstrap publish
+        if: env.NPM_TOKEN != ''
+        run: |
+          echo "::warning::Publishing with an npm token, not OIDC. This is the one-time bootstrap — see RELEASING.md, then delete the NPM_TOKEN secret."
+          echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' >> "$HOME/.npmrc"
+
+      - name: Publish (dry run)
+        if: inputs.dry-run
+        run: |
+          npm publish --dry-run --workspaces
+          echo "Dry run only. Nothing was published."
+
+      - name: Publish
+        if: ${{ !inputs.dry-run }}
+        run: npx changeset publish --tag latest
+
+      - name: Summary
+        if: always()
+        env:
+          STATED: ${{ inputs.version }}
+        run: |
+          {
+            echo "### Release $STATED"
+            echo
+            if [ "${{ inputs.dry-run }}" = "true" ]; then
+              echo "Dry run — nothing published."
+            elif [ -n "$NPM_TOKEN" ]; then
+              echo "Published with a **token** (bootstrap). Configure trusted publishing and delete the secret."
+            else
+              echo "Published over **OIDC** with automatic provenance."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"

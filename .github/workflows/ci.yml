@@ -1,0 +1,57 @@
+# The gate, run on every pull request.
+#
+# This is deliberately the same two commands as the `merge` script in
+# .rultor.yml. Rultor is what actually guards main — a maintainer types
+# `@rultor merge` and nothing reaches main unless the gate exits zero. This
+# workflow does not replace that. It runs the identical gate earlier, so a
+# pull request is already known-green before anyone asks rultor to merge it,
+# and a red run here means a red merge there.
+#
+# Keep the two in step. If `verify` grows a step, both get it.
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# One run per branch. Pushing again cancels the run that is now stale.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Node 22, matching the node:22-bookworm image rultor runs the gate in.
+      # package.json asks for >=20; pinning the major keeps the two identical
+      # rather than merely compatible.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # format:check, lint, typecheck, test:coverage, build, publint.
+      - run: npm run verify
+
+      # Kept on failure too — a failed coverage threshold is the case where
+      # the report is worth reading.
+      - name: Upload coverage
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/
+          if-no-files-found: ignore
+          retention-days: 14
