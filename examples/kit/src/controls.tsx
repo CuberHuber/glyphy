@@ -268,35 +268,6 @@ export function Toggle(props: {
   );
 }
 
-/** A colour swatch that doubles as a radio button. */
-export function InkSwatch(props: {
-  readonly name: string;
-  readonly value: string;
-  readonly active: boolean;
-  readonly onChange: (value: string) => void;
-}): ReactElement {
-  return (
-    <button
-      type="button"
-      title={`${props.name} · ${props.value}`}
-      aria-label={props.name}
-      aria-pressed={props.active}
-      onClick={() => {
-        props.onChange(props.value);
-      }}
-      style={{
-        width: TAP,
-        height: TAP,
-        borderRadius: 4,
-        cursor: 'pointer',
-        background: props.value,
-        border: props.active ? `2px solid ${ink.base}` : `1px solid ${ink.pill}`,
-        boxShadow: props.active ? `0 0 0 2px var(--page-surface) inset` : undefined,
-      }}
-    />
-  );
-}
-
 /** A nine-cell bit editor: click a cell to ring it. */
 export function MaskEditor(props: {
   readonly value: string;

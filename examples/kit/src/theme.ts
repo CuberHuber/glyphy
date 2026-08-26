@@ -119,12 +119,3 @@ export const fieldLabel: CSSProperties = {
   textTransform: 'uppercase',
   color: 'var(--page-eyebrow)',
 };
-
-/** The dark slab a code sample sits on. Fixed, like a specimen. */
-export const codeSlab: CSSProperties = {
-  background: COLORS.night,
-  border: `1px solid rgba(239,236,228,.12)`,
-  borderRadius: 6,
-  color: COLORS.inkInverse,
-  overflow: 'auto',
-};
