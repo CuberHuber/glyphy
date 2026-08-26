@@ -1,0 +1,52 @@
+{
+  "name": "@glyphy/core",
+  "version": "0.1.0",
+  "description": "Framework-agnostic engine for the Glyphy nine-cell glyph: geometry, motion frames and fill patterns. Zero dependencies.",
+  "keywords": [
+    "glyph",
+    "animation",
+    "ui-kit",
+    "headless",
+    "spinner"
+  ],
+  "license": "MIT",
+  "author": "The Glyphy authors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/glyphy.git",
+    "directory": "packages/core"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/glyphy/issues"
+  },
+  "homepage": "https://github.com/your-org/glyphy/tree/master/packages/core#readme",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsup",
+    "publint": "publint"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "name": "@glyphy/tailwind",
+  "version": "0.1.0",
+  "description": "Glyphy design tokens as a Tailwind v3 preset/plugin and a Tailwind v4 @theme stylesheet.",
+  "keywords": [
+    "glyph",
+    "tailwind",
+    "tailwindcss",
+    "preset",
+    "design-tokens"
+  ],
+  "license": "MIT",
+  "author": "The Glyphy authors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/glyphy.git",
+    "directory": "packages/tailwind"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/glyphy/issues"
+  },
+  "homepage": "https://github.com/your-org/glyphy/tree/master/packages/tailwind#readme",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist",
+    "glyphy.css",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./glyphy.css": "./glyphy.css",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsup",
+    "publint": "publint"
+  },
+  "dependencies": {
+    "@glyphy/core": "0.1.0"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.0 || ^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "tailwindcss": {
+      "optional": true
+    }
+  }
+}

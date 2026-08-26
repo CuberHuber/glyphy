@@ -1,0 +1,60 @@
+{
+  "name": "@glyphy/motion",
+  "version": "0.1.0",
+  "description": "Motion (Framer Motion) adapter for the Glyphy glyph — spring and keyframe driven rings off the same core frames.",
+  "keywords": [
+    "glyph",
+    "framer-motion",
+    "motion",
+    "react",
+    "animation"
+  ],
+  "license": "MIT",
+  "author": "The Glyphy authors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/glyphy.git",
+    "directory": "packages/motion"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/glyphy/issues"
+  },
+  "homepage": "https://github.com/your-org/glyphy/tree/master/packages/motion#readme",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.txt"
+  ],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsup",
+    "publint": "publint"
+  },
+  "dependencies": {
+    "@glyphy/core": "0.1.0",
+    "@glyphy/react": "0.1.0"
+  },
+  "peerDependencies": {
+    "motion": "^11.0.0 || ^12.0.0",
+    "react": "^18.0.0 || ^19.0.0"
+  }
+}

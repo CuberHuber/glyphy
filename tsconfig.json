@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "skipLibCheck": true,
+
+    "declaration": true,
+    "noEmit": true,
+
+    "types": ["node", "vitest/globals"],
+
+    "baseUrl": ".",
+    "paths": {
+      "@glyphy/core": ["packages/core/src/index.ts"],
+      "@glyphy/react": ["packages/react/src/index.ts"],
+      "@glyphy/motion": ["packages/motion/src/index.ts"],
+      "@glyphy/tailwind": ["packages/tailwind/src/index.ts"]
+    }
+  },
+  "include": [
+    "packages/*/src/**/*",
+    "packages/*/test/**/*",
+    "packages/*/tsup.config.ts",
+    "examples/*/src/**/*",
+    "examples/*/vite.config.ts",
+    "scripts/**/*",
+    "vitest.config.ts",
+    "vitest.setup.ts",
+    "eslint.config.js"
+  ]
+}

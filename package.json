@@ -1,0 +1,92 @@
+{
+  "name": "glyphy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Glyphy — a nine-cell glyph UI kit: one mark, twelve motion states, 512 fill patterns.",
+  "keywords": [
+    "ui-kit",
+    "glyph",
+    "animation",
+    "react",
+    "spinner",
+    "loader",
+    "tailwind"
+  ],
+  "license": "MIT",
+  "author": "The Glyphy authors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/glyphy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/glyphy/issues"
+  },
+  "homepage": "https://github.com/your-org/glyphy#readme",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "npm@10.9.7",
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "clean": "rm -rf packages/*/dist examples/*/dist coverage *.tsbuildinfo packages/*/*.tsbuildinfo",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run build && npm run publint",
+    "publint": "npm run publint --workspaces --if-present",
+    "dev": "npm run dev --workspace examples/kit",
+    "changeset": "changeset",
+    "version-packages": "changeset version && npm install --package-lock-only",
+    "release": "npm run build && changeset publish",
+    "set-repo": "node scripts/set-repo.mjs",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.5.0",
+    "@changesets/cli": "^2.27.10",
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@eslint/js": "^9.16.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitest/coverage-v8": "^2.1.8",
+    "eslint": "^9.16.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "husky": "^9.1.7",
+    "jsdom": "^25.0.1",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.4.2",
+    "publint": "^0.2.12",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.17.0",
+    "vitest": "^2.1.8"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml,css}": [
+      "prettier --write"
+    ]
+  }
+}

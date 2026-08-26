@@ -1,0 +1,11 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
+  "changelog": ["@changesets/changelog-github", { "repo": "your-org/glyphy" }],
+  "commit": false,
+  "fixed": [["@glyphy/core", "@glyphy/react", "@glyphy/motion", "@glyphy/tailwind"]],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "master",
+  "updateInternalDependencies": "patch",
+  "ignore": ["@glyphy/example-kit"]
+}
