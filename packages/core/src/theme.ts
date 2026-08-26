@@ -56,9 +56,15 @@ export const RESERVED_COLORS = Object.freeze(['accent', 'error'] as const);
 /** A reserved colour's name. */
 export type ReservedColorName = (typeof RESERVED_COLORS)[number];
 
-/** Whether a value names a colour in the palette. */
+/**
+ * Whether a value names a colour in the palette.
+ *
+ * Own keys only: `in` would also answer yes to everything on
+ * `Object.prototype`, which would send `resolveColor('toString')` back with a
+ * function where the signature promises a string.
+ */
 export function isColorName(value: unknown): value is ColorName {
-  return typeof value === 'string' && value in COLORS;
+  return typeof value === 'string' && Object.hasOwn(COLORS, value);
 }
 
 /**
@@ -140,11 +146,11 @@ export const CSS_VARIABLES = Object.freeze({
   '--glyphy-accent': COLORS.accent,
   '--glyphy-accent-hover': COLORS.accentHover,
   '--glyphy-accent-contrast': COLORS.accentContrast,
-  '--glyphy-accent-soft': `${COLORS.accent}${TINT_ALPHA_HEX}`,
+  '--glyphy-accent-soft': softOf('accent'),
   '--glyphy-error': COLORS.error,
   '--glyphy-error-hover': COLORS.errorHover,
   '--glyphy-error-contrast': COLORS.errorContrast,
-  '--glyphy-error-soft': `${COLORS.error}${TINT_ALPHA_HEX}`,
+  '--glyphy-error-soft': softOf('error'),
   '--glyphy-slate': COLORS.slate,
   '--glyphy-ease': EASE,
 } as const);

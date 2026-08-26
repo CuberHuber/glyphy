@@ -71,9 +71,17 @@ describe('the palette', () => {
     }
   });
 
-  it('carries the error on both papers, as the kit uses one value for both', () => {
+  it('carries every reserved colour on both papers, not just the one it was written for', () => {
+    for (const name of RESERVED_COLORS) {
+      // 3:1 is the floor for a mark, which is what these colours draw.
+      expect(contrast(COLORS[name], COLORS.paper)).toBeGreaterThanOrEqual(3);
+      expect(contrast(COLORS[name], COLORS.night)).toBeGreaterThanOrEqual(3);
+    }
+    // The two figures the README quotes. The accent is 4.22:1 on the paper and
+    // only clears the body-text floor on the card surface, which is where the
+    // marks sit — so the claim is pinned to the surface it is true of.
     expect(contrast(COLORS.error, COLORS.paper)).toBeGreaterThanOrEqual(4.5);
-    expect(contrast(COLORS.error, COLORS.night)).toBeGreaterThanOrEqual(3);
+    expect(contrast(COLORS.accent, COLORS.surface)).toBeGreaterThanOrEqual(4.5);
   });
 
   it('holds the error to the accent on the dark surface, where accents are weakest', () => {
@@ -89,6 +97,16 @@ describe('naming a colour', () => {
     expect(isColorName('accent')).toBe(true);
     expect(isColorName('crimson')).toBe(false);
     expect(isColorName(undefined)).toBe(false);
+  });
+
+  it('does not mistake a prototype key for a colour', () => {
+    // `in` would answer yes to all of these, and resolveColor would then hand
+    // back a function where its signature promises a string.
+    for (const key of ['toString', 'constructor', 'valueOf', 'hasOwnProperty']) {
+      expect(isColorName(key), `${key} is not a colour`).toBe(false);
+      expect(typeof resolveColor(key)).toBe('string');
+    }
+    expect(resolveColor('toString')).toBe('toString');
   });
 
   it('resolves a palette name to its hex', () => {
