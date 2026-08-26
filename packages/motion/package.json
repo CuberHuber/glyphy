@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/CuberHuber/glyphy/issues"
   },
-  "homepage": "https://github.com/CuberHuber/glyphy/tree/master/packages/motion#readme",
+  "homepage": "https://github.com/CuberHuber/glyphy/tree/main/packages/motion#readme",
   "type": "module",
   "sideEffects": false,
   "files": [

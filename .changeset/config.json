@@ -5,7 +5,7 @@
   "fixed": [["@glyphy/core", "@glyphy/react", "@glyphy/motion", "@glyphy/tailwind"]],
   "linked": [],
   "access": "public",
-  "baseBranch": "master",
+  "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": ["@glyphy/example-kit"]
 }

@@ -3,11 +3,11 @@
 # Glyphy
 
 [![ci](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/CuberHuber/glyphy/branch/master/graph/badge.svg)](https://codecov.io/gh/CuberHuber/glyphy)
+[![codecov](https://codecov.io/gh/CuberHuber/glyphy/branch/main/graph/badge.svg)](https://codecov.io/gh/CuberHuber/glyphy)
 [![npm](https://img.shields.io/npm/v/@glyphy/react.svg)](https://www.npmjs.com/package/@glyphy/react)
 [![bundle](https://img.shields.io/bundlephobia/minzip/@glyphy/react?label=minzip)](https://bundlephobia.com/package/@glyphy/react)
 [![PDD status](https://www.0pdd.com/svg?name=CuberHuber/glyphy)](https://www.0pdd.com/p?name=CuberHuber/glyphy)
-[![Hits-of-Code](https://hitsofcode.com/github/CuberHuber/glyphy?branch=master)](https://hitsofcode.com/view/github/CuberHuber/glyphy?branch=master)
+[![Hits-of-Code](https://hitsofcode.com/github/CuberHuber/glyphy?branch=main)](https://hitsofcode.com/view/github/CuberHuber/glyphy?branch=main)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
 
 A nine-cell dot matrix. Every cell is either a bare dot or a ringed dot, and the
@@ -185,7 +185,7 @@ npm ci && npm run verify   # format, lint, types, tests, build, packaging
 npm run dev                # the kit page, wired to the TypeScript sources
 ```
 
-`master` is read-only. Everything arrives through a pull request that CI has
+`main` is read-only. Everything arrives through a pull request that CI has
 verified on Node 20 and 22, and only the merge bot fast-forwards. Coverage has a
 floor and lowering it needs a reason in the pull request. Deferred work is filed
 as a [PDD puzzle](.pdd), not left as a bare `TODO`.

@@ -25,14 +25,14 @@ without a build step in between.
 
 ## How work gets merged
 
-1. Branch from `master`. Name it after the issue: `42-travel-trail-length`.
+1. Branch from `main`. Name it after the issue: `42-travel-trail-length`.
 2. Commit as you go. `git push` runs types and tests before it lets you.
 3. Open a pull request. CI runs on Node 20 and 22.
 4. A maintainer reviews, then comments `@rultor merge` on the pull request.
 
-Nobody pushes to `master`, including maintainers. The bot checks the branch out,
+Nobody pushes to `main`, including maintainers. The bot checks the branch out,
 runs `npm run verify` in a clean container, and fast-forwards only if it exits
-zero. This is the one rule that keeps `master` always releasable.
+zero. This is the one rule that keeps `main` always releasable.
 
 ## Commits
 
@@ -65,7 +65,7 @@ Pick the packages, pick a bump, and write one sentence a user of the library
 would understand — it goes into the changelog verbatim.
 
 The four `@glyphy/*` packages are versioned together, so they always agree with
-each other. On merge to `master`, CI opens a "Version Packages" pull request;
+each other. On merge to `main`, CI opens a "Version Packages" pull request;
 merging that publishes to npm with provenance.
 
 ## The gates

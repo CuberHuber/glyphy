@@ -1,10 +1,10 @@
 # Rultor — the merge and release bot.
 #
 # Most JavaScript projects have never met rultor, so: it is a chatbot that owns
-# the write access to master. A maintainer comments `@rultor merge` on a pull
+# the write access to main. A maintainer comments `@rultor merge` on a pull
 # request and rultor checks the branch out in a container, runs the script
-# below, and only fast-forwards master if it exits zero. Nobody, including the
-# maintainer, pushes to master by hand — which is the point.
+# below, and only fast-forwards main if it exits zero. Nobody, including the
+# maintainer, pushes to main by hand — which is the point.
 #
 # Docs: https://doc.rultor.com
 

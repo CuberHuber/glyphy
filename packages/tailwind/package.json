@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/CuberHuber/glyphy/issues"
   },
-  "homepage": "https://github.com/CuberHuber/glyphy/tree/master/packages/tailwind#readme",
+  "homepage": "https://github.com/CuberHuber/glyphy/tree/main/packages/tailwind#readme",
   "type": "module",
   "sideEffects": [
     "*.css"

@@ -18,6 +18,6 @@
 <!--
 The gates are not advisory. CI runs format, lint, types, tests with a coverage
 floor, a build and a packaging check, on Node 20 and 22. A pull request that
-cannot go green does not merge, and master is only ever fast-forwarded by the
+cannot go green does not merge, and main is only ever fast-forwarded by the
 merge bot.
 -->
