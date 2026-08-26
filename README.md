@@ -164,10 +164,11 @@ the same eighteen percent wash the `tint` fill uses.
 The accent and the error were one terracotta until the palette was split. A
 screen that shows one step running and another that failed needs to say which
 is which, and one colour cannot. They now sit 21 apart in CIE L\*a\*b\* — further
-than the accent is from its own hover — and each carries at least 4.5:1 on the
-paper and 3:1 on the night surface, so neither depends on the other to be read.
-One accented thing per screen still holds; an error does not spend that budget,
-because it is not decoration.
+than the accent is from its own hover — and neither drops under 3:1 on any
+surface the kit draws on: the error reads at 4.63:1 on the paper and the accent
+at 4.58:1 on the card surface the marks sit on, so neither depends on the other
+to be read. One accented thing per screen still holds; an error does not spend
+that budget, because it is not decoration.
 
 They are still both warm reds, so the kit does not let colour carry the state on
 its own. `error` cuts rather than eases, holds each frame for three ticks and

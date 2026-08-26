@@ -91,7 +91,7 @@ function Reserved(props: { readonly which: (typeof RESERVED_COLORS)[number] }): 
         >
           <Glyph variant={spec.variant} size={92} ink={props.which} />
           <span style={{ font: `500 10px/1 ${mono}`, color: 'rgba(28,26,23,.5)' }}>
-            {contrast(spec.hex, COLORS.paper)} on paper
+            {contrast(spec.hex, COLORS.surface)} on surface
           </span>
         </div>
         <div
