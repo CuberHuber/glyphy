@@ -14,9 +14,20 @@ import type { CSSProperties, ReactElement } from 'react';
 import { COLORS, type Fill } from '@glyphy/core';
 import { mono } from './theme.js';
 
+/**
+ * The page's own ink.
+ *
+ * A custom property rather than a hex, so a mark with no ink of its own flips
+ * with the page when the reader switches the document to dark. Everything else
+ * in the list is a fixed palette colour, because an accent that inverted with
+ * the surface would not be an accent.
+ */
+export const PAGE_INK = 'var(--page-ink)';
+
 const INKS: readonly { readonly value: string; readonly name: string }[] = [
-  { value: COLORS.ink, name: 'Ink' },
+  { value: PAGE_INK, name: 'Ink' },
   { value: COLORS.accent, name: 'Accent' },
+  { value: COLORS.error, name: 'Error' },
   { value: COLORS.slate, name: 'Slate' },
 ];
 
@@ -66,7 +77,7 @@ export function Toolbar(props: ToolbarProps): ReactElement {
         border: `1px solid rgba(239,236,228,.14)`,
         borderRadius: 8,
         padding: '10px 12px',
-        boxShadow: '0 6px 24px rgba(28,26,23,.22)',
+        boxShadow: '0 6px 24px var(--page-shadow)',
       }}
     >
       <div style={{ display: 'flex', gap: 5 }}>

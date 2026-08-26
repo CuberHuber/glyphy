@@ -7,17 +7,22 @@
 
 import type { CSSProperties, ReactElement, ReactNode } from 'react';
 import { COLORS } from '@glyphy/core';
-import { caption, card, column, ink, mono, sans } from './theme.js';
+import { numberOf, titleOf } from './outline.js';
+import { caption, card, fixed, ink, mono, sans } from './theme.js';
 
-/** A numbered section heading with its rule. */
+/**
+ * A numbered section heading with its rule.
+ *
+ * The number and the heading come from the outline rather than from props, so
+ * the nav, the anchor and the printed number cannot drift apart.
+ */
 export function Section(props: {
-  readonly number: string;
-  readonly title: string;
+  readonly id: string;
   readonly note?: string;
   readonly children: ReactNode;
 }): ReactElement {
   return (
-    <section style={column}>
+    <section id={props.id} className="column">
       <header
         style={{
           display: 'flex',
@@ -28,9 +33,11 @@ export function Section(props: {
           flexWrap: 'wrap',
         }}
       >
-        <span style={{ font: `500 11px/1 ${mono}`, color: COLORS.accent }}>{props.number}</span>
+        <span style={{ font: `500 11px/1 ${mono}`, color: COLORS.accent }}>
+          {numberOf(props.id)}
+        </span>
         <h2 style={{ font: `600 24px/1 ${sans}`, letterSpacing: '-.02em', margin: 0 }}>
-          {props.title}
+          {titleOf(props.id)}
         </h2>
         {props.note !== undefined && (
           <span style={{ font: `400 13px/1 ${sans}`, color: ink.faint }}>{props.note}</span>
@@ -61,7 +68,7 @@ export function SpecRow(props: { readonly name: string; readonly value: string }
         borderBottom: `1px solid ${ink.hairline}`,
       }}
     >
-      <span style={{ font: `400 13px/1.3 ${sans}`, color: 'rgba(28,26,23,.6)' }}>{props.name}</span>
+      <span style={{ font: `400 13px/1.3 ${sans}`, color: ink.muted }}>{props.name}</span>
       <span style={{ font: `500 12px/1.3 ${mono}` }}>{props.value}</span>
     </div>
   );
@@ -88,7 +95,7 @@ export function PropRow(props: { readonly name: string; readonly note: string })
       <span
         style={{
           font: `400 12.5px/1.3 ${sans}`,
-          color: 'rgba(28,26,23,.6)',
+          color: ink.muted,
           textAlign: 'right',
         }}
       >
@@ -98,7 +105,13 @@ export function PropRow(props: { readonly name: string; readonly note: string })
   );
 }
 
-/** A specimen with a name and a monospace note under it. */
+/**
+ * A specimen with a name and a monospace note under it.
+ *
+ * Both surfaces are fixed rather than themed. The section that uses this is
+ * about the two surfaces themselves, so a light specimen has to stay light when
+ * the page around it goes dark — otherwise it is a specimen of nothing.
+ */
 export function Specimen(props: {
   readonly title: string;
   readonly note: string;
@@ -115,7 +128,11 @@ export function Specimen(props: {
               border: '1px solid rgba(239,236,228,.12)',
               color: COLORS.inkInverse,
             }
-          : card),
+          : {
+              background: COLORS.surface,
+              border: `1px solid ${fixed.hairline}`,
+              color: COLORS.ink,
+            }),
         borderRadius: 6,
         padding: 36,
         display: 'flex',
@@ -130,7 +147,7 @@ export function Specimen(props: {
         <div
           style={{
             font: `500 13px/1.3 ${sans}`,
-            color: props.dark === true ? COLORS.inkInverse : undefined,
+            color: props.dark === true ? COLORS.inkInverse : COLORS.ink,
           }}
         >
           {props.title}
@@ -138,7 +155,7 @@ export function Specimen(props: {
         <div
           style={{
             font: `500 10px/1.4 ${mono}`,
-            color: props.dark === true ? 'rgba(239,236,228,.45)' : ink.faint,
+            color: props.dark === true ? 'rgba(239,236,228,.45)' : fixed.faint,
             marginTop: 5,
           }}
         >

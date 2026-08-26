@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Glyphy">
+  <style>
+    .ring { fill: none; stroke: #1c1a17; stroke-width: 2 }
+    .dot { fill: #1c1a17; opacity: .42 }
+    @media (prefers-color-scheme: dark) {
+      .ring { stroke: #efece4 }
+      .dot { fill: #efece4 }
+    }
+  </style>
+  <g class="dot">
+    <circle cx="8" cy="8" r="1.6" /><circle cx="24" cy="8" r="1.6" /><circle cx="40" cy="8" r="1.6" />
+    <circle cx="8" cy="24" r="1.6" /><circle cx="24" cy="24" r="1.6" /><circle cx="40" cy="24" r="1.6" />
+    <circle cx="8" cy="40" r="1.6" /><circle cx="24" cy="40" r="1.6" /><circle cx="40" cy="40" r="1.6" />
+  </g>
+  <g class="ring">
+    <circle cx="24" cy="8" r="6" /><circle cx="8" cy="24" r="6" /><circle cx="24" cy="24" r="6" />
+    <circle cx="40" cy="24" r="6" /><circle cx="24" cy="40" r="6" />
+  </g>
+</svg>

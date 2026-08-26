@@ -58,25 +58,21 @@ const STATES: readonly State[] = [
   {
     variant: 'error',
     title: 'Error · flicker out',
-    tag: 'accent only',
-    body: "Rings drop out unevenly and the bare dots remain — the lattice survives, the state doesn't. The one state that may use the accent.",
+    tag: 'error only',
+    body: "Rings drop out unevenly and the bare dots remain — the lattice survives, the state doesn't. The one state painted in the error ink.",
     timing: '50ms steps · 11 frames · once',
-    ink: COLORS.accent,
+    ink: COLORS.error,
   },
 ];
 
 /** Section 04 — all seven behaviours, live and looping. */
 export function MotionStates(): ReactElement {
   return (
-    <Section
-      number="04"
-      title="Motion states"
-      note="all live, all looping — one glyph, seven behaviours"
-    >
+    <Section id="motion" note="all live, all looping — one glyph, seven behaviours">
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill,minmax(252px,1fr))',
+          gridTemplateColumns: 'repeat(auto-fill,minmax(min(252px,100%),1fr))',
           gap: 20,
           padding: '40px 0 0',
         }}

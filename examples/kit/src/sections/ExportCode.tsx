@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import { COLORS } from '@glyphy/core';
 import { PropRow, Section } from '../ui.js';
-import { mono, sans } from '../theme.js';
+import { ink, mono, sans } from '../theme.js';
 
 const SNIPPET = `<Glyph
   variant="travel"   // idle · travel · accumulate
@@ -25,11 +25,11 @@ const PROPS = [
 /** Section 07 — the component contract, and why it is CSS rather than SVG. */
 export function ExportCode(): ReactElement {
   return (
-    <Section number="07" title="Export &amp; code">
+    <Section id="code">
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(min(320px,100%),1fr))',
           gap: 20,
           padding: '40px 0 0',
         }}
@@ -60,7 +60,7 @@ export function ExportCode(): ReactElement {
           <p
             style={{
               font: `400 13px/1.6 ${sans}`,
-              color: 'rgba(28,26,23,.55)',
+              color: ink.soft,
               margin: '22px 0 0',
               textWrap: 'pretty',
             }}

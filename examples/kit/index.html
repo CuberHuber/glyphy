@@ -3,27 +3,41 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Glyphy — UI kit</title>
+    <title>Glyphy — one mark, twelve motion states, 512 patterns</title>
     <meta
       name="description"
-      content="A nine-cell glyph UI kit: one mark, twelve motion states, 512 fill patterns."
+      content="A nine-cell dot matrix for React. Every cell is a bare dot or a ringed dot; the pattern of rings over time is a loading spinner, a thinking indicator, a progress stepper and a background texture."
     />
-    <style>
-      body {
-        margin: 0;
-        background: #efece4;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      a {
-        color: #b5522f;
-        text-decoration: none;
-      }
-      a:hover {
-        color: #8f3f22;
-      }
-    </style>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#efece4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121110" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Glyphy — a nine-cell glyph UI kit" />
+    <meta
+      property="og:description"
+      content="One mark, twelve motion states, 512 fill patterns. Rings are CSS borders, not paths."
+    />
+    <meta property="og:url" content="https://cuberhuber.github.io/glyphy/" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script>
+      /*
+       * Runs before first paint so a reader who chose dark never sees the page
+       * flash light. Everything here is guarded: a browser with storage denied
+       * still gets the system preference, which is the honest default.
+       */
+      (function () {
+        try {
+          var stored = window.localStorage.getItem('glyphy-theme');
+          if (stored === 'light' || stored === 'dark') {
+            document.documentElement.setAttribute('data-theme', stored);
+          }
+        } catch (error) {
+          /* Storage is a convenience. Without it the media query decides. */
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

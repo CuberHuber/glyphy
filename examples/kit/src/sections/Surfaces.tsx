@@ -45,15 +45,11 @@ const SURFACES: readonly Surface[] = [
 /** Section 03 — two treatments across two surfaces. */
 export function Surfaces(): ReactElement {
   return (
-    <Section
-      number="03"
-      title="Fill & surface"
-      note="two treatments, two surfaces — never mix both fills in one mark"
-    >
+    <Section id="surfaces" note="two treatments, two surfaces — never mix both fills in one mark">
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(min(220px,100%),1fr))',
           gap: 20,
           padding: '40px 0 0',
         }}

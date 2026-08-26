@@ -2,7 +2,7 @@ import { useState, type ReactElement } from 'react';
 import { COLORS, PATTERNS, PATTERN_NAMES, type PatternName, type Variant } from '@glyphy/core';
 import { Glyph, GlyphRow } from '@glyphy/react';
 import { Card, Section } from '../ui.js';
-import { caption, eyebrow, inverse, mono, sans } from '../theme.js';
+import { caption, eyebrow, ink, inverse, mono, sans } from '../theme.js';
 
 /** The three behaviours the panel's segmented control offers. */
 const MOTIONS: readonly { readonly label: string; readonly variant: Variant }[] = [
@@ -64,14 +64,13 @@ export function Panel(): ReactElement {
 
   return (
     <Section
-      number="08"
-      title="Glyphs panel"
+      id="panel"
       note="the authoring surface — pick a fill pattern, set the motion, copy the mark"
     >
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(min(320px,100%),1fr))',
           gap: 20,
           padding: '40px 0 0',
           alignItems: 'start',
@@ -315,7 +314,7 @@ export function Panel(): ReactElement {
               }}
             >
               <span style={eyebrow}>Multiple animation · phase offset</span>
-              <span style={{ font: `500 10px/1 ${mono}`, color: 'rgba(28,26,23,.42)' }}>
+              <span style={{ font: `500 10px/1 ${mono}`, color: ink.ghost }}>
                 phase += 2 per mark
               </span>
             </div>

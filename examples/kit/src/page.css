@@ -1,0 +1,249 @@
+/*
+ * Page-level tokens.
+ *
+ * The kit's own palette lives in @glyphy/core and never changes; these are the
+ * document's colours — paper, rules, the alpha ramp body copy is drawn from —
+ * and they invert. Light is declared on the bare :root so that a browser with
+ * no preference and no stored choice still gets a complete set; dark is layered
+ * over it twice, once for the system preference and once for an explicit
+ * choice, so the toggle wins in both directions.
+ */
+
+:root {
+  color-scheme: light;
+
+  --page-paper: #efece4;
+  --page-surface: #f7f5f0;
+  --page-ink: #1c1a17;
+  --page-muted: rgba(28, 26, 23, 0.62);
+  --page-soft: rgba(28, 26, 23, 0.58);
+  --page-faint: rgba(28, 26, 23, 0.5);
+  --page-ghost: rgba(28, 26, 23, 0.42);
+  --page-hairline: rgba(28, 26, 23, 0.1);
+  --page-rule: rgba(28, 26, 23, 0.14);
+  --page-pill: rgba(28, 26, 23, 0.16);
+  --page-eyebrow: rgba(28, 26, 23, 0.45);
+  --page-dot-grid: rgba(28, 26, 23, 0.22);
+  --page-chrome: rgba(239, 236, 228, 0.82);
+  --page-shadow: rgba(28, 26, 23, 0.22);
+  --page-selection: rgba(181, 82, 47, 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    color-scheme: dark;
+
+    --page-paper: #121110;
+    --page-surface: #1c1b19;
+    --page-ink: #efece4;
+    --page-muted: rgba(239, 236, 228, 0.68);
+    --page-soft: rgba(239, 236, 228, 0.62);
+    --page-faint: rgba(239, 236, 228, 0.52);
+    --page-ghost: rgba(239, 236, 228, 0.44);
+    --page-hairline: rgba(239, 236, 228, 0.12);
+    --page-rule: rgba(239, 236, 228, 0.16);
+    --page-pill: rgba(239, 236, 228, 0.2);
+    --page-eyebrow: rgba(239, 236, 228, 0.48);
+    --page-dot-grid: rgba(239, 236, 228, 0.2);
+    --page-chrome: rgba(18, 17, 16, 0.82);
+    --page-shadow: rgba(0, 0, 0, 0.5);
+    --page-selection: rgba(198, 47, 42, 0.28);
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --page-paper: #121110;
+  --page-surface: #1c1b19;
+  --page-ink: #efece4;
+  --page-muted: rgba(239, 236, 228, 0.68);
+  --page-soft: rgba(239, 236, 228, 0.62);
+  --page-faint: rgba(239, 236, 228, 0.52);
+  --page-ghost: rgba(239, 236, 228, 0.44);
+  --page-hairline: rgba(239, 236, 228, 0.12);
+  --page-rule: rgba(239, 236, 228, 0.16);
+  --page-pill: rgba(239, 236, 228, 0.2);
+  --page-eyebrow: rgba(239, 236, 228, 0.48);
+  --page-dot-grid: rgba(239, 236, 228, 0.2);
+  --page-chrome: rgba(18, 17, 16, 0.82);
+  --page-shadow: rgba(0, 0, 0, 0.5);
+  --page-selection: rgba(198, 47, 42, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* The nav is sticky, so an anchor must not land under it. */
+  scroll-padding-top: 84px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--page-paper);
+  color: var(--page-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--page-selection);
+}
+
+a {
+  color: var(--glyphy-accent, #b5522f);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--glyphy-accent-hover, #8f3f22);
+}
+
+/*
+ * Focus is drawn once, here, rather than per control: every button and input on
+ * the page is styled inline, and a focus ring is the one thing that must never
+ * be forgotten on one of them.
+ */
+:focus-visible {
+  outline: 2px solid var(--glyphy-accent, #b5522f);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+/* The skip link sits off-screen until it is focused. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+  padding: 10px 14px;
+  background: var(--page-surface);
+  border: 1px solid var(--page-rule);
+  border-radius: 6px;
+}
+
+/*
+ * The nav's link row. Inline styles cannot hold a media query, so the two
+ * rules that depend on width live here: the row scrolls rather than wraps, and
+ * the lower-priority links stand down on a narrow screen instead of pushing
+ * the theme switch off the edge.
+ */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-links::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .nav-secondary {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+/*
+ * The page column, and the one two-column layout the interactive sections
+ * share. These are classes rather than inline styles for one reason: they need
+ * a media query, and a style attribute cannot hold one. Everything that does
+ * not change with the viewport stays inline, where the section that owns it is.
+ */
+.column,
+.column-top,
+.column-flat {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.column {
+  padding: 96px 48px 0;
+}
+
+.column-top {
+  padding: 72px 48px 0;
+}
+
+.column-flat {
+  padding: 0 48px;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+  gap: 20px;
+  align-items: start;
+}
+
+.hero-title {
+  font:
+    600 92px/0.92 'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
+  letter-spacing: -0.045em;
+  margin: 22px 0 0;
+}
+
+/* The mirror image of .split: a narrow pane first, the wide one after it. */
+.split-narrow {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .split,
+  .split-narrow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .column {
+    padding: 64px 20px 0;
+  }
+
+  .column-top {
+    padding: 44px 20px 0;
+  }
+
+  .column-flat {
+    padding: 0 20px;
+  }
+
+  .hero-title {
+    font-size: 58px;
+  }
+}
