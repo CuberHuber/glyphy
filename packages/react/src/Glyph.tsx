@@ -7,7 +7,6 @@
  */
 
 import { forwardRef, type HTMLAttributes } from 'react';
-import { CELLS } from '@glyphy/core';
 import { useGlyph, type UseGlyphOptions } from './hooks.js';
 
 /** Props for {@link Glyph}. */
@@ -25,8 +24,6 @@ export interface GlyphProps
    */
   readonly live?: boolean;
 }
-
-const CELL_INDICES = Array.from({ length: CELLS }, (_, cell) => cell);
 
 /**
  * The Glyphy mark.
@@ -90,10 +87,10 @@ export const Glyph = forwardRef<HTMLDivElement, GlyphProps>(function Glyph(props
       data-glyphy-still={glyph.still ? '' : undefined}
       style={{ ...glyph.style.grid, ...styleOverride }}
     >
-      {CELL_INDICES.map((cell) => (
-        <div key={cell} data-glyphy-cell={cell} style={glyph.style.cells[cell]?.wrapper}>
-          <div data-glyphy-ring="" style={glyph.style.cells[cell]?.ring} />
-          <div data-glyphy-dot="" style={glyph.style.cells[cell]?.dot} />
+      {glyph.style.cells.map((styles, cell) => (
+        <div key={cell} data-glyphy-cell={cell} style={styles.wrapper}>
+          <div data-glyphy-ring="" style={styles.ring} />
+          <div data-glyphy-dot="" style={styles.dot} />
         </div>
       ))}
     </div>

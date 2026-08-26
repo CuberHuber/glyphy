@@ -1,0 +1,103 @@
+/*
+ * Glyphy design tokens for Tailwind v4.
+ *
+ * Tailwind v3 users want the preset instead:
+ *   import { glyphyPreset } from '@glyphy/tailwind';
+ *
+ * The values below are duplicated from packages/tailwind/src/tokens.ts, which
+ * derives them from @glyphy/core. That file is the source of truth — CSS cannot
+ * import TypeScript, so this one is kept in step by hand and by the token test.
+ *
+ * Usage:
+ *   @import 'tailwindcss';
+ *   @import '@glyphy/tailwind/glyphy.css';
+ */
+
+@theme {
+  --color-glyphy-paper: #efece4;
+  --color-glyphy-surface: #f7f5f0;
+  --color-glyphy-ink: #1c1a17;
+  --color-glyphy-ink-inverse: #efece4;
+  --color-glyphy-night: #191816;
+  --color-glyphy-accent: #b5522f;
+  --color-glyphy-accent-hover: #8f3f22;
+  --color-glyphy-slate: #3a4a52;
+
+  --ease-glyphy: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* One tick of the shared clock, and the two transition lengths a ring uses. */
+  --duration-glyph-tick: 70ms;
+  --duration-glyph-cut: 50ms;
+  --duration-glyph-opacity: 300ms;
+  --duration-glyph-transform: 340ms;
+
+  /* One step of each motion state, so siblings can stay in time with the mark. */
+  --duration-glyph-idle: 490ms;
+  --duration-glyph-travel: 210ms;
+  --duration-glyph-accumulate: 280ms;
+  --duration-glyph-thinking: 350ms;
+  --duration-glyph-snap: 280ms;
+  --duration-glyph-collapse: 280ms;
+  --duration-glyph-error: 210ms;
+
+  /* The scale ramp. */
+  --spacing-glyph-16: 16px;
+  --spacing-glyph-24: 24px;
+  --spacing-glyph-32: 32px;
+  --spacing-glyph-48: 48px;
+  --spacing-glyph-96: 96px;
+  --spacing-glyph-120: 120px;
+  --spacing-glyph-160: 160px;
+}
+
+/*
+ * The same tokens under the names @glyphy/react emits, so a page can mix the
+ * Tailwind classes with <GlyphProvider cssVariables> without two vocabularies.
+ */
+:root {
+  --glyphy-paper: #efece4;
+  --glyphy-surface: #f7f5f0;
+  --glyphy-ink: #1c1a17;
+  --glyphy-ink-inverse: #efece4;
+  --glyphy-night: #191816;
+  --glyphy-accent: #b5522f;
+  --glyphy-accent-hover: #8f3f22;
+  --glyphy-slate: #3a4a52;
+  --glyphy-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/*
+ * The kit's three surfaces, as plain CSS. Written outside @theme so this file
+ * is useful in a project with no Tailwind at all.
+ */
+.glyphy-surface {
+  background-color: var(--glyphy-paper);
+  color: var(--glyphy-ink);
+}
+
+.glyphy-surface-dark {
+  background-color: var(--glyphy-night);
+  color: var(--glyphy-ink-inverse);
+}
+
+.glyphy-card {
+  background-color: var(--glyphy-surface);
+  border: 1px solid #1c1a171a;
+  border-radius: 6px;
+}
+
+.glyphy-ink {
+  color: var(--glyphy-ink);
+}
+
+.glyphy-ink-inverse {
+  color: var(--glyphy-ink-inverse);
+}
+
+.glyphy-accent {
+  color: var(--glyphy-accent);
+}
+
+.glyphy-tint {
+  background-color: #1c1a172e;
+}

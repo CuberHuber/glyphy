@@ -46,6 +46,13 @@ export default tseslint.config(
         },
       ],
 
+      // Destructuring a property out in order to drop it is the idiomatic way
+      // to omit a key; the rest siblings it leaves behind are not dead code.
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', ignoreRestSiblings: true },
+      ],
+
       eqeqeq: ['error', 'always'],
       'no-console': 'error',
       'prefer-const': 'error',

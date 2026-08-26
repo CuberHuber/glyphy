@@ -9,7 +9,7 @@
  * why the mark stays crisp at any size and why the wobble costs nothing.
  */
 
-import { type CellFrame, glyphFrame, type FrameOptions } from './frames.js';
+import { type CellFrame, glyphFrame, OFF_FRAME, type FrameOptions } from './frames.js';
 import { CELLS, DOT_OPACITY, dotDiameter, GRID, RING_RATIO, strokeWidth } from './geometry.js';
 import { type Mask } from './mask.js';
 import {
@@ -30,7 +30,7 @@ export type StyleValue = string | number;
 /** A bag of CSS declarations, camelCased as the DOM wants them. */
 export type Style = Readonly<Record<string, StyleValue>>;
 
-/** The three styles that make up one cell. */
+/** Everything one cell needs to be drawn. */
 export interface CellStyle {
   /** Positioning context that centres the dot and the ring on each other. */
   readonly wrapper: Style;
@@ -38,6 +38,14 @@ export interface CellStyle {
   readonly ring: Style;
   /** The bare dot beneath it. */
   readonly dot: Style;
+  /**
+   * The frame these styles were computed from.
+   *
+   * Carried alongside so a renderer that wants to animate the ring itself —
+   * the Motion adapter, say — can reach the numbers without indexing a second
+   * array and having to reason about the two staying in step.
+   */
+  readonly frame: CellFrame;
 }
 
 /** Everything needed to paint one mark. */
@@ -161,14 +169,11 @@ export function glyphStyle(spec: GlyphSpec = {}): GlyphStyle {
 
   return {
     grid: gridStyle(size),
-    cells: Array.from({ length: CELLS }, (_, cell) => ({
-      wrapper,
-      ring: ringStyle(resolved[cell] ?? { on: 0, scale: 1, snap: false }, cell, {
-        size,
-        ink,
-        fill,
-      }),
-      dot,
-    })),
+    cells: Array.from({ length: CELLS }, (_, cell) => {
+      // A caller may hand over fewer frames than there are cells; the missing
+      // ones are simply unlit rather than an error.
+      const frame = resolved[cell] ?? OFF_FRAME;
+      return { wrapper, ring: ringStyle(frame, cell, { size, ink, fill }), dot, frame };
+    }),
   };
 }
