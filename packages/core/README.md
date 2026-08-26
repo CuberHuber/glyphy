@@ -1,10 +1,10 @@
 # @glyphy/core
 
 [![npm](https://img.shields.io/npm/v/@glyphy/core.svg)](https://www.npmjs.com/package/@glyphy/core)
-[![ci](https://github.com/your-org/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/glyphy/actions/workflows/ci.yml)
+[![ci](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
 
-The engine behind the [Glyphy](https://github.com/your-org/glyphy) nine-cell
+The engine behind the [Glyphy](https://github.com/CuberHuber/glyphy) nine-cell
 glyph. Geometry, motion frames, fill patterns and a shared clock — as pure
 functions, with no framework and no dependencies.
 
@@ -51,7 +51,7 @@ a success state that eases in is no longer a success state.
 
 ## Variants
 
-Twelve of them — see the [main README](https://github.com/your-org/glyphy#twelve-behaviours)
+Twelve of them — see the [main README](https://github.com/CuberHuber/glyphy#twelve-behaviours)
 for what each one does. Timings are derived rather than declared:
 
 ```ts

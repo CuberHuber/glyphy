@@ -3,7 +3,7 @@
 ## From clone to green
 
 ```bash
-git clone https://github.com/your-org/glyphy.git
+git clone https://github.com/CuberHuber/glyphy.git
 cd glyphy
 npm ci
 npm run verify

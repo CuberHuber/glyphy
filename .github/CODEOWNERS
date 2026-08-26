@@ -1,18 +1,22 @@
 # Every file has an owner. A pull request without a review from one does not merge.
-*                       @your-org/maintainers
+#
+# This is a personal account, so the owner is a person. If the project ever
+# moves to an organisation, replace @CuberHuber with @<org>/maintainers here and
+# the review requirement spreads across the team without touching anything else.
+*                       @CuberHuber
 
 # The engine is where a careless change is invisible until it ships, so it
 # carries its own reviewers.
-/packages/core/         @your-org/maintainers
-/packages/react/        @your-org/maintainers
-/packages/motion/       @your-org/maintainers
-/packages/tailwind/     @your-org/maintainers
+/packages/core/         @CuberHuber
+/packages/react/        @CuberHuber
+/packages/motion/       @CuberHuber
+/packages/tailwind/     @CuberHuber
 
 # Changing a gate is changing the project's standards, not its code.
-/.github/workflows/     @your-org/maintainers
-/eslint.config.js       @your-org/maintainers
-/vitest.config.ts       @your-org/maintainers
-/.rultor.yml            @your-org/maintainers
+/.github/workflows/     @CuberHuber
+/eslint.config.js       @CuberHuber
+/vitest.config.ts       @CuberHuber
+/.rultor.yml            @CuberHuber
 
 # The handoff bundle is a historical record. It is read, not edited.
-/design/                @your-org/maintainers
+/design/                @CuberHuber

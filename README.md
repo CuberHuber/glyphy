@@ -2,12 +2,12 @@
 
 # Glyphy
 
-[![ci](https://github.com/your-org/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/glyphy/actions/workflows/ci.yml)
-[![codecov](https://codecov.io/gh/your-org/glyphy/branch/master/graph/badge.svg)](https://codecov.io/gh/your-org/glyphy)
+[![ci](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/CuberHuber/glyphy/branch/master/graph/badge.svg)](https://codecov.io/gh/CuberHuber/glyphy)
 [![npm](https://img.shields.io/npm/v/@glyphy/react.svg)](https://www.npmjs.com/package/@glyphy/react)
 [![bundle](https://img.shields.io/bundlephobia/minzip/@glyphy/react?label=minzip)](https://bundlephobia.com/package/@glyphy/react)
-[![PDD status](https://www.0pdd.com/svg?name=your-org/glyphy)](https://www.0pdd.com/p?name=your-org/glyphy)
-[![Hits-of-Code](https://hitsofcode.com/github/your-org/glyphy?branch=master)](https://hitsofcode.com/view/github/your-org/glyphy?branch=master)
+[![PDD status](https://www.0pdd.com/svg?name=CuberHuber/glyphy)](https://www.0pdd.com/p?name=CuberHuber/glyphy)
+[![Hits-of-Code](https://hitsofcode.com/github/CuberHuber/glyphy?branch=master)](https://hitsofcode.com/view/github/CuberHuber/glyphy?branch=master)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
 
 A nine-cell dot matrix. Every cell is either a bare dot or a ringed dot, and the

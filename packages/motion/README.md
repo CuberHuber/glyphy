@@ -1,11 +1,11 @@
 # @glyphy/motion
 
 [![npm](https://img.shields.io/npm/v/@glyphy/motion.svg)](https://www.npmjs.com/package/@glyphy/motion)
-[![ci](https://github.com/your-org/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/glyphy/actions/workflows/ci.yml)
+[![ci](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
 
 A [Motion](https://motion.dev) adapter for the
-[Glyphy](https://github.com/your-org/glyphy) glyph. The same nine frames as
+[Glyphy](https://github.com/CuberHuber/glyphy) glyph. The same nine frames as
 `@glyphy/react`, handed to Motion instead of to CSS transitions.
 
 ```bash

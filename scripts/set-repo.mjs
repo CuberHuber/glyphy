@@ -2,9 +2,9 @@
 /**
  * Replace the repository placeholder across the whole tree.
  *
- * The repo ships with `your-org/glyphy` written into every manifest, workflow,
- * badge and template, because a scaffold cannot know where it will live. This
- * turns that into one command instead of forty find-and-replaces.
+ * The repo's slug is written into every manifest, workflow, badge, template and
+ * README, because a scaffold cannot know where it will live. This turns moving
+ * it into one command instead of sixty find-and-replaces.
  *
  * Idempotent: running it twice with the same argument changes nothing the
  * second time, and running it after a previous rename picks up whatever slug
@@ -128,27 +128,47 @@ function buildRules(fromSlug, fromScope, slug, scope) {
   const toOwner = slug.split('/')[0];
   const rules = [
     [fromSlug, slug],
-    // The CODEOWNERS team and the rultor architect are the owner alone, not
-    // the whole slug, so they need rules of their own.
-    [`@${fromOwner}/maintainers`, `@${toOwner}/maintainers`],
+    // The rultor architect and commanders are the owner alone, not the whole
+    // slug, so they need a rule of their own.
     [`  - ${fromOwner}\n`, `  - ${toOwner}\n`],
   ];
   if (scope !== undefined && scope !== fromScope) rules.push([`${fromScope}/`, `${scope}/`]);
   return rules.filter(([from, to]) => from !== to);
 }
 
+/**
+ * Substitutions that only make sense in CODEOWNERS.
+ *
+ * That file names a reviewer as a bare `@handle` — or `@org/team` — with no
+ * slug around it. Rewriting a bare handle everywhere would be reckless (it
+ * would catch npm scopes and email addresses), so it is confined to the one
+ * file where it is unambiguous.
+ */
+function buildOwnerRules(fromSlug, slug) {
+  const fromOwner = fromSlug.split('/')[0];
+  const toOwner = slug.split('/')[0];
+  return fromOwner === toOwner ? [] : [[`@${fromOwner}`, `@${toOwner}`]];
+}
+
+/** Apply a list of substitutions to one string, counting the hits. */
+function applyRules(text, rules) {
+  let after = text;
+  let hits = 0;
+  for (const [from, to] of rules) {
+    const parts = after.split(from);
+    hits += parts.length - 1;
+    after = parts.join(to);
+  }
+  return { after, hits };
+}
+
 /** Apply the rules to every file, reporting what changed. */
-function rewriteAll(rules, dryRun) {
+function rewriteAll(rules, ownerRules, dryRun) {
   const touched = [];
   for (const path of walk(ROOT)) {
     const before = readFileSync(path, 'utf8');
-    let after = before;
-    let hits = 0;
-    for (const [from, to] of rules) {
-      const parts = after.split(from);
-      hits += parts.length - 1;
-      after = parts.join(to);
-    }
+    const forThisFile = path.endsWith('CODEOWNERS') ? [...rules, ...ownerRules] : rules;
+    const { after, hits } = applyRules(before, forThisFile);
     if (after === before) continue;
     touched.push([relative(ROOT, path), hits]);
     if (!dryRun) writeFileSync(path, after);
@@ -189,8 +209,15 @@ function main(argv) {
   const fromSlug = currentSlug();
   const fromScope = currentScope();
   const rules = buildRules(fromSlug, fromScope, slug, scope);
+  const ownerRules = buildOwnerRules(fromSlug, slug);
 
-  printReport(rewriteAll(rules, dryRun), { fromSlug, fromScope, slug, scope, dryRun });
+  printReport(rewriteAll(rules, ownerRules, dryRun), {
+    fromSlug,
+    fromScope,
+    slug,
+    scope,
+    dryRun,
+  });
   return 0;
 }
 

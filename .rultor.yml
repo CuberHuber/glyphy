@@ -9,7 +9,7 @@
 # Docs: https://doc.rultor.com
 
 architect:
-  - your-org
+  - CuberHuber
 
 # The container the scripts run in. Anything with Node 22 will do.
 docker:
@@ -19,7 +19,7 @@ docker:
 # Generate with: gpg --encrypt --armor -r <rultor key> .npmrc
 # and commit the result. The token itself is never in this file.
 assets:
-  npmrc: your-org/glyphy-secrets#.npmrc.asc
+  npmrc: CuberHuber/glyphy-secrets#.npmrc.asc
 
 # Runs on `@rultor merge`. Exactly the gate CI runs, so a green pull request
 # and a green merge mean the same thing.
@@ -40,7 +40,7 @@ release:
     npm run build
     npx changeset publish --tag latest
   commanders:
-    - your-org
+    - CuberHuber
 
 # Runs on `@rultor deploy`. Publishes the kit page to GitHub Pages.
 deploy:

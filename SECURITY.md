@@ -13,7 +13,7 @@ them at once.
 ## Reporting a vulnerability
 
 Report privately, through
-[GitHub Security Advisories](https://github.com/your-org/glyphy/security/advisories/new).
+[GitHub Security Advisories](https://github.com/CuberHuber/glyphy/security/advisories/new).
 If that is not available to you, email `security@example.com`.
 
 Please do not open a public issue for a vulnerability, and please do not

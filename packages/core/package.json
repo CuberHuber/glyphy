@@ -13,13 +13,13 @@
   "author": "The Glyphy authors",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-org/glyphy.git",
+    "url": "git+https://github.com/CuberHuber/glyphy.git",
     "directory": "packages/core"
   },
   "bugs": {
-    "url": "https://github.com/your-org/glyphy/issues"
+    "url": "https://github.com/CuberHuber/glyphy/issues"
   },
-  "homepage": "https://github.com/your-org/glyphy/tree/master/packages/core#readme",
+  "homepage": "https://github.com/CuberHuber/glyphy/tree/master/packages/core#readme",
   "type": "module",
   "sideEffects": false,
   "files": [

@@ -2,10 +2,10 @@
 
 [![npm](https://img.shields.io/npm/v/@glyphy/react.svg)](https://www.npmjs.com/package/@glyphy/react)
 [![bundle](https://img.shields.io/bundlephobia/minzip/@glyphy/react?label=minzip)](https://bundlephobia.com/package/@glyphy/react)
-[![ci](https://github.com/your-org/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/your-org/glyphy/actions/workflows/ci.yml)
+[![ci](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.txt)
 
-React bindings for the [Glyphy](https://github.com/your-org/glyphy) nine-cell
+React bindings for the [Glyphy](https://github.com/CuberHuber/glyphy) nine-cell
 glyph: a loading spinner, a thinking indicator, a progress mark and a background
 texture, all the same nine cells under different instructions.
 

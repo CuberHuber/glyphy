@@ -16,12 +16,12 @@
   "author": "The Glyphy authors",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-org/glyphy.git"
+    "url": "git+https://github.com/CuberHuber/glyphy.git"
   },
   "bugs": {
-    "url": "https://github.com/your-org/glyphy/issues"
+    "url": "https://github.com/CuberHuber/glyphy/issues"
   },
-  "homepage": "https://github.com/your-org/glyphy#readme",
+  "homepage": "https://github.com/CuberHuber/glyphy#readme",
   "type": "module",
   "engines": {
     "node": ">=20"

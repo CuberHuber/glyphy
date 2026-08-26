@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "your-org/glyphy" }],
+  "changelog": ["@changesets/changelog-github", { "repo": "CuberHuber/glyphy" }],
   "commit": false,
   "fixed": [["@glyphy/core", "@glyphy/react", "@glyphy/motion", "@glyphy/tailwind"]],
   "linked": [],
