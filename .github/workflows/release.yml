@@ -26,11 +26,11 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: "Version being released, e.g. 0.2.0. Must equal the version already committed to the packages."
+        description: 'Version being released, e.g. 0.2.0. Must equal the version already committed to the packages.'
         required: true
         type: string
       dry-run:
-        description: "Validate and pack without publishing. Leave on until the summary looks right."
+        description: 'Validate and pack without publishing. Leave on until the summary looks right.'
         required: true
         type: boolean
         default: true

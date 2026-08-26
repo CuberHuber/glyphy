@@ -35,7 +35,7 @@ depend on a sibling version nobody published.
 3. Commit as `chore: release 0.2.0`, open a pull request, and `@rultor merge`
    it. Main is still only ever written by rultor.
 
-4. **Actions → Release → Run workflow.** State the version. Leave *dry run*
+4. **Actions → Release → Run workflow.** State the version. Leave _dry run_
    on for the first pass, read the summary, then run it again with dry run
    off.
 
