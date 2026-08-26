@@ -80,10 +80,13 @@ export function CopyButton(props: {
       onClick={onClick}
       aria-live="polite"
       style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        minHeight: TAP,
         font: `500 10px/1 ${mono}`,
         letterSpacing: '.08em',
         textTransform: 'uppercase',
-        padding: '7px 10px',
+        padding: '0 11px',
         borderRadius: 4,
         cursor: 'pointer',
         whiteSpace: 'nowrap',
@@ -154,12 +157,26 @@ export function Field(props: {
   );
 }
 
+/**
+ * Minimum height for anything a finger has to land on.
+ *
+ * The chips were 26px, which clears the 24px floor and misses every guideline
+ * above it. Height is set rather than derived from padding so a narrower chip
+ * stays as tall as a wide one.
+ */
+export const TAP = 32;
+
 /** The chip every segmented control is made of. */
 export function chipStyle(active: boolean): CSSProperties {
   return {
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 6,
+    minHeight: TAP,
     font: `500 10px/1 ${mono}`,
     letterSpacing: '.05em',
-    padding: '7px 9px',
+    padding: '0 10px',
     borderRadius: 4,
     cursor: 'pointer',
     border: `1px solid ${active ? 'transparent' : ink.pill}`,
@@ -268,8 +285,8 @@ export function InkSwatch(props: {
         props.onChange(props.value);
       }}
       style={{
-        width: 26,
-        height: 26,
+        width: TAP,
+        height: TAP,
         borderRadius: 4,
         cursor: 'pointer',
         background: props.value,
@@ -291,7 +308,7 @@ export function MaskEditor(props: {
       aria-label="Fill pattern, nine cells"
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(3,22px)',
+        gridTemplateColumns: `repeat(3,${TAP}px)`,
         gap: 4,
       }}
     >
@@ -310,8 +327,8 @@ export function MaskEditor(props: {
               props.onChange(bits.join(''));
             }}
             style={{
-              width: 22,
-              height: 22,
+              width: TAP,
+              height: TAP,
               padding: 0,
               cursor: 'pointer',
               borderRadius: 4,

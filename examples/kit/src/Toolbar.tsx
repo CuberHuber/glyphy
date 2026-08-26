@@ -35,10 +35,13 @@ const FILLS: readonly Fill[] = ['stroke', 'tint'];
 
 function chip(active: boolean): CSSProperties {
   return {
+    display: 'inline-flex',
+    alignItems: 'center',
+    minHeight: 32,
     font: `500 10px/1 ${mono}`,
     letterSpacing: '.06em',
     textTransform: 'uppercase',
-    padding: '7px 10px',
+    padding: '0 11px',
     borderRadius: 4,
     border: `1px solid ${active ? COLORS.inkInverse : 'rgba(239,236,228,.2)'}`,
     background: active ? COLORS.inkInverse : 'transparent',

@@ -171,6 +171,17 @@ textarea {
   .nav-links {
     display: none;
   }
+
+  /* No keyboard, no shortcut worth advertising — and the row needs the width. */
+  .nav-kbd {
+    display: none;
+  }
+
+  /* The mark is the wordmark at this width. It is the whole subject of the
+     site; nobody reaching this page needs it spelled out as well. */
+  .nav-wordmark {
+    display: none;
+  }
 }
 
 /*
@@ -246,4 +257,39 @@ textarea {
   .hero-title {
     font-size: 58px;
   }
+}
+
+/*
+ * The ⌘K palette. A native <dialog>, so the backdrop is a pseudo-element and
+ * cannot be reached from an inline style — which is the whole reason these
+ * three rules live here rather than in the component.
+ */
+.search-dialog {
+  width: min(620px, calc(100vw - 32px));
+  max-width: none;
+  margin: 12vh auto auto;
+  padding: 0;
+  border: 1px solid var(--page-rule);
+  border-radius: 10px;
+  background: var(--page-surface);
+  color: var(--page-ink);
+  box-shadow: 0 24px 64px var(--page-shadow);
+}
+
+.search-dialog::backdrop {
+  background: rgba(12, 11, 10, 0.46);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.search-dialog [data-active='true'] {
+  background: var(--page-hairline);
+}
+
+/*
+ * A range input's own box is about 16px tall whatever the thumb looks like, so
+ * the track gets the tap height here rather than in each slider that uses it.
+ */
+input[type='range'] {
+  height: 32px;
 }

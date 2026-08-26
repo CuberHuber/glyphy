@@ -51,12 +51,18 @@ export function Footer(): ReactElement {
             teaching and public-benefit bodies; a separate licence for anything a business sells.
           </p>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           {LINKS.map(([name, href]) => (
             <a
               key={name}
               href={href}
-              style={{ font: `500 11px/1 ${mono}`, letterSpacing: '.04em' }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                minHeight: 32,
+                font: `500 11px/1 ${mono}`,
+                letterSpacing: '.04em',
+              }}
             >
               {name}
             </a>

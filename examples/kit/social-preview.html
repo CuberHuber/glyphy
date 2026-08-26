@@ -1,0 +1,182 @@
+<!doctype html>
+<!--
+  The 1280×640 card GitHub shows when the repo is linked, and the og:image the
+  page points at. Not part of the site build: it is rendered once to
+  public/social-preview.png, which the build then copies into docs/.
+
+    npx playwright screenshot --viewport-size=1280,640 \
+      examples/kit/social-preview.html examples/kit/public/social-preview.png
+
+  Everything here is drawn the way the library draws it — nine divs, rings as
+  CSS borders, the nine fixed wobble signatures. A card for a kit that claims it
+  needs no SVG should not open with one.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Glyphy — social preview</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        width: 1280px;
+        height: 640px;
+        background: #efece4;
+        color: #1c1a17;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 64px;
+        /* The safe margin: GitHub crops nothing, but the card is read at about
+           a quarter size and the edges are where a thumbnail loses first. */
+        padding: 64px 72px;
+        overflow: hidden;
+      }
+      .eyebrow {
+        font:
+          500 20px/1 ui-monospace,
+          Menlo,
+          monospace;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #b5522f;
+      }
+      h1 {
+        font-size: 116px;
+        font-weight: 600;
+        letter-spacing: -0.045em;
+        line-height: 0.9;
+        margin: 26px 0 0;
+      }
+      p {
+        font-size: 30px;
+        line-height: 1.35;
+        color: rgba(28, 26, 23, 0.66);
+        margin: 26px 0 0;
+        max-width: 19ch;
+      }
+      .install {
+        display: inline-block;
+        margin: 34px 0 0;
+        padding: 14px 20px;
+        border: 1px solid rgba(28, 26, 23, 0.18);
+        border-radius: 8px;
+        font:
+          500 21px/1 ui-monospace,
+          Menlo,
+          monospace;
+      }
+      .install span {
+        color: rgba(28, 26, 23, 0.42);
+      }
+      .mark {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+        width: 452px;
+        height: 452px;
+        flex: none;
+      }
+      .cell {
+        position: relative;
+        display: grid;
+        place-items: center;
+      }
+      .dot {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #1c1a17;
+        opacity: 0.42;
+      }
+      .ring {
+        position: absolute;
+        width: 78%;
+        height: 78%;
+        border: 8px solid #1c1a17;
+      }
+      /* One accented ring. The kit allows one accented thing per screen, and a
+         card is a screen. */
+      .cell:nth-child(5) .ring {
+        border-color: #b5522f;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="eyebrow">UI-Kit · glyph + motion</div>
+      <h1>Glyphy</h1>
+      <p>One mark. Twelve motion states. 512 patterns.</p>
+      <div class="install"><span>$</span> npm install @glyphy/react</div>
+    </div>
+
+    <div class="mark">
+      <div class="cell">
+        <div
+          class="ring"
+          style="border-radius: 53% 47% 45% 55% / 48% 54% 46% 52%; transform: rotate(-7deg)"
+        ></div>
+        <div class="dot"></div>
+      </div>
+      <div class="cell">
+        <div
+          class="ring"
+          style="border-radius: 46% 54% 52% 48% / 53% 47% 53% 47%; transform: rotate(5deg)"
+        ></div>
+        <div class="dot"></div>
+      </div>
+      <div class="cell">
+        <div
+          class="ring"
+          style="border-radius: 51% 49% 47% 53% / 45% 55% 49% 51%; transform: rotate(-3deg)"
+        ></div>
+        <div class="dot"></div>
+      </div>
+      <div class="cell">
+        <div
+          class="ring"
+          style="border-radius: 48% 52% 55% 45% / 52% 48% 51% 49%; transform: rotate(8deg)"
+        ></div>
+        <div class="dot"></div>
+      </div>
+      <div class="cell">
+        <div
+          class="ring"
+          style="border-radius: 54% 46% 48% 52% / 47% 53% 52% 48%; transform: rotate(-5deg)"
+        ></div>
+        <div class="dot"></div>
+      </div>
+      <div class="cell">
+        <div
+          class="ring"
+          style="border-radius: 47% 53% 51% 49% / 54% 46% 47% 53%; transform: rotate(4deg)"
+        ></div>
+        <div class="dot"></div>
+      </div>
+      <div class="cell">
+        <div
+          class="ring"
+          style="border-radius: 52% 48% 54% 46% / 46% 54% 53% 47%; transform: rotate(-9deg)"
+        ></div>
+        <div class="dot"></div>
+      </div>
+      <div class="cell">
+        <div
+          class="ring"
+          style="border-radius: 49% 51% 46% 54% / 51% 49% 45% 55%; transform: rotate(6deg)"
+        ></div>
+        <div class="dot"></div>
+      </div>
+      <div class="cell">
+        <div
+          class="ring"
+          style="border-radius: 55% 45% 49% 51% / 49% 51% 54% 46%; transform: rotate(-4deg)"
+        ></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </body>
+</html>

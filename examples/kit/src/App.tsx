@@ -11,12 +11,14 @@
  * did not need.
  */
 
-import { useState, type ReactElement } from 'react';
-import { type Fill } from '@glyphy/core';
+import { useCallback, useState, type ReactElement } from 'react';
+import { PATTERNS, type Fill, type Variant } from '@glyphy/core';
 import { GlyphProvider } from '@glyphy/react';
 import { sans } from './theme.js';
 import { Toolbar, PAGE_INK } from './Toolbar.js';
 import { SiteNav, useThemeMode } from './SiteNav.js';
+import { SearchDialog, useSearchShortcut } from './search/SearchDialog.js';
+import { type Target } from './search/index.js';
 import { Footer } from './Footer.js';
 import { Hero } from './sections/Hero.js';
 import { Anatomy } from './sections/Anatomy.js';
@@ -42,13 +44,46 @@ export function App(): ReactElement {
   const [dots, setDots] = useState(true);
   const [paused, setPaused] = useState(false);
 
+  // The palette can land the reader on a section, a pattern or a variant, so
+  // the two selections it reaches into are held here rather than inside the
+  // sections that own them.
+  const [searching, setSearching] = useState(false);
+  const [pattern, setPattern] = useState<string>(PATTERNS.cross);
+  const [requested, setRequested] = useState<Variant | undefined>(undefined);
+
+  const openSearch = useCallback(() => {
+    setSearching(true);
+  }, []);
+  useSearchShortcut(openSearch);
+
+  const go = useCallback((target: Target) => {
+    const section =
+      target.kind === 'section' ? target.id : target.kind === 'pattern' ? 'browser' : 'playground';
+    if (target.kind === 'pattern') setPattern(target.mask);
+    if (target.kind === 'variant') setRequested(target.variant);
+    // The dialog is still closing on this frame; the scroll waits for it so the
+    // section is not moved under a backdrop that is about to disappear.
+    requestAnimationFrame(() => {
+      document.getElementById(section)?.scrollIntoView({ block: 'start' });
+      window.history.replaceState(undefined, '', `#${section}`);
+    });
+  }, []);
+
   return (
     <GlyphProvider theme={{ ink, fill, dots, paused }} cssVariables>
       <a className="skip-link" href="#anatomy">
         Skip to the kit
       </a>
 
-      <SiteNav mode={mode} onMode={setMode} />
+      <SiteNav mode={mode} onMode={setMode} onSearch={openSearch} />
+
+      <SearchDialog
+        open={searching}
+        onClose={() => {
+          setSearching(false);
+        }}
+        onChoose={go}
+      />
 
       <main style={{ fontFamily: sans, padding: '0 0 120px' }}>
         <Hero />
@@ -57,7 +92,7 @@ export function App(): ReactElement {
         <Surfaces />
         <Palette />
         <MotionStates />
-        <Playground />
+        <Playground requested={requested} />
         <Compare />
         <InProduct />
         <Rules />
@@ -65,7 +100,7 @@ export function App(): ReactElement {
         <LiveCode />
         <Panel />
         <Patterns />
-        <PatternBrowser />
+        <PatternBrowser selected={pattern} onSelect={setPattern} />
       </main>
 
       <Footer />

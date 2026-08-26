@@ -173,7 +173,7 @@ function Controls(props: {
               onClick={() => {
                 set('mask', PATTERNS[name]);
               }}
-              style={{ ...chipStyle(props.side.mask === PATTERNS[name]), padding: '5px 7px' }}
+              style={{ ...chipStyle(props.side.mask === PATTERNS[name]), padding: '0 8px' }}
             >
               {name}
             </button>

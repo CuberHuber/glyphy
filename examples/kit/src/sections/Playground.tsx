@@ -8,7 +8,7 @@
  * different component from the one beside it.
  */
 
-import { useMemo, useState, type ReactElement } from 'react';
+import { useEffect, useMemo, useState, type ReactElement } from 'react';
 import {
   COLORS,
   DEFAULT_MASK,
@@ -27,16 +27,8 @@ import {
 } from '@glyphy/core';
 import { GLYPH_DEFAULTS, Glyph, type DotsSetting } from '@glyphy/react';
 import { Section } from '../ui.js';
-import {
-  CodeBlock,
-  Field,
-  MaskEditor,
-  Note,
-  Segmented,
-  Slider,
-  Toggle,
-  chipStyle,
-} from '../controls.js';
+import { Preview } from '../Preview.js';
+import { Field, MaskEditor, Note, Segmented, Slider, Toggle, chipStyle } from '../controls.js';
 import { card, ink, mono, sans } from '../theme.js';
 
 /** The inks the playground offers by name, in the order the palette reads. */
@@ -203,9 +195,21 @@ function Still(props: {
   );
 }
 
+/** Props for {@link Playground}. */
+export interface PlaygroundProps {
+  /** A variant to load, when the search palette sends the reader here. */
+  readonly requested?: Variant;
+}
+
 /** Section 06 — the playground. */
-export function Playground(): ReactElement {
+export function Playground(props: PlaygroundProps): ReactElement {
   const [settings, setSettings] = useState<Settings>(START);
+
+  const requested = props.requested;
+  useEffect(() => {
+    if (requested === undefined) return;
+    setSettings((current) => ({ ...current, variant: requested }));
+  }, [requested]);
   const set = <K extends keyof Settings>(key: K, value: Settings[K]): void => {
     setSettings((current) => ({ ...current, [key]: value }));
   };
@@ -243,18 +247,7 @@ export function Playground(): ReactElement {
             </button>
           </div>
 
-          <div
-            style={{
-              ...(settings.dark
-                ? { background: COLORS.night, border: `1px solid rgba(239,236,228,.12)` }
-                : card),
-              borderRadius: 6,
-              minHeight: 360,
-              display: 'grid',
-              placeItems: 'center',
-              padding: 40,
-            }}
-          >
+          <Preview code={code} minHeight={360} dark={settings.dark}>
             <Glyph
               variant={settings.variant}
               size={settings.size}
@@ -268,9 +261,7 @@ export function Playground(): ReactElement {
               paused={settings.paused}
               label={settings.label === '' ? undefined : settings.label}
             />
-          </div>
-
-          <CodeBlock code={code} copy />
+          </Preview>
 
           <div
             style={{
@@ -398,7 +389,7 @@ export function Playground(): ReactElement {
                     onClick={() => {
                       set('mask', PATTERNS[name]);
                     }}
-                    style={{ ...chipStyle(settings.mask === PATTERNS[name]), padding: '5px 7px' }}
+                    style={{ ...chipStyle(settings.mask === PATTERNS[name]), padding: '0 8px' }}
                   >
                     {name}
                   </button>

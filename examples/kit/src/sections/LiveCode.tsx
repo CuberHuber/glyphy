@@ -13,8 +13,9 @@ import { useMemo, useState, type ReactElement } from 'react';
 import { COLORS } from '@glyphy/core';
 import { Glyph, GlyphLattice, GlyphRow } from '@glyphy/react';
 import { Section } from '../ui.js';
+import { PreviewStage } from '../Preview.js';
 import { CopyButton, Note, chipStyle } from '../controls.js';
-import { card, ink, mono, sans } from '../theme.js';
+import { ink, mono } from '../theme.js';
 import {
   dotsOf,
   fillOf,
@@ -192,21 +193,14 @@ export function LiveCode(): ReactElement {
 
         <div
           style={{
-            ...card,
-            padding: 40,
-            display: 'grid',
-            placeItems: 'center',
-            minHeight: 300,
+            border: `1px solid ${ink.hairline}`,
+            borderRadius: 6,
             overflow: 'hidden',
           }}
         >
-          {reading.ok ? (
-            <Rendered reading={reading} />
-          ) : (
-            <span style={{ font: `400 13px/1.5 ${sans}`, color: ink.faint, textAlign: 'center' }}>
-              Nothing rendered — fix the snippet on the left.
-            </span>
-          )}
+          <PreviewStage minHeight={300} problem={reading.ok ? undefined : reading.problem}>
+            {reading.ok ? <Rendered reading={reading} /> : undefined}
+          </PreviewStage>
         </div>
       </div>
     </Section>

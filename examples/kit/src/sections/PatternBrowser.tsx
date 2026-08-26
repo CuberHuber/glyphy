@@ -14,7 +14,6 @@ import { useMemo, useState, type ReactElement } from 'react';
 import {
   CELLS,
   MASK_COUNT,
-  PATTERNS,
   PATTERN_NAMES,
   invertMask,
   maskDensity,
@@ -195,12 +194,19 @@ function Detail(props: {
   );
 }
 
+/** Props for {@link PatternBrowser}. */
+export interface PatternBrowserProps {
+  /** The pattern in hand. Lifted so the search palette can deep-link to one. */
+  readonly selected: string;
+  readonly onSelect: (mask: string) => void;
+}
+
 /** Section 14 — the browser. */
-export function PatternBrowser(): ReactElement {
+export function PatternBrowser(props: PatternBrowserProps): ReactElement {
   const [density, setDensity] = useState('all');
   const [query, setQuery] = useState('');
   const [namedOnly, setNamedOnly] = useState(false);
-  const [selected, setSelected] = useState<string>(PATTERNS.cross);
+  const { selected, onSelect: setSelected } = props;
   const [page, setPage] = useState(0);
 
   const matches = useMemo(() => filtered(density, query, namedOnly), [density, query, namedOnly]);
@@ -233,7 +239,7 @@ export function PatternBrowser(): ReactElement {
                         setDensity(option);
                       });
                     }}
-                    style={{ ...chipStyle(density === option), padding: '6px 8px' }}
+                    style={{ ...chipStyle(density === option), padding: '0 8px' }}
                   >
                     {option}
                   </button>

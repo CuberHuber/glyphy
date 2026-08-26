@@ -64,6 +64,7 @@ export function useThemeMode(): readonly [ThemeMode, (mode: ThemeMode) => void] 
 export interface SiteNavProps {
   readonly mode: ThemeMode;
   readonly onMode: (mode: ThemeMode) => void;
+  readonly onSearch: () => void;
 }
 
 /** The sticky header. */
@@ -104,13 +105,19 @@ export function SiteNav(props: SiteNavProps): ReactElement {
           style={{
             display: 'flex',
             alignItems: 'center',
+            minHeight: 32,
             gap: 9,
             color: ink.base,
             flexShrink: 0,
           }}
         >
           <Glyph variant="idle" size={22} dots={false} />
-          <span style={{ font: `600 15px/1 ${sans}`, letterSpacing: '-.02em' }}>Glyphy</span>
+          <span
+            className="nav-wordmark"
+            style={{ font: `600 15px/1 ${sans}`, letterSpacing: '-.02em' }}
+          >
+            Glyphy
+          </span>
         </a>
 
         <div className="nav-links">
@@ -120,7 +127,14 @@ export function SiteNav(props: SiteNavProps): ReactElement {
               href={`#${entry.id}`}
               onClick={onJump}
               className={entry.nav === 'secondary' ? 'nav-secondary' : undefined}
-              style={{ font: `400 13px/1 ${sans}`, color: ink.muted, whiteSpace: 'nowrap' }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                minHeight: 32,
+                font: `400 13px/1 ${sans}`,
+                color: ink.muted,
+                whiteSpace: 'nowrap',
+              }}
             >
               {entry.title}
             </a>
@@ -128,6 +142,38 @@ export function SiteNav(props: SiteNavProps): ReactElement {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginLeft: 'auto' }}>
+          <button
+            type="button"
+            onClick={props.onSearch}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              height: 32,
+              padding: '0 8px 0 11px',
+              borderRadius: 6,
+              border: `1px solid ${ink.pill}`,
+              background: 'transparent',
+              color: ink.muted,
+              cursor: 'pointer',
+              font: `400 12.5px/1 ${sans}`,
+            }}
+          >
+            Search
+            <kbd
+              className="nav-kbd"
+              style={{
+                font: `500 10px/1 ${mono}`,
+                border: `1px solid ${ink.pill}`,
+                borderRadius: 4,
+                padding: '4px 5px',
+                color: ink.ghost,
+              }}
+            >
+              ⌘K
+            </kbd>
+          </button>
+
           <div role="group" aria-label="Page theme" style={{ display: 'flex', gap: 4 }}>
             {MODES.map((option) => (
               <button
@@ -137,7 +183,7 @@ export function SiteNav(props: SiteNavProps): ReactElement {
                 onClick={() => {
                   props.onMode(option);
                 }}
-                style={{ ...chipStyle(props.mode === option), padding: '6px 8px' }}
+                style={{ ...chipStyle(props.mode === option), padding: '0 8px' }}
               >
                 {option}
               </button>
@@ -147,10 +193,13 @@ export function SiteNav(props: SiteNavProps): ReactElement {
             href="https://github.com/CuberHuber/glyphy"
             className="nav-secondary"
             style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              minHeight: 32,
               font: `500 10px/1 ${mono}`,
               letterSpacing: '.08em',
               textTransform: 'uppercase',
-              padding: '7px 10px',
+              padding: '0 11px',
               border: `1px solid ${ink.pill}`,
               borderRadius: 4,
               color: ink.muted,

@@ -8,6 +8,7 @@
 import type { CSSProperties, ReactElement, ReactNode } from 'react';
 import { COLORS } from '@glyphy/core';
 import { numberOf, titleOf } from './outline.js';
+import { GLYPH_PROPS, type PropSpec } from './props.js';
 import { caption, card, fixed, ink, mono, sans } from './theme.js';
 
 /**
@@ -75,32 +76,80 @@ export function SpecRow(props: { readonly name: string; readonly value: string }
 }
 
 /**
- * One line of the prop table: the prop name in monospace, its note in prose.
+ * The prop table.
  *
- * The mirror image of {@link SpecRow} — there the exact value is on the right,
- * here the exact thing is the name on the left.
+ * Four columns, types written as literal unions, and a horizontal scroll on the
+ * container rather than a wrap — every kit surveyed for `design/BRIEF.md` does
+ * exactly this, and none of them generates it. A missing default is an em dash,
+ * not an empty cell, so a reader can tell "none" from "nobody filled this in".
  */
-export function PropRow(props: { readonly name: string; readonly note: string }): ReactElement {
+export function PropTable(props: { readonly on?: PropSpec['on'] }): ReactElement {
+  const rows =
+    props.on === undefined ? GLYPH_PROPS : GLYPH_PROPS.filter((row) => row.on === props.on);
+  const cell = {
+    padding: '11px 14px 11px 0',
+    borderBottom: `1px solid ${ink.hairline}`,
+    verticalAlign: 'top',
+  } as const;
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        gap: 16,
-        padding: '13px 0',
-        borderBottom: `1px solid ${ink.hairline}`,
-      }}
-    >
-      <span style={{ font: `500 12px/1.3 ${mono}` }}>{props.name}</span>
-      <span
-        style={{
-          font: `400 12.5px/1.3 ${sans}`,
-          color: ink.muted,
-          textAlign: 'right',
-        }}
+    <div style={{ overflowX: 'auto' }}>
+      <table
+        style={{ borderCollapse: 'collapse', width: '100%', minWidth: 460, textAlign: 'left' }}
       >
-        {props.note}
-      </span>
+        <thead>
+          <tr>
+            {['Prop', 'Type', 'Default', 'What it does'].map((head) => (
+              <th
+                key={head}
+                style={{
+                  font: `500 10px/1 ${mono}`,
+                  letterSpacing: '.1em',
+                  textTransform: 'uppercase',
+                  color: 'var(--page-eyebrow)',
+                  padding: '0 14px 10px 0',
+                  borderBottom: `1px solid ${ink.rule}`,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {head}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr key={`${row.on}.${row.name}`}>
+              <td style={{ ...cell, font: `500 12px/1.4 ${mono}`, whiteSpace: 'nowrap' }}>
+                {row.name}
+              </td>
+              <td style={{ ...cell, font: `400 11px/1.5 ${mono}`, color: ink.soft, maxWidth: 240 }}>
+                {row.type}
+              </td>
+              <td
+                style={{
+                  ...cell,
+                  font: `500 11px/1.5 ${mono}`,
+                  color: ink.ghost,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {row.fallback}
+              </td>
+              <td
+                style={{
+                  ...cell,
+                  paddingRight: 0,
+                  font: `400 12.5px/1.5 ${sans}`,
+                  color: ink.muted,
+                }}
+              >
+                {row.note}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }

@@ -158,7 +158,7 @@ by name, and `repo/APPLY.md` is where that mapping is written down.
 | `Glyphy Pages Mobile.dc.html` | 390 × full | Nav collapse, the two sidebar layouts stacked, the stepper scrolling |
 | `Preview Shell.dc.html` | 1200 × 900 | The one repeated demo container and every state it has — §7 |
 | `Error Palette.dc.html` | 1200 × 1400 | The palette section: the reserved pair, the greyscale proof, the swatch grid |
-| `Search Palette.dc.html` | 1200 × 900 | The ⌘K dialog — §9, item 4. Currently missing from the site |
+| `Search Palette.dc.html` | 1200 × 900 | The ⌘K dialog — §9, item 4. Built; the board settles its look |
 | `Section Kit.dc.html` | 1200 × 1600 | Every repeated shape: section rule, card, chip, slider, prop row, spec row, copy button, mask editor |
 | `Social Preview.dc.html` | 1280 × 640 | The GitHub repo card — §8 |
 | `README Hero.dc.html` | 1280 × 860 | The image the README opens with — §8 |
@@ -222,10 +222,12 @@ right.
    illustration. Mobile may fall back to a prerendered image.
 3. **One preview shell** — §7.
 4. **⌘K search over a build-time index.** Nobody runs a search server; Radix
-   moved *off* hosted search to a JSON index and MiniSearch. This is the site's
-   clearest gap, and it is the only way the 512 patterns become findable. Design
-   the dialog: input, grouped results (Sections · Patterns · Props · Variants), a
-   keyboard-hint footer, empty and no-result states.
+   moved *off* hosted search to a JSON index and MiniSearch. It is the only way
+   the 512 patterns become findable. **Built** — the index is derived from the
+   outline, the variants, the props and all 512 masks, and the dialog is a
+   native `<dialog>` with grouped results, a keyboard-hint footer and an empty
+   state. What the board settles is how it *looks*: row density, the thumbnail,
+   how a capped group says so.
 5. **A metadata chip row under the title** — source, licence, version, size.
    The cheapest thing that makes a small library read as a real one.
 6. **Persist one preference, globally.** `localStorage`, never cookies — there is

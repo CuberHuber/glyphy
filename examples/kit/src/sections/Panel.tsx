@@ -203,13 +203,16 @@ export function Panel(): ReactElement {
                     }}
                     style={{
                       flex: 1,
-                      textAlign: 'center',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      minHeight: 32,
                       font: `500 11px/1 ${sans}`,
                       color: selected ? COLORS.night : inverse.soft,
                       background: selected ? COLORS.inkInverse : 'transparent',
                       border: 0,
                       borderRadius: 4,
-                      padding: '8px 0',
+                      padding: 0,
                       cursor: 'pointer',
                     }}
                   >
@@ -233,12 +236,15 @@ export function Panel(): ReactElement {
                 onClick={() => {
                   setDots((on) => !on);
                 }}
+                // The switch stays 34 by 19 — that is what the inspector looks
+                // like. The button around it is 32 tall and transparent, so the
+                // thing a finger has to hit is bigger than the thing it draws.
                 style={{
-                  width: 34,
-                  height: 19,
-                  borderRadius: 100,
-                  background: dots ? COLORS.accent : inverse.border,
-                  position: 'relative',
+                  width: 44,
+                  height: 32,
+                  display: 'grid',
+                  placeItems: 'center',
+                  background: 'transparent',
                   border: 0,
                   padding: 0,
                   cursor: 'pointer',
@@ -246,16 +252,27 @@ export function Panel(): ReactElement {
               >
                 <span
                   style={{
-                    position: 'absolute',
-                    top: 2,
-                    left: dots ? 17 : 2,
-                    width: 15,
-                    height: 15,
-                    borderRadius: '50%',
-                    background: COLORS.inkInverse,
-                    transition: 'left 160ms cubic-bezier(.4,0,.2,1)',
+                    position: 'relative',
+                    display: 'block',
+                    width: 34,
+                    height: 19,
+                    borderRadius: 100,
+                    background: dots ? COLORS.accent : inverse.border,
                   }}
-                />
+                >
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: 2,
+                      left: dots ? 17 : 2,
+                      width: 15,
+                      height: 15,
+                      borderRadius: '50%',
+                      background: COLORS.inkInverse,
+                      transition: 'left 160ms cubic-bezier(.4,0,.2,1)',
+                    }}
+                  />
+                </span>
               </button>
             </div>
           </div>
