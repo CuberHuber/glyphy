@@ -9,6 +9,7 @@
 import {
   COLORS,
   CSS_VARIABLES,
+  RESERVED_COLORS,
   DEFAULT_SIZE,
   EASE,
   EASE_OPACITY_MS,
@@ -16,11 +17,18 @@ import {
   MOTION_VARIANTS,
   SNAP_MS,
   TICK_MS,
+  softOf,
   stepDuration,
 } from '@glyphy/core';
 
-/** The kit's palette, keyed as Tailwind colour names. */
-export const glyphyColors = Object.freeze({
+/**
+ * The kit's palette, keyed as Tailwind colour names.
+ *
+ * Every colour core names, plus the wash tier for each reserved colour. The
+ * wash is derived rather than retyped, so `bg-glyphy-error-soft` and a ring
+ * drawn with `fill="tint"` cannot end up at two different strengths.
+ */
+export const glyphyColors: Readonly<Record<string, string>> = Object.freeze({
   paper: COLORS.paper,
   surface: COLORS.surface,
   ink: COLORS.ink,
@@ -28,9 +36,12 @@ export const glyphyColors = Object.freeze({
   night: COLORS.night,
   accent: COLORS.accent,
   'accent-hover': COLORS.accentHover,
+  'accent-contrast': COLORS.accentContrast,
   error: COLORS.error,
   'error-hover': COLORS.errorHover,
+  'error-contrast': COLORS.errorContrast,
   slate: COLORS.slate,
+  ...Object.fromEntries(RESERVED_COLORS.map((name) => [`${name}-soft`, softOf(name)])),
 });
 
 /**

@@ -21,8 +21,12 @@
   --color-glyphy-night: #191816;
   --color-glyphy-accent: #b5522f;
   --color-glyphy-accent-hover: #8f3f22;
+  --color-glyphy-accent-contrast: #f7f5f0;
+  --color-glyphy-accent-soft: #b5522f2e;
   --color-glyphy-error: #c62f2a;
   --color-glyphy-error-hover: #a12622;
+  --color-glyphy-error-contrast: #f7f5f0;
+  --color-glyphy-error-soft: #c62f2a2e;
   --color-glyphy-slate: #3a4a52;
 
   --ease-glyphy: cubic-bezier(0.4, 0, 0.2, 1);
@@ -64,8 +68,12 @@
   --glyphy-night: #191816;
   --glyphy-accent: #b5522f;
   --glyphy-accent-hover: #8f3f22;
+  --glyphy-accent-contrast: #f7f5f0;
+  --glyphy-accent-soft: #b5522f2e;
   --glyphy-error: #c62f2a;
   --glyphy-error-hover: #a12622;
+  --glyphy-error-contrast: #f7f5f0;
+  --glyphy-error-soft: #c62f2a2e;
   --glyphy-slate: #3a4a52;
   --glyphy-ease: cubic-bezier(0.4, 0, 0.2, 1);
 }

@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { COLORS, EASE, MOTION_VARIANTS, stepDuration } from '@glyphy/core';
+import { COLORS, EASE, MOTION_VARIANTS, RESERVED_COLORS, softOf, stepDuration } from '@glyphy/core';
 import {
   HAIRLINE,
   cssVariableBlock,
@@ -32,8 +32,16 @@ describe('the colour tokens', () => {
     expect(glyphyColors['accent-hover']).toBe(COLORS.accentHover);
   });
 
-  it('covers every colour core defines', () => {
-    expect(Object.keys(glyphyColors)).toHaveLength(Object.keys(COLORS).length);
+  it('covers every colour core defines, plus a wash per reserved colour', () => {
+    expect(Object.keys(glyphyColors)).toHaveLength(
+      Object.keys(COLORS).length + RESERVED_COLORS.length,
+    );
+  });
+
+  it('derives each wash rather than retyping it, so it matches the tint fill', () => {
+    for (const name of RESERVED_COLORS) {
+      expect(glyphyColors[`${name}-soft`]).toBe(softOf(name));
+    }
   });
 
   it('keeps the accent and the error apart, as two tokens with two jobs', () => {

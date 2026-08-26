@@ -57,8 +57,10 @@ const USES: Readonly<Record<keyof typeof COLORS, string>> = {
   night: 'Dark surface',
   accent: 'The live step',
   accentHover: 'Accent, hovered',
+  accentContrast: 'Drawn on the accent',
   error: 'The failed state',
   errorHover: 'Error, hovered',
+  errorContrast: 'Drawn on the error',
   slate: 'The optional third ink',
 };
 
@@ -236,6 +238,49 @@ export function Palette(): ReactElement {
         the first job and a vermilion took the second. They sit 21 apart in CIE L*a*b* — further
         than the accent is from its own hover — so neither is read as a state of the other.
       </p>
+
+      <div
+        style={{
+          ...card,
+          padding: 30,
+          margin: '24px 0 0',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(min(240px,100%),1fr))',
+          gap: 30,
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ display: 'flex', gap: 34, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'grid', placeItems: 'center', gap: 12 }}>
+            <Glyph variant="accumulate" size={96} ink="ink" />
+            <span style={{ font: `500 10px/1 ${mono}`, color: ink.ghost }}>accumulate</span>
+          </div>
+          <div style={{ display: 'grid', placeItems: 'center', gap: 12 }}>
+            <Glyph variant="error" size={96} ink="ink" />
+            <span style={{ font: `500 10px/1 ${mono}`, color: ink.ghost }}>error</span>
+          </div>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <span
+            style={{
+              font: `500 10px/1 ${mono}`,
+              letterSpacing: '.08em',
+              textTransform: 'uppercase',
+              color: 'var(--page-eyebrow)',
+            }}
+          >
+            Colour is never the only channel
+          </span>
+          <Note>
+            Both marks here are plain ink. The accent and the error are close in hue — a terracotta
+            and a vermilion — and a reader who cannot separate two warm reds still has to be able to
+            tell a step running from a step that failed. So the state is carried by the motion
+            first: <code style={{ font: `500 12px ${mono}` }}>error</code> cuts rather than eases,
+            holds each frame for three ticks, and drops its rings unevenly until only the bare
+            lattice is left. The colour agrees with that reading. It does not do the work alone.
+          </Note>
+        </div>
+      </div>
 
       <div
         style={{

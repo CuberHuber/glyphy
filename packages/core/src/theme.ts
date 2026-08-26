@@ -25,10 +25,14 @@ export const COLORS = Object.freeze({
   accent: '#b5522f',
   /** Accent under the pointer. */
   accentHover: '#8f3f22',
+  /** What is legible drawn *on* the accent: 4.58:1, above the floor for text. */
+  accentContrast: '#f7f5f0',
   /** Vermilion. The failed state, and nothing else. */
   error: '#c62f2a',
   /** Error under the pointer. */
   errorHover: '#a12622',
+  /** What is legible drawn *on* the error: 5.02:1. */
+  errorContrast: '#f7f5f0',
   /** The optional third ink. */
   slate: '#3a4a52',
 } as const);
@@ -40,6 +44,12 @@ export type ColorName = keyof typeof COLORS;
  * Colours the kit reserves — each one means a single thing and is never spent
  * on emphasis. Ordered as the palette reads them: what is happening, then what
  * went wrong.
+ *
+ * Each has three more names beside it and no numeric ramp: `<name>Hover` is the
+ * pointer state, `<name>Contrast` is what is drawn on top of it, and
+ * `--glyphy-<name>-soft` is the same eighteen percent the `tint` fill uses. A
+ * ramp would invite `error-300` to be spent on decoration, which is the one
+ * thing these two colours are not for.
  */
 export const RESERVED_COLORS = Object.freeze(['accent', 'error'] as const);
 
@@ -109,6 +119,17 @@ export function tintOf(ink: string): string {
     : `color-mix(in srgb, ${resolved} 18%, transparent)`;
 }
 
+/**
+ * The reserved colour at wash strength, under the name the stylesheet uses.
+ *
+ * Derived rather than authored, and derived through {@link tintOf}, so a soft
+ * surface and a tinted ring are provably the same weight instead of being two
+ * numbers that happen to agree today.
+ */
+export function softOf(name: ReservedColorName): string {
+  return tintOf(COLORS[name]);
+}
+
 /** Every token as a CSS custom property, for the style provider to emit. */
 export const CSS_VARIABLES = Object.freeze({
   '--glyphy-paper': COLORS.paper,
@@ -118,8 +139,12 @@ export const CSS_VARIABLES = Object.freeze({
   '--glyphy-night': COLORS.night,
   '--glyphy-accent': COLORS.accent,
   '--glyphy-accent-hover': COLORS.accentHover,
+  '--glyphy-accent-contrast': COLORS.accentContrast,
+  '--glyphy-accent-soft': `${COLORS.accent}${TINT_ALPHA_HEX}`,
   '--glyphy-error': COLORS.error,
   '--glyphy-error-hover': COLORS.errorHover,
+  '--glyphy-error-contrast': COLORS.errorContrast,
+  '--glyphy-error-soft': `${COLORS.error}${TINT_ALPHA_HEX}`,
   '--glyphy-slate': COLORS.slate,
   '--glyphy-ease': EASE,
 } as const);

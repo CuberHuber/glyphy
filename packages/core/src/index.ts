@@ -112,6 +112,7 @@ export {
   isColorName,
   isFill,
   resolveColor,
+  softOf,
   tintOf,
   type ColorName,
   type Fill,

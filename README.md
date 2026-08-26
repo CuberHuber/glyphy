@@ -156,6 +156,10 @@ copied as hex:
 | `ink-inverse` | `#efece4` | Everything else on a dark surface      |
 | `slate`       | `#3a4a52` | The optional third ink                 |
 
+Each reserved colour carries three more names and no numeric ramp: `-hover` for
+the pointer state, `-contrast` for what is drawn on top of it, and `-soft` for
+the same eighteen percent wash the `tint` fill uses.
+
 The accent and the error were one terracotta until the palette was split. A
 screen that shows one step running and another that failed needs to say which
 is which, and one colour cannot. They now sit 21 apart in CIE L\*a\*b\* — further
@@ -163,6 +167,11 @@ than the accent is from its own hover — and each carries at least 4.5:1 on the
 paper and 3:1 on the night surface, so neither depends on the other to be read.
 One accented thing per screen still holds; an error does not spend that budget,
 because it is not decoration.
+
+They are still both warm reds, so the kit does not let colour carry the state on
+its own. `error` cuts rather than eases, holds each frame for three ticks and
+drops its rings unevenly until the bare lattice is all that is left — the state
+reads with the colour taken away, and the colour only agrees with it.
 
 Three ways in, depending on what you already use.
 

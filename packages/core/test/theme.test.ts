@@ -6,6 +6,7 @@ import {
   TINT_ALPHA_HEX,
   isColorName,
   resolveColor,
+  softOf,
   tintOf,
 } from '@glyphy/core';
 
@@ -106,13 +107,42 @@ describe('naming a colour', () => {
   });
 });
 
-describe('the custom properties', () => {
-  it('emits one per colour, plus the easing curve', () => {
-    expect(Object.keys(CSS_VARIABLES)).toHaveLength(Object.keys(COLORS).length + 1);
+describe('the reserved tiers', () => {
+  it('gives each reserved colour a hover, a contrast and a wash — and no ramp', () => {
+    for (const name of RESERVED_COLORS) {
+      expect(COLORS[`${name}Hover`]).toBeDefined();
+      expect(COLORS[`${name}Contrast`]).toBeDefined();
+      expect(softOf(name)).toBe(`${COLORS[name]}${TINT_ALPHA_HEX}`);
+    }
+    // A numeric step would invite the reserved colours to be spent on
+    // decoration, which is the one thing they are not for.
+    expect(Object.keys(COLORS).some((name) => /\d/.test(name))).toBe(false);
   });
 
-  it('spells the error out under its own name', () => {
+  it('draws the contrast ink legibly on the colour it is named for', () => {
+    for (const name of RESERVED_COLORS) {
+      expect(contrast(COLORS[`${name}Contrast`], COLORS[name])).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
+  it('washes at the same strength as the tint fill, never a second alpha', () => {
+    for (const name of RESERVED_COLORS) {
+      expect(softOf(name)).toBe(tintOf(COLORS[name]));
+    }
+  });
+});
+
+describe('the custom properties', () => {
+  it('emits one per colour, one wash per reserved colour, and the easing curve', () => {
+    expect(Object.keys(CSS_VARIABLES)).toHaveLength(
+      Object.keys(COLORS).length + RESERVED_COLORS.length + 1,
+    );
+  });
+
+  it('spells the error out under its own name, at every tier', () => {
     expect(CSS_VARIABLES['--glyphy-error']).toBe(COLORS.error);
     expect(CSS_VARIABLES['--glyphy-error-hover']).toBe(COLORS.errorHover);
+    expect(CSS_VARIABLES['--glyphy-error-contrast']).toBe(COLORS.errorContrast);
+    expect(CSS_VARIABLES['--glyphy-error-soft']).toBe(softOf('error'));
   });
 });

@@ -65,18 +65,28 @@ import { cssVariableBlock } from '@glyphy/tailwind';
 
 **Colours** — `bg-glyphy-paper`, `text-glyphy-ink`, `border-glyphy-accent`:
 
-| Token          | Value     | Use                                   |
-| -------------- | --------- | ------------------------------------- |
-| `paper`        | `#efece4` | Page background                       |
-| `surface`      | `#f7f5f0` | Cards, one step up from the paper     |
-| `ink`          | `#1c1a17` | Body ink on light                     |
-| `ink-inverse`  | `#efece4` | Ink on dark                           |
-| `night`        | `#191816` | Dark surface                          |
-| `accent`       | `#b5522f` | The live step of a flow. Nothing else |
-| `accent-hover` | `#8f3f22` | Accent under the pointer              |
-| `error`        | `#c62f2a` | The failed state. Nothing else        |
-| `error-hover`  | `#a12622` | Error under the pointer               |
-| `slate`        | `#3a4a52` | The optional third ink                |
+| Token             | Value       | Use                                   |
+| ----------------- | ----------- | ------------------------------------- |
+| `paper`           | `#efece4`   | Page background                       |
+| `surface`         | `#f7f5f0`   | Cards, one step up from the paper     |
+| `ink`             | `#1c1a17`   | Body ink on light                     |
+| `ink-inverse`     | `#efece4`   | Ink on dark                           |
+| `night`           | `#191816`   | Dark surface                          |
+| `accent`          | `#b5522f`   | The live step of a flow. Nothing else |
+| `accent-hover`    | `#8f3f22`   | Accent under the pointer              |
+| `accent-contrast` | `#f7f5f0`   | Drawn on the accent — 4.58:1          |
+| `accent-soft`     | `#b5522f2e` | The accent at wash strength           |
+| `error`           | `#c62f2a`   | The failed state. Nothing else        |
+| `error-hover`     | `#a12622`   | Error under the pointer               |
+| `error-contrast`  | `#f7f5f0`   | Drawn on the error — 5.02:1           |
+| `error-soft`      | `#c62f2a2e` | The error at wash strength            |
+| `slate`           | `#3a4a52`   | The optional third ink                |
+
+A bare name is the colour; `-contrast` is what goes on top of it; `-soft` is the
+same eighteen percent the `tint` fill uses, derived through `tintOf` so the two
+cannot drift. There is no numeric ramp and there will not be one — an
+`error-300` would invite the reserved colours to be spent on decoration, which
+is the one thing they are not for.
 
 `accent` and `error` were one token until the palette was split. They are two
 now because a screen that shows a step running and a step that failed needs two
