@@ -42,8 +42,11 @@ release:
   commanders:
     - CuberHuber
 
-# Runs on `@rultor deploy`. Publishes the kit page to GitHub Pages.
+# Runs on `@rultor deploy`. Rebuilds the kit page into docs/, which is what
+# GitHub Pages serves. See PAGES.md — the folder is committed on purpose, so
+# this only has to prove the build is reproducible from a clean checkout.
 deploy:
   script: |
     npm ci
-    npm run build --workspace examples/kit
+    npm run build:pages
+    git diff --exit-code docs

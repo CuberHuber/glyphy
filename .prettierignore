@@ -2,6 +2,7 @@ dist
 coverage
 node_modules
 design
+docs
 package-lock.json
 CHANGELOG.md
 *.min.*

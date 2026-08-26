@@ -6,7 +6,16 @@ import prettier from 'eslint-config-prettier';
 
 export default tseslint.config(
   {
-    ignores: ['**/dist/**', '**/coverage/**', '**/node_modules/**', 'design/**', '.changeset/**'],
+    ignores: [
+      '**/dist/**',
+      '**/coverage/**',
+      '**/node_modules/**',
+      // The handoff bundle is a record, and docs/ is the built site — both are
+      // read, not written, and neither is this project's source.
+      'design/**',
+      'docs/**',
+      '.changeset/**',
+    ],
   },
 
   js.configs.recommended,

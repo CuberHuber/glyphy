@@ -2,6 +2,9 @@
 
 # Glyphy
 
+**[The kit page →](https://cuberhuber.github.io/glyphy/)** — every state live,
+a playground for every prop, and all 512 patterns to browse.
+
 [![ci](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml/badge.svg)](https://github.com/CuberHuber/glyphy/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/CuberHuber/glyphy/branch/main/graph/badge.svg)](https://codecov.io/gh/CuberHuber/glyphy)
 [![npm](https://img.shields.io/npm/v/@glyphy/react.svg)](https://www.npmjs.com/package/@glyphy/react)
@@ -209,7 +212,11 @@ mismatch.
 ```bash
 npm ci && npm run verify   # format, lint, types, tests, build, packaging
 npm run dev                # the kit page, wired to the TypeScript sources
+npm run build:pages        # the same page, built into docs/ for GitHub Pages
 ```
+
+The published page is the built output of `examples/kit`, committed to `docs/`.
+[PAGES.md](PAGES.md) says how it is served and how to rebuild it.
 
 `main` is read-only. Everything arrives through a pull request that CI has
 verified on Node 20 and 22, and only the merge bot fast-forwards. Coverage has a
