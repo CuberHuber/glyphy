@@ -195,10 +195,26 @@ function Still(props: {
   );
 }
 
+/**
+ * A variant the search palette asked the playground to load.
+ *
+ * Counted rather than bare, because the reader can pick the same variant out
+ * of the palette twice with a hand-turned knob in between. A bare variant
+ * would be the same value the second time, React would bail out of the state
+ * update, and the effect below would never run — the page would scroll here
+ * and show whatever the knob was left on.
+ */
+export interface VariantRequest {
+  /** The variant asked for. */
+  readonly variant: Variant;
+  /** Which ask this is. Only its changing matters. */
+  readonly nth: number;
+}
+
 /** Props for {@link Playground}. */
 export interface PlaygroundProps {
   /** A variant to load, when the search palette sends the reader here. */
-  readonly requested?: Variant;
+  readonly requested?: VariantRequest;
 }
 
 /** Section 06 — the playground. */
@@ -208,7 +224,7 @@ export function Playground(props: PlaygroundProps): ReactElement {
   const requested = props.requested;
   useEffect(() => {
     if (requested === undefined) return;
-    setSettings((current) => ({ ...current, variant: requested }));
+    setSettings((current) => ({ ...current, variant: requested.variant }));
   }, [requested]);
   const set = <K extends keyof Settings>(key: K, value: Settings[K]): void => {
     setSettings((current) => ({ ...current, [key]: value }));

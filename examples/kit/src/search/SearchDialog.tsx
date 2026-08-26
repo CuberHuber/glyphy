@@ -10,7 +10,16 @@
 import { useCallback, useEffect, useMemo, useState, type ReactElement } from 'react';
 import { Glyph } from '@glyphy/react';
 import { ink, mono, sans } from '../theme.js';
-import { GROUPS, PER_GROUP, countOf, search, type Hit, type Target } from './index.js';
+import {
+  GROUPS,
+  PER_GROUP,
+  SUMMARY,
+  countOf,
+  countsOf,
+  search,
+  type Hit,
+  type Target,
+} from './index.js';
 
 /** Props for {@link SearchDialog}. */
 export interface SearchDialogProps {
@@ -57,7 +66,10 @@ export function SearchDialog(props: SearchDialogProps): ReactElement {
 
   const hits = useMemo(() => search(query), [query]);
   const total = useMemo(() => countOf(query), [query]);
-  const capped = total > hits.length;
+  // Per group, because the note under a group header is about that group. The
+  // global figure is true whenever *any* group overflowed, which would tell a
+  // reader results were hidden from a group that showed all of them.
+  const counts = useMemo(() => countsOf(query), [query]);
 
   useEffect(() => {
     if (dialog === undefined) return;
@@ -128,7 +140,7 @@ export function SearchDialog(props: SearchDialogProps): ReactElement {
             type="text"
             value={query}
             aria-label="Search sections, variants, patterns and props"
-            placeholder="Search 14 sections, 12 variants, 512 patterns, 21 props…"
+            placeholder={`Search ${SUMMARY}…`}
             onChange={(event) => {
               setQuery(event.target.value);
               setAt(0);
@@ -188,7 +200,7 @@ export function SearchDialog(props: SearchDialogProps): ReactElement {
                   }}
                 >
                   {group}
-                  {inGroup.length === PER_GROUP && capped ? ' · first 6' : ''}
+                  {(counts.get(group) ?? 0) > inGroup.length ? ` · first ${PER_GROUP}` : ''}
                 </div>
                 {inGroup.map((hit) => {
                   cursor += 1;

@@ -18,7 +18,6 @@ import {
   VARIANTS,
   maskDensity,
   maskFromIndex,
-  maskToIndex,
   patternNameOf,
   stepDuration,
   type Variant,
@@ -166,14 +165,35 @@ export function search(query: string): readonly Hit[] {
   return kept;
 }
 
-/** How many entries matched in total, before the per-group cap. */
-export function countOf(query: string): number {
+/**
+ * How many entries a query matches in each group, before the per-group cap.
+ *
+ * Counted against what {@link search} would return, the empty query included:
+ * an empty query opens on the sections rather than on the whole index, so
+ * counting the index there would put a number over a list that never held it.
+ */
+export function countsOf(query: string): ReadonlyMap<Group, number> {
   const wanted = query.trim().toLowerCase();
-  if (wanted === '') return INDEX.length;
-  return INDEX.reduce((total, entry) => total + (scoreOf(entry, wanted) > 0 ? 1 : 0), 0);
+  const counts = new Map<Group, number>(GROUPS.map((group) => [group, 0]));
+  const matched = wanted === '' ? opening() : INDEX.filter((entry) => scoreOf(entry, wanted) > 0);
+  for (const entry of matched) counts.set(entry.group, (counts.get(entry.group) ?? 0) + 1);
+  return counts;
 }
 
-/** A pattern's index, for the dialog's detail line. */
-export function indexOfMask(mask: string): number {
-  return maskToIndex(mask);
+/** How many entries matched in total, before the per-group cap. */
+export function countOf(query: string): number {
+  let total = 0;
+  for (const count of countsOf(query).values()) total += count;
+  return total;
 }
+
+/**
+ * What the palette can find, counted off the index rather than typed.
+ *
+ * The numbers move whenever a section, a variant or a prop is added, which is
+ * the drift `outline.ts` and `props.ts` exist to prevent — so the placeholder
+ * that quotes them reads them off the same source.
+ */
+export const SUMMARY: string = GROUPS.map(
+  (group) => `${INDEX.filter((entry) => entry.group === group).length} ${group.toLowerCase()}`,
+).join(', ');

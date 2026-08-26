@@ -10,7 +10,7 @@
  * hundred and twenty-eight renders once rather than fourteen a second forever.
  */
 
-import { useMemo, useState, type ReactElement } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactElement } from 'react';
 import {
   CELLS,
   MASK_COUNT,
@@ -213,6 +213,21 @@ export function PatternBrowser(props: PatternBrowserProps): ReactElement {
   const pages = Math.max(1, Math.ceil(matches.length / PAGE));
   const at = Math.min(page, pages - 1);
   const shown = matches.slice(at * PAGE, at * PAGE + PAGE);
+
+  // The search palette can select a pattern the grid is not currently showing —
+  // index 400 is on the fourth page — and a highlighted tile nowhere on screen
+  // is the deep link half-working. Page to whichever page holds it.
+  //
+  // Keyed on the selection changing rather than on `matches`, because narrowing
+  // the filters resets to the first page on purpose and re-running here would
+  // undo that.
+  const revealed = useRef(selected);
+  useEffect(() => {
+    if (revealed.current === selected) return;
+    revealed.current = selected;
+    const index = matches.indexOf(selected);
+    if (index >= 0) setPage(Math.floor(index / PAGE));
+  }, [selected, matches]);
 
   const narrow = (change: () => void): void => {
     change();

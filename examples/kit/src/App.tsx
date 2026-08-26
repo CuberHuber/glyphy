@@ -12,7 +12,7 @@
  */
 
 import { useCallback, useState, type ReactElement } from 'react';
-import { PATTERNS, type Fill, type Variant } from '@glyphy/core';
+import { PATTERNS, type Fill } from '@glyphy/core';
 import { GlyphProvider } from '@glyphy/react';
 import { sans } from './theme.js';
 import { Toolbar, PAGE_INK } from './Toolbar.js';
@@ -26,7 +26,7 @@ import { Scale } from './sections/Scale.js';
 import { Surfaces } from './sections/Surfaces.js';
 import { Palette } from './sections/Palette.js';
 import { MotionStates } from './sections/MotionStates.js';
-import { Playground } from './sections/Playground.js';
+import { Playground, type VariantRequest } from './sections/Playground.js';
 import { Compare } from './sections/Compare.js';
 import { InProduct } from './sections/InProduct.js';
 import { Rules } from './sections/Rules.js';
@@ -49,7 +49,7 @@ export function App(): ReactElement {
   // sections that own them.
   const [searching, setSearching] = useState(false);
   const [pattern, setPattern] = useState<string>(PATTERNS.cross);
-  const [requested, setRequested] = useState<Variant | undefined>(undefined);
+  const [requested, setRequested] = useState<VariantRequest | undefined>(undefined);
 
   const openSearch = useCallback(() => {
     setSearching(true);
@@ -60,7 +60,12 @@ export function App(): ReactElement {
     const section =
       target.kind === 'section' ? target.id : target.kind === 'pattern' ? 'browser' : 'playground';
     if (target.kind === 'pattern') setPattern(target.mask);
-    if (target.kind === 'variant') setRequested(target.variant);
+    // Counted, so picking the same variant twice reaches the playground twice
+    // rather than being swallowed as an unchanged value.
+    if (target.kind === 'variant') {
+      const { variant } = target;
+      setRequested((previous) => ({ variant, nth: (previous?.nth ?? 0) + 1 }));
+    }
     // The dialog is still closing on this frame; the scroll waits for it so the
     // section is not moved under a backdrop that is about to disappear.
     requestAnimationFrame(() => {
