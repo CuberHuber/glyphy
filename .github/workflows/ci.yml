@@ -7,7 +7,11 @@
 # pull request is already known-green before anyone asks rultor to merge it,
 # and a red run here means a red merge there.
 #
-# Keep the two in step. If `verify` grows a step, both get it.
+# Node 20 and 22: 20 is the floor package.json asks for, 22 is what rultor
+# and the release workflow run. Both are covered because the pull request
+# template promises they are.
+#
+# Keep this in step with rultor. If `verify` grows a step, both get it.
 
 name: CI
 
@@ -17,7 +21,6 @@ on:
   push:
     branches: [main]
 
-# One run per branch. Pushing again cancels the run that is now stale.
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
@@ -27,31 +30,41 @@ permissions:
 
 jobs:
   verify:
-    name: verify
+    name: verify (node ${{ matrix.node }})
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      # Node 22, matching the node:22-bookworm image rultor runs the gate in.
-      # package.json asks for >=20; pinning the major keeps the two identical
-      # rather than merely compatible.
-      - uses: actions/setup-node@v4
+    strategy:
+      # Report both, rather than hiding 22 behind a failure on 20.
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      # Actions are pinned to commit SHAs, not tags. A tag can be moved; a
+      # commit cannot.
+      - name: Set up Node ${{ matrix.node }}
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 22
+          node-version: ${{ matrix.node }}
           cache: npm
 
-      - run: npm ci
+      - name: Install
+        run: npm ci
 
       # format:check, lint, typecheck, test:coverage, build, publint.
-      - run: npm run verify
+      - name: Verify
+        run: npm run verify
 
-      # Kept on failure too — a failed coverage threshold is the case where
-      # the report is worth reading.
+      # Kept on failure too — a failed coverage floor is exactly when the
+      # report is worth reading.
       - name: Upload coverage
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: coverage
+          name: coverage-node-${{ matrix.node }}
           path: coverage/
           if-no-files-found: ignore
           retention-days: 14
